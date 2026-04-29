@@ -25,8 +25,14 @@ vcf package available list -n tkg-system
 cd Documents/Lab
 kubectl create ns prometheus-installed
 vcf package install prometheus -p prometheus.kubernetes.vmware.com --values-file prometheus-data-values.yaml -n prometheus-installed -v 3.5.0+vmware.1-vks.2
+kubectl get pods -n tanzu-system-monitoring
+```
+```
+kubectl create ns telegraf-installed
+vcf package install telegraf -p telegraf.kubernetes.vmware.com --values-file telegraf-data-values.yaml -n telegraf-installed -v 1.37.1+vmware.1-vks.1
+
+kubectl get pods -n tanzu-system-telegraf
 
 ```
-
 
 
