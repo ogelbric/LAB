@@ -23,6 +23,7 @@ vcf context create vks-01 --kubeconfig ~/.kube/config --kubecontext vcf-cli-kube
 ```
 ```
 vcf context refresh
+vcf context use vks-01
 ```
 
 
