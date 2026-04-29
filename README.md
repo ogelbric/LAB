@@ -15,6 +15,15 @@ vcf cluster register-vcfa-jwt-authenticator kubernetes-cluster-bkec
 ```
 vcf cluster kubeconfig get kubernetes-cluster-bkec --export-file ~/.kube/config
 ```
+```
+cat ~/.kube/config | grep kuber | grep @
+```
+```
+vcf context create vks-01 --kubeconfig ~/.kube/config --kubecontext vcf-cli-kubernetes-cluster-bkec-dev-f5llm@kubernetes-cluster-bkec-dev-f5llm
+```
+```
+vcf context refresh
+```
 
 
 
