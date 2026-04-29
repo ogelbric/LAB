@@ -9,5 +9,9 @@ vcf context use
 ```
 vcf cluster list
 ```
+```
+vcf cluster register-vcfa-jwt-authenticator kubernetes-cluster-bkec
+```
+
 
 
