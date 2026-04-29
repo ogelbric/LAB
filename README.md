@@ -30,8 +30,14 @@ kubectl get pods -n tanzu-system-monitoring
 ```
 kubectl create ns telegraf-installed
 vcf package install telegraf -p telegraf.kubernetes.vmware.com --values-file telegraf-data-values.yaml -n telegraf-installed -v 1.37.1+vmware.1-vks.1
-
 kubectl get pods -n tanzu-system-telegraf
+```
+Opencart
+```
+kubectl create namespace opencart
+kubectl label ns opencart pod-security.kubernetes.io/enforce=privileged
+kubectl apply -f opencart-lb.yaml -n opencart
+kubectl get service -n opencart
 
 ```
 
