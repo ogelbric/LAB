@@ -12,6 +12,9 @@ vcf cluster list
 ```
 vcf cluster register-vcfa-jwt-authenticator kubernetes-cluster-bkec
 ```
+```
+vcf cluster kubeconfig get kubernetes-cluster-bkec --export-file ~/.kube/config
+```
 
 
 
