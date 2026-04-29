@@ -10,18 +10,10 @@ vcf cluster list
 ```
 Create vks-01 cluser!
 ```
-vcf cluster register-vcfa-jwt-authenticator kubernetes-cluster-bkec
-```
-```
-vcf cluster kubeconfig get kubernetes-cluster-bkec --export-file ~/.kube/config
-```
-```
-cat ~/.kube/config | grep kuber | grep @
-```
-```
-vcf context create vks-01 --kubeconfig ~/.kube/config --kubecontext vcf-cli-kubernetes-cluster-bkec-dev-f5llm@kubernetes-cluster-bkec-dev-f5llm
-```
-```
+vcf cluster register-vcfa-jwt-authenticator vks-01
+vcf cluster kubeconfig get vks-01 --export-file ~/.kube/config
+cat ~/.kube/config | grep vks-01 | grep @
+vcf context create vks-01 --kubeconfig ~/.kube/config --kubecontext vcf-cli-vks-01-dev-f5llm-vks-01-dev-f5llm
 vcf context refresh
 vcf context use vks-01
 kubectl get nodes
