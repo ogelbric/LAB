@@ -46,3 +46,43 @@ Supervisor cluster
 vcf context create sup --endpoint 10.1.0.6 --insecure-skip-tls-verify --auth-type basic
 vcf context use sup
 ```
+
+Simple app
+```
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: http-echo
+  name: http-echo
+spec:
+  ports:
+    - port: 80
+  selector:
+    app: http-echo
+  type: LoadBalancer
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: http-echo
+spec:
+  selector:
+    matchLabels:
+      app: http-echo
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: http-echo
+    spec:
+      containers:
+      - name: ttools
+        #image: harbor.lab.local/vks/hello-app
+        image: gcr.io/boreal-rain-256712/http-echo
+        ports:
+        - containerPort: 80
+```
+
