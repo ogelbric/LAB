@@ -41,4 +41,7 @@ kubectl get service -n opencart
 
 ```
 
-
+Supervisor cluster
+```
+vcf context create sup --endpoint 10.1.0.6 --insecure-skip-tls-verify --auth-type basic
+```
