@@ -10,7 +10,7 @@ vcf cluster list
 # Select new dev / vks-01 cluster
 
 ```
-Guest cluster reg...
+Guest cluster register
 ```
 vcf cluster register-vcfa-jwt-authenticator vks-01
 vcf cluster kubeconfig get vks-01 --export-file ~/.kube/config
@@ -47,6 +47,7 @@ kubectl get service -n opencart
 Supervisor cluster
 ```
 vcf context create sup --endpoint 10.1.0.6 --insecure-skip-tls-verify --auth-type basic
+#administrator@WLD.SSO
 vcf context use sup
 ```
 
