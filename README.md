@@ -1,6 +1,6 @@
 # LAB
 
-Create dev namespace!
+Create a Namespace (dev) in VCF-A and then a K8 cluster (vks-01)!
 ```
 vcf context create vcfa --endpoint auto-a.site-a.vcf.lab --api-token Gzy8gHueTtYu20ODUJfx3asdZ7NWveuC --tenant-name broadcom --ca-certificate vcfa-cert-chain.pem
 ```
@@ -8,7 +8,7 @@ vcf context create vcfa --endpoint auto-a.site-a.vcf.lab --api-token Gzy8gHueTtY
 vcf context use
 vcf cluster list
 ```
-Create a Namespace (dev) in VCF-A and then a K8 cluster (vks-01)!
+Guest cluster reg...
 ```
 vcf cluster register-vcfa-jwt-authenticator vks-01
 vcf cluster kubeconfig get vks-01 --export-file ~/.kube/config
