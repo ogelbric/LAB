@@ -8,7 +8,7 @@ vcf context create vcfa --endpoint auto-a.site-a.vcf.lab --api-token Gzy8gHueTtY
 vcf context use
 vcf cluster list
 ```
-Create dev Namespace in VCF-A and then a K8 cluster vks-01!
+Create a Namespace (dev) in VCF-A and then a K8 cluster (vks-01)!
 ```
 vcf cluster register-vcfa-jwt-authenticator vks-01
 vcf cluster kubeconfig get vks-01 --export-file ~/.kube/config
