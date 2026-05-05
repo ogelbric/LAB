@@ -53,6 +53,12 @@ vcf context use sup
 
 Simple app
 ```
+vcf context use
+#select vcfa / dev / vks01 cluster
+kubectl label ns default pod-security.kubernetes.io/enforce=privileged
+```
+
+```
 apiVersion: v1
 kind: Service
 metadata:
