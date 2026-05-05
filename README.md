@@ -16,6 +16,7 @@ vcf cluster register-vcfa-jwt-authenticator vks-01
 vcf cluster kubeconfig get vks-01 --export-file ~/.kube/config
 cat ~/.kube/config | grep vks-01 | grep @
 vcf context create vks-01 --kubeconfig ~/.kube/config --kubecontext vcf-cli-vks-01-dev-f5llm-vks-01-dev-f5llm
+#Cloud Consumption Interface
 vcf context refresh
 vcf context use vks-01
 kubectl get nodes
