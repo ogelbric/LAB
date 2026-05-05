@@ -7,6 +7,8 @@ vcf context create vcfa --endpoint auto-a.site-a.vcf.lab --api-token Gzy8gHueTtY
 ```
 vcf context use
 vcf cluster list
+# Select new dev / vks-01 cluster
+
 ```
 Guest cluster reg...
 ```
