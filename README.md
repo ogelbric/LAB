@@ -2,7 +2,7 @@
 
 Install Local Consumption Interface in Supervisro Services
 
-Create a Namespace (dev) in VCF-A and then a K8 cluster (vks-01)!
+Create a Namespace (dev) in VCF-A and then a K8 cluster (vks-01)(Broadcom Org)!
 ```
 vcf context create vcfa --endpoint auto-a.site-a.vcf.lab --api-token Gzy8gHueTtYu20ODUJfx3asdZ7NWveuC --tenant-name broadcom --ca-certificate vcfa-cert-chain.pem
 ```
