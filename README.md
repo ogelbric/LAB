@@ -51,6 +51,11 @@ Supervisor cluster
 vcf context create sup --endpoint 10.1.0.6 --insecure-skip-tls-verify --auth-type basic
 #administrator@WLD.SSO
 vcf context use sup
+
+or download kubeconfig file for cluster
+
+k get nodes --kubeconfig=./Downloads/k8-orf-kubeconfig.yaml
+
 ```
 
 Simple app
