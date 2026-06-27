@@ -74,6 +74,12 @@ Burger Menu -> Supervisor Management -> Get Started
     GW.: 10.1.4.1
     DNS: 10.1.1.1
     NTP: 10.1.1.1
+
+#One Arm FLB:
+#MGT 10.1.1.110-10.1.1.125	255.255.255.0		GW.: 10.1.1.1
+#Wkt 10.1.4.30-10.1.4.39		255.255.255.128		GW.: 10.1.4.1
+#vip 10.1.4.40-10.1.4.49		255.255.255.128
+
   Loadbalancer
     Select One Arm
     Management Network: Assign
@@ -93,14 +99,9 @@ Burger Menu -> Supervisor Management -> Get Started
       Mask: 255.255.255.128
       GW.: 10.1.4.1
       VIP: 10.1.4.40-10.1.4.49
-
-
-One Arm FLB:
-
-MGT 10.1.1.110-10.1.1.125	255.255.255.0		GW.: 10.1.1.1
-Wkt 10.1.4.30-10.1.4.39		255.255.255.128		GW.: 10.1.4.1
-vip 10.1.4.40-10.1.4.49		255.255.255.128
-
+  Advanced Settings
+    Check Export Configuration
+Finish
 ```
 
 ```
