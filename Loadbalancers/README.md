@@ -23,7 +23,7 @@ Enable DRS on vCenter cluster - Fully Automated
 Burger Menu -> Inventory -> Networks -> expand the 2 VDS networks -> select each one and verify the VLANS in the Distributed Port Group Details
 
 mgmt-vds01-wld01-01a     VLAN 10		10.1.1.1 	255.255.255.0			  .50-59 .110-.130		MGT
-vmotion-vds01-wld01-01a    VLAN 17		10.1.5.1	255.255.255.128							            Transit
+vmotion-vds01-wld01-01a  VLAN 17		10.1.5.1	255.255.255.128							            Transit
 vsan-vds02-wld01-01a     VLAN 15		10.1.4.1	255.255.255.128			.10-.99				      Workload/VIP
 ```
 
