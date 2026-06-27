@@ -42,10 +42,14 @@ arp -a | grep 10.1.5
 arp -a | grep 10.1.1
 ```
 
-
-Enable supervisor cluster 
-Cluster deployment 
-Foundational load balancer
+## Supervisor Enablement 
+```
+Burger Menu -> Supervisor Management -> Get Started
+  vSphere distributed Switch
+  Foundational Loadbalancer
+  Cluster Deployment
+  Supervisor Name: sup1
+  Compatible select vSphere Zone
 
 DNS 10.1.1.1
 NTP 10.1.1.1
