@@ -77,10 +77,16 @@ Save
 
 Infrastructure -> Cloud -> my cloud -> select the myservice engine group in SE templates -> SAVE
 Infrastructure -> Network -> my cloud
-Select edit on management network
+Select edit on management network -> edit
 add IP address pool edit
-10.1.1.110-10.1.1.115 SE vNIC
+10.1.1.110-10.1.1.115 Use for SE vNIC
+Save -> Save
 
+Select the vSAN network -> edit
+Uncheck use static IP for VIP and SE
+Subnet: 10.1.4.0/25
+Add pool: 10.1.4.40-10.1.4.49 Use for VIP
+Save -> Save
 
 
 
