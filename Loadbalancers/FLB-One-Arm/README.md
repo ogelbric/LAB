@@ -105,17 +105,6 @@ Finish
 
 ```
 
-# Foundational Loadbalancer (Two Arm)
-```
-In the Loadbalancer section select Two Arm and use these values:
-
-MGT 10.1.1.110-10.1.1.125	255.255.255.0		GW.: 10.1.1.1 mgmt-vds01-wld01-01a
-Wkt 10.1.4.30-10.1.4.39		255.255.255.128		GW.: 10.1.4.1 vsan-vds02-wld01-01a
-vip 10.1.4.40-10.1.4.49		255.255.255.128		
-Tran 10.1.5.10-10.1.5.19	255.255.255.128		GW.: 10.1.5.1 vmotion-vds01-wld01-01a
-```
-
-
 # Once the supervisor is green check the API end point IP
 ```
 Burger menu -> Supervisor Management -> Supervisors -> Control Plane Node Address
