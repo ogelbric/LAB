@@ -1,11 +1,11 @@
-# AVI Loadbalancer
+# Avi Load Balancer
 
 
-## Download the AVI OVA
+## Download the Avi OVA
 ```
 http://support.broadcom.com
 Downloads
-Search fro AVI
+Search fro Avi
 Select VMware Avi Load balancer
 VMware Avi Load balancer
 32.1.1
@@ -30,6 +30,18 @@ GW.: 10.1.1.1.
 Hostname of Avi Controller: avi
 Finish
 ```
+## Power up the Avi VM
+```
+Burger Menu -> Inventory -> Compute -> Select Avi VM right click power on
+
+```
+
+## Connect to Avi
+```
+Firefox Browser: http://10.1.1.50
+admin/(famouse password)
+```
+
 
 
 
