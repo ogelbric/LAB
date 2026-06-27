@@ -124,6 +124,20 @@ In AVI get the cert
 Paste into server certificate in vCetner and make sure the trailing CR is deleted !!!!!!!
 Cloud name: mycloud
 
+Management
+Static
+#MGT 10.1.1.51-10.1.1.59	255.255.255.0	GW.:10.1.1.1 mgmt-vds01-wld01-01a
+
+vcf.lab
+
+Workload
+Static
+work1
+#Wrk 10.1.4.10-10.1.4.29	255.255.255.128	GW.: 10.1.4.1 vsan-vds02-wld01-01a
+DNS: 10.1.1.1
+NTP:: 10.1.1.1
+
+
 
 ```
 
