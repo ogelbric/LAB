@@ -102,6 +102,7 @@ Burger Menu -> Supervisor Management -> Get Started
   Advanced Settings
     Check Export Configuration
 Finish
+
 ```
 
 ```
