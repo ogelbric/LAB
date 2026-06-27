@@ -1,4 +1,4 @@
-# Foundational Loadbalancer
+# Foundational Loadbalancer (One Arm)
 
 The idea is to use a HOL / Field demo lab to reuse it for different Loadbalancer options to be tried out.
 
@@ -13,27 +13,35 @@ Select VCF-9.1 Single Site with Auto
 ## Once the lab is up use Firefox to bring up the workload vCenter
 ```
 Delete the current Supervisor cluster
-  Durger Menu -> Workload manageent -> select supervisor cluster -> Deactivate
+  Burger Menu -> Supervisor Manageent -> select supervisor cluster -> Deactivate
+Enable DRS on vCenter cluster - Fully Automated
+  Burger Menu -> Inventory -> Compute -> vcenter Cluster -> Configure -> vSphere DRS -> Edit -> Select Fully Automated
+```
 
-Enable DRS on vCenter cluster - fully automated
+## Selecting Networks
+```
+Burger Menu -> Inventory -> Networks -> expand the 2 VDS networks -> select each one and verify the VLANS in the Distributed Port Group Details
 
-vCenter networks used for FLB deployment (1 arm and 2 arm):
+mgmt-vds01-wld01-01a	  VLAN 10		10.1.1.1 	255.255.255.0			  .50-59 .110-.130		MGT
+vmotion-vds01-wld01-01a	VLAN 17		10.1.5.1	255.255.255.128							            Transit
+vsan-vds02-wld01-01a	  VLAN 15		10.1.4.1	255.255.255.128			.10-.99				      Workload/VIP
+```
 
-mgmt-vds01-wld01-01a	VLAN 10		10.1.1.1 	255.255.255.0			.50-59 .110-.130		MGT
-vmotion-vds01-wld01-01a	VLAN 17		10.1.5.1	255.255.255.128							
-vsan-vds02-wld01-01a	VLAN 15		10.1.4.1	255.255.255.128			.10-.99				Workload
+## Locating open IP ranges on the Router
+```
+SSH to router: ssh root@10.1.10.1 (Typical vmware password twice)
 
-SSH to router: ssh root@10.1.10.1 (VMware123!VMware123!)
-
-Find open IP ranges: 
+Investgating the routing table and availabe VLAN(s)
 
 netstat -nr
+
+Find open IP ranges: 
 
 arp -a | grep 10.1.4
 arp -a | grep 10.1.5
 arp -a | grep 10.1.1
+```
 
-Enable DRS on vCenter cluster - fully automated
 
 Enable supervisor cluster 
 Cluster deployment 
