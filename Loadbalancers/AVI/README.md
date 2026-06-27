@@ -32,8 +32,7 @@ Finish
 ```
 ## Power up the Avi VM
 ```
-Burger Menu -> Inventory -> Compute -> Select Avi VM right click power on
-
+Burger Menu -> Inventory -> Compute -> Select Avi VM right click power -> Power on
 ```
 
 ## Connect to Avi
