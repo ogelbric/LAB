@@ -88,7 +88,28 @@ Subnet: 10.1.4.0/25
 Add pool: 10.1.4.40-10.1.4.49 Use for VIP
 Save -> Save
 
+Infrastructure -> Cloud -> my cloud -> edit -> IPAM / DNS
+IPAM profile create
+Mycloud
+Name: myipam
+Select the vSAN network
+Save
 
+Administration -> System Settings -> Edit
+Access delete the 2 certs ssl / tls cert
+3 dots -> edit
+Name: mycert
+Common name: avi
+Add SAN: 10.1.1.50
+Save -> Save
+Log back in (session is diconnected due to new cert)
+Allow basic auth check box
+Save
+```
+
+# Enable Supervisor
+```
+Burger Menu -> Supervisor Management 
 
 ```
 
