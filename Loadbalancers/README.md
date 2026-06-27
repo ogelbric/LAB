@@ -56,10 +56,19 @@ Burger Menu -> Supervisor Management -> Get Started
     mgmt-vds01-wld01-01a
     Range: 10.1.1.50-10.1.1.59
     Mask: 255.255.255.0
-    GW.:10.1.1.1
+    GW.: 10.1.1.1
     DNS: 10.1.1.1
     SD.: vcf.lab
-    NTP:10.1.1.1
+    NTP: 10.1.1.1
+  Workload Network
+    Static
+    vsan-vds02-wld01-01a
+    Networkname: work1
+    Range: 10.1.4.10-10.1.4.29
+    Mask 255.255.255.128
+    GW.: 10.1.4.1
+    DNS: 10.1.1.1
+    NTP: 10.1.1.1
 
 
 Sup:
