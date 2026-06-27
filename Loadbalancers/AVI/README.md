@@ -38,7 +38,47 @@ Burger Menu -> Inventory -> Compute -> Select Avi VM right click power -> Power 
 ## Connect to Avi
 ```
 Firefox Browser: http://10.1.1.50
-admin/(famouse password)
+admin/( VMware password)
+vmware password x3
+vmware password x3
+Pass Phrase: vmware password x3
+Confirm Phrase: vmware password x3
+DNS: 10.1.1.1
+DNS Search Domain: vcf.lab
+Uncheck Join VMware...
+Email: Next
+Multi Tenant: Don't change
+Select check box for set up cloud after
+Save
+
+Infrastructure -> Clouds
+Create -> VMware
+Name: mycloud
+Object Name Prefix: mycloud
+uncheck enable DHCP
+uncheck IPv6 auto config
+uncheck enable IPv6
+check use static routes
+Set Credentials
+vc-wld01-a.site-a-vcf.lab
+administrator@WLD.SSO
+(Vmware password twice)
+uncheck content lib
+Save and Relaunch
+
+Management network: mgmt-vds01-wld01-01a
+
+Infrastructure -> Serives Engine Group -> myclud -> create 
+Name: myservieenginegroup
+Scope -> Host and Cluster -> select the vCetner cluster
+Include the 3 hosts
+Datastore shared -> Include -> vSAN Storage
+Save
+
+
+
+
+
 ```
 
 ## Notes on networking 
