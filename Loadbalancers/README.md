@@ -51,6 +51,11 @@ Burger Menu -> Supervisor Management -> Get Started
   Supervisor Name: sup1
   Compatible select vSphere Zone
   Storage Police select vSAN Default Storage Policy 3x
+
+#Sup:
+#MGT 10.1.1.50-10.1.1.59	255.255.255.0	GW.:10.1.1.1
+#Wrk 10.1.4.10-10.1.4.29	255.255.255.128	GW.: 10.1.4.1
+
   Management Network
     Static
     mgmt-vds01-wld01-01a
@@ -69,11 +74,26 @@ Burger Menu -> Supervisor Management -> Get Started
     GW.: 10.1.4.1
     DNS: 10.1.1.1
     NTP: 10.1.1.1
+  Loadbalancer
+    Select One Arm
+    Management Network: Assign
+      Static
+      mgmt-vds01-wld01-01a
+      Network Name: mgt2
+      Range: 10.1.1.110-10.1.1.125
+      Mask: 255.255.255.0
+      GW.: 10.1.1.1
+      DNS: 10.1.1.1
+      NTP: 10.1.1.1
+    Virtual Server Network: Assign
+      Static
+      vsan-vds02-wld01-01a
+      Network Name: vip1
+      Range: 10.1.4.30-10.1.4.39
+      Mask: 255.255.255.128
+      GW.: 10.1.4.1
+      VIP: 10.1.4.40-10.1.4.49
 
-
-Sup:
-MGT 10.1.1.50-10.1.1.59	255.255.255.0	GW.:10.1.1.1
-Wrk 10.1.4.10-10.1.4.29	255.255.255.128	GW.: 10.1.4.1
 
 One Arm FLB:
 
