@@ -75,6 +75,11 @@ Include the 3 hosts
 Datastore shared -> Include -> vSAN Storage
 Save
 
+Infrastructure -> Cloud -> my cloud -> select the myservice engine group in SE templates -> SAVE
+Infrastructure -> Network -> my cloud
+Select edit on management network
+add IP address pool edit
+10.1.1.110-10.1.1.115 SE vNIC
 
 
 
