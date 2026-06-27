@@ -50,10 +50,17 @@ Burger Menu -> Supervisor Management -> Get Started
   Cluster Deployment
   Supervisor Name: sup1
   Compatible select vSphere Zone
+  Storage Police select vSAN Default Storage Policy 3x
+  Management Network
+    Static
+    mgmt-vds01-wld01-01a
+    Range: 10.1.1.50-10.1.1.59
+    Mask: 255.255.255.0
+    GW.:10.1.1.1
+    DNS: 10.1.1.1
+    SD.: vcf.lab
+    NTP:10.1.1.1
 
-DNS 10.1.1.1
-NTP 10.1.1.1
-vcf.lab
 
 Sup:
 MGT 10.1.1.50-10.1.1.59	255.255.255.0	GW.:10.1.1.1
@@ -65,7 +72,9 @@ MGT 10.1.1.110-10.1.1.125	255.255.255.0		GW.: 10.1.1.1
 Wkt 10.1.4.30-10.1.4.39		255.255.255.128		GW.: 10.1.4.1
 vip 10.1.4.40-10.1.4.49		255.255.255.128
 
+```
 
+```
 Two Arm FLB:
 
 MGT 10.1.1.110-10.1.1.125	255.255.255.0		GW.: 10.1.1.1
@@ -84,5 +93,6 @@ k get nodes
 
 
 
+```
 
 
