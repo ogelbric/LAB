@@ -22,7 +22,15 @@ Select Avi OVA from dowloads folder
 Virtual machine Name: avi
 Cluster
 vSAN Storage
-management network
+management network: mgmt-vds01-wld01-01a
+Enter Password twice (Famouse VMware password)
+IP: 10.1.1.50
+Mask: 255.255.255.0
+GW.: 10.1.1.1.
+Hostname of Avi Controller: avi
+Finish
+```
+
 
 
 
