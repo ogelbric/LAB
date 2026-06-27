@@ -137,6 +137,8 @@ work1
 DNS: 10.1.1.1
 NTP:: 10.1.1.1
 
+Save config -> submit
+
 
 
 ```
