@@ -109,7 +109,21 @@ Save
 
 # Enable Supervisor
 ```
-Burger Menu -> Supervisor Management 
+Burger Menu -> Supervisor Management -> Get Started -> vSphere Distributed Switch -> Avi
+Sup1
+Zone vCenter Cluster
+Storage 3x vSAN default
+Name: avi
+10.1.1.50:443
+admin
+(VMware password 3 times)
+
+In AVI get the cert
+  Templates -> security -> SSL/TLS/ Certs -> mycert -> export -> select the certificate -> copy to clip board
+
+Paste into server certificate in vCetner and make sure the trailing CR is deleted !!!!!!!
+Cloud name: mycloud
+
 
 ```
 
