@@ -52,6 +52,7 @@ Select check box for set up cloud after
 Save
 
 Administration -> Licensing -> On Prem Licensing Hup should give you 20 lic's
+
 Infrastructure -> Clouds
 Create -> VMware
 Name: mycloud
@@ -67,8 +68,6 @@ administrator@WLD.SSO
 uncheck content lib
 Save and Relaunch
 
-Management network: mgmt-vds01-wld01-01a
-
 Infrastructure -> Serives Engine Group -> myclud -> create 
 Name: myservieenginegroup
 Scope -> Host and Cluster -> select the vCetner cluster
@@ -80,11 +79,13 @@ Infrastructure -> Cloud -> my cloud -> select the myservice engine group in SE t
 Infrastructure -> Network -> my cloud
 Select edit on management network -> edit
 add IP address pool edit
-10.1.1.110-10.1.1.115 Use for SE vNIC
+Check box use for VIP and SE
+add net
+10.1.1.110-10.1.1.115
 Save -> Save
 
 Select the vmotion-vds01-wld01-01a -> edit
-Uncheck use static IP for VIP and SE
+Use static IP for VIP and SE
 Subnet: 10.1.5.0/25
 Add pool: 10.1.5.40-10.1.5.49 Use for VIP
 Save -> Save
