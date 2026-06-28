@@ -1,5 +1,46 @@
 # Avi Load Balancer
 
+The idea is to use a HOL / Field demo lab to reuse it for different Loadbalancer options to be tried out.
+
+## As a Broadcom user find the lab(s) 
+```
+mylogin.broadcom.com
+My applications search for demo
+VCF Field Demo Lab
+Select VCF-9.1 Single Site with Auto
+```
+
+## Once the lab is up use Firefox to bring up the workload vCenter
+```
+Delete the current Supervisor cluster
+  Burger Menu -> Supervisor Manageent -> select supervisor cluster -> Deactivate
+Enable DRS on vCenter cluster - Fully Automated
+  Burger Menu -> Inventory -> Compute -> vcenter Cluster -> Configure -> vSphere DRS -> Edit -> Select Fully Automated
+```
+
+## Selecting Networks
+```
+Burger Menu -> Inventory -> Networks -> expand the 2 VDS networks -> select each one and verify the VLANS in the Distributed Port Group Details
+
+mgmt-vds01-wld01-01a     VLAN 10		10.1.1.1 	255.255.255.0           .50-59 .110-.130		  MGT
+vmotion-vds01-wld01-01a  VLAN 17		10.1.5.1	255.255.255.128							          VIP
+vsan-vds02-wld01-01a     VLAN 15		10.1.4.1	255.255.255.128			.10-.99				      Workload
+```
+
+## Locating open IP ranges on the Router
+```
+SSH to router: ssh root@10.1.10.1 (Typical vmware password twice)
+
+Investgating the routing table and availabe VLAN(s)
+
+netstat -nr
+
+Find open IP ranges: 
+
+arp -a | grep 10.1.4
+arp -a | grep 10.1.5
+arp -a | grep 10.1.1
+```
 
 ## Download the Avi OVA
 ```
