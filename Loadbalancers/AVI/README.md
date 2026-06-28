@@ -143,24 +143,23 @@ DNS: 10.1.1.1
 NTP:: 10.1.1.1
 
 Save config -> submit
-
-
-
 ```
 
-## Notes on networking 
+
+# Once the supervisor is green check the API end point IP
 ```
-#Sup:
-#MGT 10.1.1.51-10.1.1.59	255.255.255.0	GW.:10.1.1.1 mgmt-vds01-wld01-01a
-#Wrk 10.1.4.10-10.1.4.29	255.255.255.128	GW.: 10.1.4.1 vsan-vds02-wld01-01a
-
-
-#MGT 10.1.1.110-10.1.1.125	255.255.255.0		GW.: 10.1.1.1 mgmt-vds01-wld01-01a
-#Wkt 10.1.4.30-10.1.4.39		255.255.255.128		GW.: 10.1.4.1 vsan-vds02-wld01-01a
-#vip 10.1.4.40-10.1.4.49		255.255.255.128		
-#Tran 10.1.5.10-10.1.5.19	255.255.255.128		GW.: 10.1.5.1 vmotion-vds01-wld01-01a
-
+Burger menu -> Supervisor Management -> Supervisors -> Control Plane Node Address
 ```
+
+# Open up a Terminal session 	
+```
+vcf context create sup --endpoint 10.1.5.40 --insecure-skip-tls-verify --auth-type basic
+#administrator@WLD.SSO/(famous VMware password twice)
+vcf context use
+k get nodes
+
+
+
 
 
 
