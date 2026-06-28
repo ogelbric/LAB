@@ -106,6 +106,9 @@ Log back in (session is diconnected due to new cert)
 Allow basic auth check box
 Save
 ```
+Create route from workload network to Frontend network
+Infrastructure -> VRF Context -> mycloud -> edit global
+10.1.4.0/25 -> 10.1.5.0
 
 # Enable Supervisor
 ```
