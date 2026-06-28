@@ -26,7 +26,7 @@ management network: mgmt-vds01-wld01-01a
 Enter Password twice (Famouse VMware password)
 IP: 10.1.1.50
 Mask: 255.255.255.0
-GW.: 10.1.1.1.
+GW.: 10.1.1.1
 Hostname of Avi Controller: avi
 Finish
 ```
@@ -82,17 +82,17 @@ add IP address pool edit
 10.1.1.110-10.1.1.115 Use for SE vNIC
 Save -> Save
 
-Select the vSAN network -> edit
+Select the vmotion-vds01-wld01-01a -> edit
 Uncheck use static IP for VIP and SE
-Subnet: 10.1.4.0/25
-Add pool: 10.1.4.40-10.1.4.49 Use for VIP
+Subnet: 10.1.5.0/25
+Add pool: 10.1.5.40-10.1.5.49 Use for VIP
 Save -> Save
 
 Infrastructure -> Cloud -> my cloud -> edit -> IPAM / DNS
 IPAM profile create
 Mycloud
 Name: myipam
-Select the vSAN network
+Select the vmotion-vds01-wld01-01a
 Save
 
 Administration -> System Settings -> Edit
