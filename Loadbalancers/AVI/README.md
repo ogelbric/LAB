@@ -51,6 +51,7 @@ Multi Tenant: Don't change
 Select check box for set up cloud after
 Save
 
+Administration -> Licensing -> On Prem Licensing Hup should give you 20 lic's
 Infrastructure -> Clouds
 Create -> VMware
 Name: mycloud
