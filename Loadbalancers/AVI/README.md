@@ -68,8 +68,7 @@ administrator@WLD.SSO
 uncheck content lib
 Save and Relaunch
 
-Infrastructure -> Serives Engine Group -> myclud -> create 
-Name: myservieenginegroup
+Infrastructure -> Serives Engine Group -> mycloud -> default service engine -> edit 
 Scope -> Host and Cluster -> select the vCetner cluster
 Include the 3 hosts
 Datastore shared -> Include -> vSAN Storage
