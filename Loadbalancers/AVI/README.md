@@ -91,7 +91,7 @@ DNS Search Domain: vcf.lab
 Uncheck Join VMware...
 Email: Next
 Multi Tenant: Don't change
-Select check box for set up cloud after
+Select check box for set up cloud after (next to save button)
 Save
 
 Administration -> Licensing -> On Prem Licensing Hup should give you 20 lic's
