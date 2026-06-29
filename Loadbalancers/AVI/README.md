@@ -64,6 +64,7 @@ Virtual machine Name: avi
 DataCenter
 Cluster
 vSAN Storage
+network tab
 management network: mgmt-vds01-wld01-01a
 Enter Password twice (Famouse VMware password)
 IP: 10.1.1.50
