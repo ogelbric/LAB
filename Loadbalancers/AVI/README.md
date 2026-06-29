@@ -118,7 +118,10 @@ Include the 3 hosts
 Datastore shared -> Include -> vSAN Storage
 Save
 
-Infrastructure -> Cloud -> my cloud -> select the myservice engine group in SE templates -> SAVE
+Infrastructure -> Cloud -> my cloud -> select the myservice engine group in SE templates
+Management Network select the mgmt-vds01-wld01-01a
+Save
+
 Infrastructure -> Network -> my cloud
 Select edit on management network -> edit
 add IP address pool edit
@@ -128,8 +131,9 @@ add net
 Save -> Save
 
 Select the vmotion-vds01-wld01-01a -> edit
+Pre-fix: 10.1.5.0/25
+Add
 Use static IP for VIP and SE
-Subnet: 10.1.5.0/25
 Add pool: 10.1.5.40-10.1.5.49 Use for VIP
 Save -> Save
 
