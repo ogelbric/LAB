@@ -156,7 +156,7 @@ Allow basic auth check box
 Save
 
 Create route from workload network to Frontend network
-Infrastructure -> VRF Context -> mycloud -> edit global
+Infrastructure -> VRF Context -> mycloud -> edit global -> add static route
 10.1.4.0/25 -> 10.1.5.0
 ```
 
