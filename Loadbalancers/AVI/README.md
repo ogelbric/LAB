@@ -112,8 +112,8 @@ uncheck content lib
 Save and Relaunch
 Cancel and yes to cont...
 
-Infrastructure -> clound Resources -> Serives Engine Group -> mycloud -> default service engine -> edit 
-Scope -> Host and Cluster -> select the vCetner cluster
+Infrastructure -> cloud Resources -> Serives Engine Group -> mycloud -> Default Group -> edit 
+Scope -> Host and Cluster -> include -> select the vCenter cluster
 Include the 3 hosts
 Datastore shared -> Include -> vSAN Storage
 Save
