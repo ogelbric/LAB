@@ -105,7 +105,7 @@ uncheck IPv6 auto config
 uncheck enable IPv6
 check use static routes
 Set Credentials
-vc-wld01-a.site-a-vcf.lab
+vc-wld01-a.site-a.vcf.lab
 administrator@WLD.SSO
 (Vmware password twice)
 uncheck content lib
