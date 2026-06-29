@@ -146,7 +146,7 @@ Save
 
 Administration -> System Settings -> Edit
 Access delete the 2 certs ssl / tls cert
-3 dots -> edit
+3 dots -> edit -> Create
 Name: mycert
 Common name: avi
 Add SAN: 10.1.1.50
@@ -154,10 +154,11 @@ Save -> Save
 Log back in (session is diconnected due to new cert)
 Allow basic auth check box
 Save
-```
+
 Create route from workload network to Frontend network
 Infrastructure -> VRF Context -> mycloud -> edit global
 10.1.4.0/25 -> 10.1.5.0
+```
 
 # Enable Supervisor
 ```
