@@ -138,10 +138,10 @@ Add pool: 10.1.5.40-10.1.5.49 Use for VIP
 Save -> Save
 
 Infrastructure -> Cloud -> my cloud -> edit -> IPAM / DNS
-IPAM profile create
-Mycloud
+IPAM profile create (3 buttons)
 Name: myipam
-Select the vmotion-vds01-wld01-01a
+Seelct Cloud: mycloud
+Usable network -> add :  vmotion-vds01-wld01-01a
 Save
 
 Administration -> System Settings -> Edit
