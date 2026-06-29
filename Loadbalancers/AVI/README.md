@@ -213,13 +213,7 @@ k get nodes
 
 # Trouble Shooting AVI (AKO) Pod on Supervisor cluster
 
-
 (1)	vCenter
-```
-	https://192.168.1.50:5480			#Enable bash shell!!!
-```
-
-(2)	vCenter
 ```
 	ssh root@10.1.1.11   
 	shell
@@ -227,7 +221,7 @@ k get nodes
 	ssh root@10.1.5.40				#use IP/Password from above command
 ```
 
-(3)	On Supervisor VM get guest cluster credentials
+(2)	On Supervisor VM get guest cluster credentials
 ```
 	kubectl get pods -A | grep ako
   kubctl log -n {paste from above ns and pod name}
