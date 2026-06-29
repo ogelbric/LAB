@@ -62,6 +62,7 @@ Local File
 Select Avi OVA from dowloads folder
 Virtual machine Name: avi
 DataCenter
+Cluster
 vSAN Storage
 management network: mgmt-vds01-wld01-01a
 Enter Password twice (Famouse VMware password)
