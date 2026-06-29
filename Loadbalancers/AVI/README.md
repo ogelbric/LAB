@@ -14,7 +14,7 @@ Select VCF-9.1 Single Site with Auto
 ```
 Delete the current Supervisor cluster
   Burger Menu -> Supervisor Manageent -> select supervisor cluster -> Deactivate
-Enable DRS on vCenter cluster - Fully Automated
+Enable DRS on vCenter cluster - Fully Automated -> ok
   Burger Menu -> Inventory -> Compute -> vcenter Cluster -> Configure -> vSphere DRS -> Edit -> Select Fully Automated
 ```
 
@@ -163,7 +163,8 @@ Infrastructure -> VRF Context -> mycloud -> edit global
 # Enable Supervisor
 ```
 Burger Menu -> Supervisor Management -> Get Started -> vSphere Distributed Switch -> Avi
-Sup1
+Cluster Deployment
+Name of Supervisor cluster: sup1
 Zone vCenter Cluster
 Storage 3x vSAN default
 Name: avi
@@ -175,22 +176,24 @@ In AVI get the cert
   Templates -> security -> SSL/TLS/ Certs -> mycert -> export -> select the certificate -> copy to clip board
 
 Paste into server certificate in vCetner and make sure the trailing CR is deleted !!!!!!!
-Cloud name: mycloud
+Cloud Name: mycloud
 
-Management
+Management Network
 Static
 #MGT 10.1.1.51-10.1.1.59	255.255.255.0	GW.:10.1.1.1 mgmt-vds01-wld01-01a
 
 vcf.lab
 
-Workload
+Workload network
 Static
 work1
 #Wrk 10.1.4.10-10.1.4.29	255.255.255.128	GW.: 10.1.4.1 vsan-vds02-wld01-01a
 DNS: 10.1.1.1
 NTP:: 10.1.1.1
 
-Save config -> submit
+Check box Export Configuration:
+Next
+Finish
 ```
 
 
