@@ -110,6 +110,7 @@ administrator@WLD.SSO
 (Vmware password twice)
 uncheck content lib
 Save and Relaunch
+Cancel and yes to cont...
 
 Infrastructure -> Serives Engine Group -> mycloud -> default service engine -> edit 
 Scope -> Host and Cluster -> select the vCetner cluster
