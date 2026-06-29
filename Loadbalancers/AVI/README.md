@@ -208,7 +208,7 @@ vcf context create sup --endpoint 10.1.5.40 --insecure-skip-tls-verify --auth-ty
 #administrator@WLD.SSO/(famous VMware password twice)
 vcf context use
 k get nodes
-
+```
 
 
 # Trouble Shooting AVI (AKO) Pod on Supervisor cluster
