@@ -157,7 +157,7 @@ Save
 
 Create route from workload network to Frontend network
 Infrastructure -> Clound Resources -> VRF Context -> mycloud -> edit global -> add static route
-10.1.4.0/25 -> 10.1.5.0
+10.1.4.0/25 -> 10.1.5.1
 ```
 
 # Enable Supervisor
