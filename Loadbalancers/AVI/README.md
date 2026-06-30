@@ -152,7 +152,7 @@ Common name: avi
 Add SAN: 10.1.1.50
 Save -> Save
 Log back in (session is diconnected due to new cert)
-Allow basic auth check box
+Allow basic auth check box ( *** Looks like this is not needed anymore *** )
 Save
 
 Create route from workload network to Frontend network
