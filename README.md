@@ -23,6 +23,13 @@ vcf context refresh
 vcf context use vks-01
 kubectl get nodes
 ```
+Other guest cluster options
+```
+kubectl get nodes --kubeconfig ./Downloads/orfcluster1-kubeconfig.yaml
+```
+
+
+
 Install standard packages
 ```
 vcf package repository add default-repo --url projects.packages.broadcom.com/vsphere/supervisor/vks-standard-packages/3.6.0-20260211/vks-standard-packages:3.6.0-20260211 -n tkg-system
