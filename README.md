@@ -26,6 +26,7 @@ kubectl get nodes
 Other guest cluster options
 ```
 kubectl get nodes --kubeconfig ./Downloads/orfcluster1-kubeconfig.yaml
+kubectl get pods -A --kubeconfig ./Downloads/orfcluster1-kubeconfig.yaml
 ```
 
 
