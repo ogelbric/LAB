@@ -54,6 +54,10 @@ mv VCF-Consumption-CLI-PluginBundle-Linux_AMD64-9.1.0.0300.25509668.tar.gz ./plu
 cd plug
 tar xvf VCF-Consumption-CLI-PluginBundle-Linux_AMD64-9.1.0.0300.25509668.tar.gz 
 
+sudo vcf plugin install all --local-source .
+
+
+
 ```
 
 
