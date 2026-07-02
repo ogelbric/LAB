@@ -25,7 +25,18 @@ Serach for: VMware Cloud Foundation
 scp VCF-* orf@10.1.4.11:/home/orf/.
 
 VCF-Consumption-CLI-Linux_AMD64-9.1.0.0.25296 100%   44MB  72.0MB/s   00:00    
-VCF-Consumption-CLI-PluginBundle-Linux_AMD64- 100%  366MB 134.1MB/s   00:02   
+VCF-Consumption-CLI-PluginBundle-Linux_AMD64- 100%  366MB 134.1MB/s   00:02
+```
+
+## Install a few things on this Photon OS
+```
+ssh root@10.1.4.11
+changeme
+new password x2
+
+tdnf install sudo
+tdnf install tar
+
 ```
 
 
