@@ -60,7 +60,13 @@ sudo vcf plugin install all --local-source .
 
 ```
 
+## Log into sup cluster
+```
+vcf context create  --endpoint https://10.1.4.41 --username administrator@WLD.SSO --insecure-skip-tls-verify --auth-type basic
 
+Provide a name for the context:  sup66
+
+```
 
 
 
