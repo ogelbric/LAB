@@ -6,7 +6,10 @@ https://github.com/ogelbric/LAB/tree/main/VCF-CLI
 https://github.com/vmware/photon/wiki/Downloading-Photon-OS
 ```
 
-## Download the CLI (apparenly not on support.broadcom.com web site) 
+## Download the CLI 
 ```
-https://packages.broadcom.com/artifactory/vcf-distro/vcf-cli/
+support.broadcom.com
+Serach for: VMware Cloud Foundation
+9.1.00 > VCF Consumption CLI & VCF CLI Plugins
+
 ```
