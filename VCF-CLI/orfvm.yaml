@@ -1,0 +1,29 @@
+apiVersion: vmoperator.vmware.com/v1alpha5
+kind: VirtualMachine
+metadata:
+  name: orfvm
+  namespace: namespace1000
+  labels:
+    vm-selector: orfvm
+    orfvmlob: vm-lb-selector
+spec:
+  className: best-effort-medium
+  # Friendly image name: photon-hw15-5.0-dde71ec57.x86_64
+  imageName: vmi-8cb2bd0d8671fdf66
+  storageClass: vsan-default-storage-policy
+  powerState: PoweredOn
+  network:
+    hostName: orfvm
+    domainName: vcf.lab
+  bootstrap:
+    cloudInit:
+      cloudConfig:
+        defaultUserEnabled: true
+        ssh_pwauth: true
+        users:
+          - name: orf
+            passwd:
+              name: orfvm-bootstrap-secret
+              key: orf-passwd
+            lock_passwd: false
+            sudo: ALL=(ALL) NOPASSWD:ALL
