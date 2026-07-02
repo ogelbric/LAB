@@ -2,7 +2,7 @@
 # Installing VCF CLI
 ## Creating a VMservice OS image
 ```
-Download an image and load into content lib and attach the content lib for the VM to the namespace
+Download an image and import into content lib and attach the content lib for the VM to the namespace
 
 https://github.com/vmware/photon/wiki/Downloading-Photon-OS
 
