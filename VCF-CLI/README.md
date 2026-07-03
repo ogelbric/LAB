@@ -104,9 +104,15 @@ guest1
 
 
 
+139  vcf context list
+  140  vcf context use
+  141  vcf context create  --endpoint https://10.1.4.41 --username administrator@WLD.SSO --insecure-skip-tls-verify --auth-type basic --workload-cluster-name kubernetes-cluster-5smg --workload-cluster-namespace namespace1000
+  142  k get nodes
+  143  vcf context use
+  144  k get nodes
 
 
-
+```
 
 
 
