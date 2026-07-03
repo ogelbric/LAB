@@ -281,6 +281,9 @@ EOF
 kubectl get pods,gateway -n istio-ingress
 ```
 
+# Update Local /etc/hosts
+
+*.vksc01.example.com
 
 
 
