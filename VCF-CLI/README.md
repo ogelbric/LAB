@@ -299,6 +299,11 @@ Since DNS is not available the test is only partially working and gets a 404 but
 curl -vI shop.vksc01.example.com
 ```
 
+## Look at mTLS and Service membership
+```
+istioctl x describe pod redis-cart-6dc7bfd5f4-qt4qk -n default
+stioctl proxy-config routes deployment/shared-gateway-istio -n istio-ingress --name http.80 -o json
+```
 
 
 
