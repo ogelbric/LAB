@@ -68,8 +68,35 @@ vcf context list
 vcf context use
 #or
 vcf context use sup66:namespace1000
+```
+
+## Install the kubectl command from API endpoint
+```
+wget --no-check-certificate https://10.1.4.41/wcp/plugin/linux-amd64/vsphere-plugin.zip
+unzip vsphere-plugin.zip
+cd bin
+sudo mv kubectl kubectl-vsphere /usr/local/bin/
+sudo chmod +x /usr/local/bin/kubectl /usr/local/bin/kubectl-vsphere
+```
+## Use kubectl
+```
+kubectl get nodes
+```
 
 ```
+NAME                               STATUS   ROLES                  AGE   VERSION
+42275129b28d6a90e230a1623ca6c164   Ready    control-plane,master   32h   v1.32.9+vmware.2-fips
+esx-05a.site-a.vcf.lab             Ready    agent                  32h   v1.32.5-sph-f4e887d
+esx-06a.site-a.vcf.lab             Ready    agent                  31h   v1.32.5-sph-f4e887d
+esx-07a.site-a.vcf.lab             Ready    agent                  31h   v1.32.5-sph-f4e887d
+```
+
+
+
+
+
+
+
 
 
 
