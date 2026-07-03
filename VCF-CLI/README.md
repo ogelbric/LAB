@@ -1,6 +1,9 @@
 
 # Installing VCF CLI in VMware Lab Platform
 
+The idea is to have a virgin Linux VM to install the VCF cli and the VCF plugins in an airgapped environment. 
+
+
 ## Creating a VMservice OS image
 ```
 Download an image and import into content lib in vCenter and attach the content lib for the VMservice Tile to the vSphere namespace
