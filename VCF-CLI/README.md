@@ -222,6 +222,66 @@ vcf package install istio \
 -v 1.28.2+vmware.1-vks.1 \
 --values-file bobsistio.yaml \
 -n tkg-system
+
+# You should see a deploy succeeded
 ```
+
+## Make sure istio is running 
+```
+kubectl get pkgi -n tkg-system |grep istio
+kubectl get po -n istio-system
+kubectl get po -n istio-egress
+```
+
+## Deploy sample app 
+```
+# Enable istio injection
+kubectl label namespace default istio-injection=enabled
+# Deploy sample app
+kubectl apply -f https://raw.githubusercontent.com/GoogleCloudPlatform/microservices-demo/refs/heads/main/release/kubernetes-manifests.yaml
+```
+
+## Check out the app 
+```
+kubectl get svc; echo "---"; kubectl get svc | grep front
+```
+
+## Create Gateway
+```
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: istio-ingress
+  labels:
+    # Required in VKS to allow Istio proxies to run
+    pod-security.kubernetes.io/enforce: privileged
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: shared-gateway
+  namespace: istio-ingress
+spec:
+  gatewayClassName: istio 
+  listeners:
+  - name: http
+    port: 80
+    protocol: HTTP
+    # Shared model accepts any subdomain under vdoubleb.com
+    hostname: "*.vksc01.vdoubleb.com" 
+    allowedRoutes:
+      namespaces:
+        from: All
+EOF
+```
+
+## Check the Gateway Infrastructure
+```
+kubectl get pods,gateway -n istio-ingress
+```
+
+
+
 
 
