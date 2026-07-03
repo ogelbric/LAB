@@ -139,26 +139,33 @@ k get pods -A
 
 # Install Service Mesch
 
-## Scale our guest cluster
-
-```
-
-
+## Scale out guest cluster
 ```
 # Swap to supervisor cluster
 vcf context use sup66:namespace1000
-
+# add 2 more workers for a total of 3
 vcf cluster scale kubernetes-cluster-5smg -w 3 -n namespace1000
-
 vcf context use guest44:kubernetes-cluster-5smg
 k get nodes 
-
-
-
-
-
 ```
 
+## Look at packages 
+```
+#Adding the external packe repo (for airgapped this would have to be moved to an internal habor repo
+vcf package repository add vks-packages --url projects.packages.broadcom.com/vsphere/supervisor/vks-standard-packages/3.6.0-20260320/vks-standard-packages:3.6.0-20260320 -n tkg-system
+
+kubectl get pkgr -n tkg-system
+
+# Make sure the repo is working
+kubectl describe pkgr vks-packages -n tkg-system|grep image
+
+#find the istio package
+vcf package available list -n tkg-system |grep istio
+
+#List versions and we need 1.28
+vcf package available get istio.kubernetes.vmware.com -n tkg-system
+
+```
 
 
 
