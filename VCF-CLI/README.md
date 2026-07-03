@@ -6,9 +6,12 @@ The idea is to have a virgin Linux VM to install the VCF cli and the VCF plugins
 
 ## Creating a VMservice OS image
 ```
-Download an image and import into content lib in vCenter and attach the content lib for the VMservice Tile to the vSphere namespace
+Create namespace1000 in vCenter 
+
+Download the Photon OS image and import into content lib in vCenter and attach the content lib for the VMservice Tile to the vSphere namespace1000
 
 https://github.com/vmware/photon/wiki/Downloading-Photon-OS
+Get: OVA with virtual hardware v15 (Supports both BIOS and UEFI boot, default is UEFI)
 
 Deploy a VM from the VMservce from the vCenter Consumption Interface (yaml(s) for VM are in this GitHub folder) into namespace1000 (create namespace1000)
 Obtain the LB IP for VM from namespace 
