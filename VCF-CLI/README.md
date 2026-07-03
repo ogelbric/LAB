@@ -91,7 +91,14 @@ esx-06a.site-a.vcf.lab             Ready    agent                  31h   v1.32.5
 esx-07a.site-a.vcf.lab             Ready    agent                  31h   v1.32.5-sph-f4e887d
 ```
 
+## Loginto a Guest cluster
+```
+In vCenter in the Consumption interface create a guest cluster in namespace1000
 
+vcf cluster list 
+vcf context create  --endpoint https://10.1.4.41 --username administrator@WLD.SSO --insecure-skip-tls-verify --auth-type basic --workload-cluster-name kubernetes-cluster-5smg --workload-cluster-namespace namespace1000
+
+guest1
 
 
 
