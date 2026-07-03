@@ -269,7 +269,7 @@ spec:
     port: 80
     protocol: HTTP
     # Shared model accepts any subdomain under vdoubleb.com
-    hostname: "*.vksc01.vdoubleb.com" 
+    hostname: "*.vksc01.examle.com" 
     allowedRoutes:
       namespaces:
         from: All
