@@ -35,6 +35,7 @@ new password x2
 
 tdnf install sudo
 tdnf install tar
+tdnf install wget
 
 ssh orf@10.1.4.11
 tar -xvf VCF-Consumption-CLI-Linux_AMD64-9.1.0.0.25296329.tar.gz
