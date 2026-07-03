@@ -98,6 +98,11 @@ alias k=kubectl
 
 vcf cluster list
 
+#
+# In there there may be a token refresh necessary in order not to get a pinnepad error
+# Need command here (vcf context refresh # seem not to do the trick
+#
+
 vcf context create  --endpoint https://10.1.4.41 --username administrator@WLD.SSO --insecure-skip-tls-verify --auth-type basic --workload-cluster-name kubernetes-cluster-5smg --workload-cluster-namespace namespace1000
 
 guest44
