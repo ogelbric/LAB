@@ -220,7 +220,7 @@ vcf package available get istio.kubernetes.vmware.com/1.28.2+vmware.1-vks.1 --de
 vcf package install istio \
 -p istio.kubernetes.vmware.com \
 -v 1.28.2+vmware.1-vks.1 \
---values-file bobsinstio.yaml \
+--values-file bobsistio.yaml \
 -n tkg-system
 ```
 
