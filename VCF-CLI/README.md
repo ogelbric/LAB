@@ -96,30 +96,34 @@ esx-07a.site-a.vcf.lab             Ready    agent                  31h   v1.32.5
 In vCenter in the Consumption interface create a guest cluster in namespace1000
 alias k=kubectl
 
-vcf cluster list 
+vcf cluster list
+
 vcf context create  --endpoint https://10.1.4.41 --username administrator@WLD.SSO --insecure-skip-tls-verify --auth-type basic --workload-cluster-name kubernetes-cluster-5smg --workload-cluster-namespace namespace1000
 
-guest1
+guest44
 
 
+k get nodes
+# Should disply the supervisor control and worker nodes (ESX)
 
+vcf context list
 
-139  vcf context list
-  140  vcf context use
-  141  vcf context create  --endpoint https://10.1.4.41 --username administrator@WLD.SSO --insecure-skip-tls-verify --auth-type basic --workload-cluster-name kubernetes-cluster-5smg --workload-cluster-namespace namespace1000
-  142  k get nodes
-  143  vcf context use
-  144  k get nodes
+#  NAME                             CURRENT  TYPE        
+#  guest44                          false    kubernetes  
+#  guest44:kubernetes-cluster-5smg  true     kubernetes  
+#  sup66                            false    kubernetes  
+#  sup66:namespace1000              false    kubernetes  
+#  sup66:svc-cci-ns-2q0cm           false    kubernetes  
+#  sup66:svc-tkg-1g5q6              false    kubernetes  
+#  sup66:svc-velero-xfbxl           false    kubernetes  
 
- NAME                             CURRENT  TYPE        
-  guest44                          false    kubernetes  
-  guest44:kubernetes-cluster-5smg  true     kubernetes  
-  sup66                            false    kubernetes  
-  sup66:namespace1000              false    kubernetes  
-  sup66:svc-cci-ns-2q0cm           false    kubernetes  
-  sup66:svc-tkg-1g5q6              false    kubernetes  
-  sup66:svc-velero-xfbxl           false    kubernetes  
+vcf context use
+# Select the guest44 context
 
+k get nodes
+# Should get you the gues cluster controll plane nodes and worker nodes
+
+k get pods -A
 
 
 
