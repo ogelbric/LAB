@@ -39,12 +39,10 @@ ssh orf@10.1.4.11
 tar -xvf VCF-Consumption-CLI-Linux_AMD64-9.1.0.0.25296329.tar.gz
 sudo install vcf-cli-linux_amd64 /usr/local/bin/vcf
 vcf version
-```
 
-```
-version: v9.1.0.0.25296329
-buildDate: 2026-03-20
-...
+#version: v9.1.0.0.25296329
+#buildDate: 2026-03-20
+#...
 ```
 
 ## Plugins
