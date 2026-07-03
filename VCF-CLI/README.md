@@ -48,12 +48,15 @@ vcf version
 
 ## Plugins
 ```
-mkdir plug
-mv VCF-Consumption-CLI-PluginBundle-Linux_AMD64-9.1.0.0300.25509668.tar.gz ./plug/.
-cd plug
-tar xvf VCF-Consumption-CLI-PluginBundle-Linux_AMD64-9.1.0.0300.25509668.tar.gz 
+rm -rf ~/.local/vcf
+rm -rf ~/.local/vcf-cli-telemetry
 
-sudo vcf plugin install all --local-source .
+mkdir -p VCF-Consumption-CLI-Plugins-9.1
+tar -zxvf VCF-Consumption-CLI-PluginBundle-Darwin_AMD64-9.1.0.0.25305443.tar.gz -C VCF-Consumption-CLI-Plugins-9.1.0.0
+
+
+
+
 ```
 
 ## Log into sup cluster
