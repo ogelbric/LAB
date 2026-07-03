@@ -111,6 +111,17 @@ guest1
   143  vcf context use
   144  k get nodes
 
+ NAME                             CURRENT  TYPE        
+  guest44                          false    kubernetes  
+  guest44:kubernetes-cluster-5smg  true     kubernetes  
+  sup66                            false    kubernetes  
+  sup66:namespace1000              false    kubernetes  
+  sup66:svc-cci-ns-2q0cm           false    kubernetes  
+  sup66:svc-tkg-1g5q6              false    kubernetes  
+  sup66:svc-velero-xfbxl           false    kubernetes  
+
+
+
 
 ```
 
