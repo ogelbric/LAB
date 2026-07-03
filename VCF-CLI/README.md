@@ -42,6 +42,7 @@ new password x2
 tdnf install sudo
 tdnf install tar
 tdnf install wget
+curl -L https://istio.io/downloadIstio | sh
 
 ssh orf@10.1.4.11
 tar -xvf VCF-Consumption-CLI-Linux_AMD64-9.1.0.0.25296329.tar.gz
@@ -281,16 +282,23 @@ EOF
 kubectl get pods,gateway -n istio-ingress
 ```
 
-# Update Local /etc/hosts
+# Update Local dns with *.vksc01.example.com 
+In this lab the DNS is not accessible so next thing is update /etc/hosts with shop.vksc01.example.com
 ```
 kubectl get pods,gateway -n istio-ingress | tail -1 | awk '{print $3}'
-10.1.4.45
+# 10.1.4.45
 
-echo `kubectl get pods,gateway -n istio-ingress | tail -1 | awk '{print $3}'` "*.vksc01.example.com" | sudo tee -a /etc/hosts
-
-
+echo `kubectl get pods,gateway -n istio-ingress | tail -1 | awk '{print $3}'` "shop.vksc01.example.com" | sudo tee -a /etc/hosts
 ```
-*.vksc01.example.com
+
+## Test ingress
+Since DNS is not available the test is only partially working and gets a 404 but does connect 
+```
+curl -vI shop.vksc01.example.com
+```
+
+
+
 
 
 
