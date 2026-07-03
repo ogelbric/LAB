@@ -165,7 +165,63 @@ vcf package available list -n tkg-system |grep istio
 #List versions and we need 1.28
 vcf package available get istio.kubernetes.vmware.com -n tkg-system
 
+# Get the data vaues file
+vcf package available get istio.kubernetes.vmware.com/1.28.2+vmware.1-vks.1 --default-values-file-output istio-data-values.yaml -n tkg-system
 ```
 
+# Here is Bob(s) short version
+```
+ istio:
+   enableStrictMTLS: true
+   gateways:
+     egress:
+       autoscaling:
+         enabled: false
+         maxReplicas: 5
+         minReplicas: 1
+       enabled: true
+       replicas: 1
+#       resources:
+#         limits:
+#           cpu: 2000m
+#           memory: 1024Mi
+#         requests:
+#           cpu: 100m
+#           memory: 128Mi
+     ingress:
+       autoscaling:
+         enabled: false
+         maxReplicas: 5
+         minReplicas: 1
+       enabled: false
+       replicas: 1
+#       resources:
+#         limits:
+#           cpu: 2000m
+#           memory: 1024Mi
+#         requests:
+#           cpu: 100m
+#           memory: 128Mi
+   meshConfig:
+     accessLogFile: /dev/stdout
+     connectTimeout: 10s
+     enableDNSProxy: false
+     enablePrometheusMerge: true
+     enableTracing: true
+     externalIstiod: false
+     meshMTLS:
+       minProtocolVersion: TLSV1_2
+     trustDomain: cluster.local
+   namespace: istio-system
+```
+
+## Deploy istio
+```
+vcf package install istio \
+-p istio.kubernetes.vmware.com \
+-v 1.28.2+vmware.1-vks.1 \
+--values-file bobsinstio.yaml \
+-n tkg-system
+```
 
 
