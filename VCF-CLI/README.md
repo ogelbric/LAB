@@ -135,6 +135,25 @@ k get nodes
 # Should get you the gues cluster controll plane nodes and worker nodes
 
 k get pods -A
+```
+
+# Install Service Mesch
+
+## Scale our guest cluster
+
+```
+
+
+```
+# Swap to supervisor cluster
+vcf context use sup66:namespace1000
+
+vcf cluster scale kubernetes-cluster-5smg -w 3 -n namespace1000
+
+vcf context use guest44:kubernetes-cluster-5smg
+k get nodes 
+
+
 
 
 
