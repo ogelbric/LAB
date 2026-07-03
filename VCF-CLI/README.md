@@ -7,7 +7,7 @@ Download an image and import into content lib in vCenter and attach the content 
 
 https://github.com/vmware/photon/wiki/Downloading-Photon-OS
 
-Deploy a VM from the VMservce from the vCenter Consumption Interface (yaml(s) for VM are in this GitHub folder)
+Deploy a VM from the VMservce from the vCenter Consumption Interface (yaml(s) for VM are in this GitHub folder) into namespace1000 (create namespace1000)
 Obtain the LB IP for VM from namespace 
 ssh orf@10.1.4.11
 ```
@@ -52,19 +52,18 @@ rm -rf ~/.local/vcf
 rm -rf ~/.local/vcf-cli-telemetry
 
 mkdir -p VCF-Consumption-CLI-Plugins-9.1
-tar -zxvf VCF-Consumption-CLI-PluginBundle-Darwin_AMD64-9.1.0.0.25305443.tar.gz -C VCF-Consumption-CLI-Plugins-9.1.0.0
-
-
-
-
+tar -zxvf VCF-Consumption-CLI-PluginBundle-Linux_AMD64-9.1.0.0300.25509668.tar.gz -C VCF-Consumption-CLI-Plugins-9.1
+vcf plugin install all --local-source VCF-Consumption-CLI-Plugins-9.1
+vcf plugin list
 ```
+
 
 ## Log into sup cluster
 ```
 vcf context create  --endpoint https://10.1.4.41 --username administrator@WLD.SSO --insecure-skip-tls-verify --auth-type basic
 
 Provide a name for the context:  sup66
-
+vcf context list
 ```
 
 
