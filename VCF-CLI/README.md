@@ -305,7 +305,8 @@ istioctl x describe pod redis-cart-6dc7bfd5f4-qt4qk -n default
 stioctl proxy-config routes deployment/shared-gateway-istio -n istio-ingress --name http.80 -o json
 ```
 
-
+## Ispiration came from there
+https://medium.com/@bob-bauer/istio-on-vmware-vks-single-cluster-install-a574a3c95bbb
 
 
 
