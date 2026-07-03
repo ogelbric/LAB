@@ -28,6 +28,7 @@ VCF-Consumption-CLI-PluginBundle-Linux_AMD64- 100%  366MB 134.1MB/s   00:02
 ```
 
 ## Install a few things on the Photon OS VM
+```
 ssh root@10.1.4.11
 changeme
 new password x2
@@ -37,7 +38,6 @@ tdnf install tar
 
 ssh orf@10.1.4.11
 tar -xvf VCF-Consumption-CLI-Linux_AMD64-9.1.0.0.25296329.tar.gz
-
 sudo install vcf-cli-linux_amd64 /usr/local/bin/vcf
 vcf version
 
