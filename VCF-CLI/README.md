@@ -64,6 +64,10 @@ vcf context create  --endpoint https://10.1.4.41 --username administrator@WLD.SS
 
 Provide a name for the context:  sup66
 vcf context list
+vcf context use
+#or
+vcf context use sup66:namespace1000
+
 ```
 
 
