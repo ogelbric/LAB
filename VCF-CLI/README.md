@@ -286,6 +286,7 @@ kubectl get pods,gateway -n istio-ingress
 kubectl get pods,gateway -n istio-ingress | tail -1 | awk '{print $3}'
 10.1.4.45
 
+echo `kubectl get pods,gateway -n istio-ingress | tail -1 | awk '{print $3}'` "*.vksc01.example.com" | sudo tee -a /etc/hosts
 
 
 ```
