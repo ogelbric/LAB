@@ -43,6 +43,7 @@ tdnf install sudo
 tdnf install tar
 tdnf install wget
 curl -L https://istio.io/downloadIstio | sh
+cp istio-1.30.2/bin/istioctl /usr/local/bin
 
 ssh orf@10.1.4.11
 tar -xvf VCF-Consumption-CLI-Linux_AMD64-9.1.0.0.25296329.tar.gz
