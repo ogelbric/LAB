@@ -282,7 +282,13 @@ kubectl get pods,gateway -n istio-ingress
 ```
 
 # Update Local /etc/hosts
+```
+kubectl get pods,gateway -n istio-ingress | tail -1 | awk '{print $3}'
+10.1.4.45
 
+
+
+```
 *.vksc01.example.com
 
 
