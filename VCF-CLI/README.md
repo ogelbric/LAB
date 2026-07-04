@@ -1,5 +1,5 @@
 
-# Installing VCF CLI in VMware Lab Platform
+# Installing VCF CLI in VMware Lab Platform (and install of istio (in this case non air gapped) 
 
 The idea is to have a virgin Linux VM to install the VCF cli and the VCF plugins in an airgapped environment. 
 
