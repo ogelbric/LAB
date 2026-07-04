@@ -284,14 +284,20 @@ EOF
 kubectl get pods,gateway -n istio-ingress
 ```
 
-# Update Local dns with *.vksc01.example.com 
-In this lab the DNS is not accessible so next thing is update /etc/hosts with shop.vksc01.example.com
-Found the DNS server 10.1.1.1:5380 admin/x2
+# Update Local DNS with *.vksc01.example.com 
+
+## Get LB IP
 ```
 kubectl get pods,gateway -n istio-ingress | tail -1 | awk '{print $3}'
 # 10.1.4.45
+```
 
-echo `kubectl get pods,gateway -n istio-ingress | tail -1 | awk '{print $3}'` "shop.vksc01.example.com" | sudo tee -a /etc/hosts
+## Update DNS
+```
+In Browser go to DNS server 10.1.1.1:5380 admin/x2
+add zone vksc01.example.com
+add A record * pointing to 10.1.4.45
+Test from new jump server: nslookup shop.vksc01.example.com should resolve to 10.1.4.45
 ```
 
 ## Test ingress
