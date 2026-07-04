@@ -286,6 +286,7 @@ kubectl get pods,gateway -n istio-ingress
 
 # Update Local dns with *.vksc01.example.com 
 In this lab the DNS is not accessible so next thing is update /etc/hosts with shop.vksc01.example.com
+Found the DNS server 10.1.1.1:5380 admin/x2
 ```
 kubectl get pods,gateway -n istio-ingress | tail -1 | awk '{print $3}'
 # 10.1.4.45
