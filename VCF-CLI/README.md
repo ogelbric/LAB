@@ -42,6 +42,8 @@ new password x2
 tdnf install sudo
 tdnf install tar
 tdnf install wget
+tdnf install unzip
+
 curl -L https://istio.io/downloadIstio | sh
 cp istio-1.30.2/bin/istioctl /usr/local/bin
 chmod 755  /usr/local/bin/istioctl 
