@@ -1,6 +1,7 @@
 # Using the VMservice VM to relocate images
 
 ## Start docker on the Photon OS VM
+https://github.com/ogelbric/LAB/blob/main/VCF-CLI/README.md
 ```
 ssh root@10.1.14.11
 tdnf install docker
