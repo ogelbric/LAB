@@ -39,6 +39,9 @@ ssh root@10.1.4.11
 changeme
 new password x2
 
+#
+# for proxy info see below
+#
 tdnf install sudo
 tdnf install tar
 tdnf install wget
