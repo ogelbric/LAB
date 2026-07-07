@@ -23,7 +23,7 @@ docker login docker.io
 # Google application yaml
 wget -O sample_app.yaml https://raw.githubusercontent.com/GoogleCloudPlatform/microservices-demo/refs/heads/main/release/kubernetes-manifests.yaml
 # Save the yaml locally
-# Images we need:
+# Images we need (grep "images:" sample_app.yaml):
         image: us-central1-docker.pkg.dev/google-samples/microservices-demo/currencyservice:v0.10.5
         image: busybox:latest
         image: us-central1-docker.pkg.dev/google-samples/microservices-demo/loadgenerator:v0.10.5
@@ -38,7 +38,7 @@ wget -O sample_app.yaml https://raw.githubusercontent.com/GoogleCloudPlatform/mi
         image: us-central1-docker.pkg.dev/google-samples/microservices-demo/recommendationservice:v0.10.5
         image: us-central1-docker.pkg.dev/google-samples/microservices-demo/adservice:v0.10.5
 
-
+# Test new Harbor
 docker image pull us-central1-docker.pkg.dev/google-samples/microservices-demo/currencyservice:v0.10.5
 docker image ls
 
@@ -46,12 +46,26 @@ docker image ls
 ```
 ## Please see the Harbor install here: Need URL: https://github.com/ogelbric/LAB/tree/main/where_is(are)/Create_Harbor
 
-## Images pull + tag + push
+## Images pull + tag + push with script 
 ```
 # get the sample app yaml
 wget -O sample_app.yaml https://raw.githubusercontent.com/GoogleCloudPlatform/microservices-demo/refs/heads/main/release/kubernetes-manifests.yaml
 grep "image:" sample_app.yaml | awk '{print $2}' > images.txt
 
+cat > myscript.sh <<"EOF"
+#! /usr/bin/bash
+p="harbor.vcf.lab/myrepo/"
+for f in $(cat images.txt); do
+b=$(basename $f)
+echo "Processing: $f <> $b"
+docker image pull $f
+docker image tag $f $p$b
+docker image push $p$b
+docker image rm $f
+docker image rm $p$b
+docker image ls
+done
+EOF
 
 
 
