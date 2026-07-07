@@ -76,7 +76,7 @@ p="harbor.vcf.lab/myrepo/"
 for f in $(cat images.txt); do
 b=$(basename $f)
 echo "Processing: $f <> $b"
-sed -i 's/$f/$p$b/g' sample_app.yaml
+sed -i "s|$f|$p$b|g" sample_app.yaml
 done
 EOF
 chmod +x myupdatesample_app.sh
