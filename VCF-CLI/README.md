@@ -318,5 +318,14 @@ stioctl proxy-config routes deployment/shared-gateway-istio -n istio-ingress --n
 https://medium.com/@bob-bauer/istio-on-vmware-vks-single-cluster-install-a574a3c95bbb
 
 
+## Proxy 
+```
+This file needs to be updated: /etc/sysconfig/proxy
+
+PROXY_ENABLED to “yes”
+Define HTTP and HTTPS proxy.
+#tdnf uses HTTPS repositories use HTTPS
+
+```
 
 
