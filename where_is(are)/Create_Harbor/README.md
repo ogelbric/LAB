@@ -31,7 +31,7 @@ cp /tmp/a5 ~/Downloads/a5.yaml
 ## Configure Harbor
 ```
 Burger Menu -> Supervisor Management -> Services -> Harbor -> Actions -> Manage Service
-In step 3 paste the a3.yaml file into the window.
+In step 3 paste the a5.yaml file into the window.
 ```
 ```
 There should be pods running in the new harbor namespace 
