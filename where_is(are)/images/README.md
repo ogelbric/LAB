@@ -23,7 +23,7 @@ docker login docker.io
 # Google application yaml
 wget -O sample_app.yaml https://raw.githubusercontent.com/GoogleCloudPlatform/microservices-demo/refs/heads/main/release/kubernetes-manifests.yaml
 # Save the yaml locally
-# Images we need (grep "images:" sample_app.yaml):
+# Images we need (grep "image:" sample_app.yaml):
         image: us-central1-docker.pkg.dev/google-samples/microservices-demo/currencyservice:v0.10.5
         image: busybox:latest
         image: us-central1-docker.pkg.dev/google-samples/microservices-demo/loadgenerator:v0.10.5
@@ -64,11 +64,25 @@ docker image push $p$b
 docker image rm $f
 docker image rm $p$b
 docker image ls
+sed -i 's/$f/$p$b/g' sample_app.yaml
 done
 EOF
+chmod +x myscript.sh
+./myscript.sh
 
+cat > myupdatesample_app.sh <<"EOF"
+#! /usr/bin/bash
+p="harbor.vcf.lab/myrepo/"
+for f in $(cat images.txt); do
+b=$(basename $f)
+echo "Processing: $f <> $b"
+sed -i 's/$f/$p$b/g' sample_app.yaml
+done
+EOF
+chmod +x myupdatesample_app.sh
+./myupdatesample_app.sh
 
-
+grep "image:" sample_app.yaml
 
 ```
 
