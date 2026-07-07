@@ -243,6 +243,8 @@ kubectl get po -n istio-egress
 
 ## Deploy sample app 
 ```
+# Disable pod sec pol fro this test app
+kubectl label --overwrite ns default pod-security.kubernetes.io/enforce=privileged
 # Enable istio injection
 kubectl label namespace default istio-injection=enabled
 # Deploy sample app
