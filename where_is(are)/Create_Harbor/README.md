@@ -33,13 +33,29 @@ cp /tmp/a5 ~/Downloads/a5.yaml
 Burger Menu -> Supervisor Management -> Services -> Harbor -> Actions -> Manage Service
 In step 3 paste the a5.yaml file into the window.
 ```
+
 ```
 There should be pods running in the new harbor namespace 
 Under network -> services there is the LB IP: 10.1.4.46
 Update DNS: harbor.vcf.lab with LB IP   (In this lab DNS is at: https://10.1.1.1:5380)
 Browser to https://harbor.vcf.lab
 admin/Harbor12345
-create a public project: myrepo
-
+Create a public project: myrepo
+```
+## Cert
+```
+In Harbor select your project and then Regestry Certificate -> it will down load the ca.crt file
+su
+mkdir -p /etc/docker/certs.d/harbor.vcf.lab
+#open with mouse pad in the lab and paste into vi session
+vi /etc/docker/certs.d/harbor.vcf.lab/ca.crt
+#
+# Don't forget to delete the trailing <CR> in the file
+#
+```
+## Test login 
+```
+docker login harbor.vcf.lab
+admin/Harbor12345
 ```
 
