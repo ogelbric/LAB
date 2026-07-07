@@ -40,9 +40,21 @@ https://raw.githubusercontent.com/GoogleCloudPlatform/microservices-demo/refs/he
 
 
 docker image pull us-central1-docker.pkg.dev/google-samples/microservices-demo/currencyservice:v0.10.5
-# works
+docker image
+# should return the image local in docker
+```
+## Please see the Harbor install here: Need URL
 
-We need a harbor
+## Images pull + tag + push
+```
+docker image pull us-central1-docker.pkg.dev/google-samples/microservices-demo/currencyservice:v0.10.5
+docker image tag us-central1-docker.pkg.dev/google-samples/microservices-demo/currencyservice:v0.10.5 harbor.vcf.lab/myrepo/currencyservice:v0.10.5
+docker image push harbor.vcf.lab/myrepo/currencyservice:v0.10.5
 
 ```
+
+
+
+
+
 
