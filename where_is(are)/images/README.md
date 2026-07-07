@@ -21,7 +21,7 @@ docker login docker.io
 ## Images we are after from the sample app
 ```
 # Google application yaml
-https://raw.githubusercontent.com/GoogleCloudPlatform/microservices-demo/refs/heads/main/release/kubernetes-manifests.yaml
+wget -O sample_app.yaml https://raw.githubusercontent.com/GoogleCloudPlatform/microservices-demo/refs/heads/main/release/kubernetes-manifests.yaml
 # Save the yaml locally
 # Images we need:
         image: us-central1-docker.pkg.dev/google-samples/microservices-demo/currencyservice:v0.10.5
@@ -40,16 +40,21 @@ https://raw.githubusercontent.com/GoogleCloudPlatform/microservices-demo/refs/he
 
 
 docker image pull us-central1-docker.pkg.dev/google-samples/microservices-demo/currencyservice:v0.10.5
-docker image
+docker image ls
+
 # should return the image local in docker
 ```
-## Please see the Harbor install here: Need URL
+## Please see the Harbor install here: Need URL: https://github.com/ogelbric/LAB/tree/main/where_is(are)/Create_Harbor
 
 ## Images pull + tag + push
 ```
-docker image pull us-central1-docker.pkg.dev/google-samples/microservices-demo/currencyservice:v0.10.5
-docker image tag us-central1-docker.pkg.dev/google-samples/microservices-demo/currencyservice:v0.10.5 harbor.vcf.lab/myrepo/currencyservice:v0.10.5
-docker image push harbor.vcf.lab/myrepo/currencyservice:v0.10.5
+# get the sample app yaml
+wget -O sample_app.yaml https://raw.githubusercontent.com/GoogleCloudPlatform/microservices-demo/refs/heads/main/release/kubernetes-manifests.yaml
+grep "image:" sample_app.yaml | awk '{print $2}' > images.txt
+
+
+
+
 
 ```
 
