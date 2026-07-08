@@ -1,0 +1,14 @@
+# Creae Git
+```
+curl -LO https://git.io/get_helm.sh
+chmod 700 get_helm.sh
+./get_helm.sh
+kubectl create ns rabbit
+helm init
+kubectl get pods --namespace kube-system
+helm version
+helm install --name myrabbit stable/rabbitmq     (Error)
+```
+
+
+  
