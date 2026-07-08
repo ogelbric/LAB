@@ -108,6 +108,11 @@ esx-07a.site-a.vcf.lab             Ready    agent                  31h   v1.32.5
 ## Loginto a Guest cluster
 ```
 In vCenter in the Consumption interface create a guest cluster in namespace1000
+#
+# The Harbor cert and credentais should be set up before the creation of the guest cluster !!!
+# (https://github.com/ogelbric/LAB/tree/main/where_is(are)/Create_Harbor)
+#
+
 alias k=kubectl
 
 vcf cluster list
@@ -154,7 +159,8 @@ vcf context use sup66:namespace1000
 # add 2 more workers for a total of 3
 vcf cluster scale kubernetes-cluster-5smg -w 3 -n namespace1000
 vcf context use guest44:kubernetes-cluster-5smg
-k get nodes 
+k get nodes
+kubectl label --overwrite ns default pod-security.kubernetes.io/enforce=privileged
 ```
 
 ## Look at packages 
