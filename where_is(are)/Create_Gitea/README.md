@@ -69,17 +69,32 @@ helm install gitea gitea-charts/gitea --values values-gitea.yaml -n git
 # test 3
 
 ```
- vi loadbalancer.yaml 
-  415  k apply -f loadbalancer.yaml  -n git
-  416  k get svc -n git
-  417  curl -v 10.1.4.45:80
-  418  k get svc -n git
-  419  k get httproute -n git
-  420  k create ns es
-  421  kubectl run echoserver --image=gcr.io/google-containers/echoserver:1.10 --port=8080 -n es
-  422  kubectl label --overwrite ns es pod-security.kubernetes.io/enforce=privileged
-  423  kubectl run echoserver --image=gcr.io/google-containers/echoserver:1.10 --port=8080 -n es
-  424  history
+kubectl label --overwrite ns es pod-security.kubernetes.io/enforce=privileged
+kubectl run echoserver --image=gcr.io/google-containers/echoserver:1.10 --port=8080 -n es
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: loadbalanced-service
+spec:
+  selector:
+    run: echoserver
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+EOF
+kubectl apply -f loadbalancer.yaml
+
+kubectl get service loadbalanced-service
+
+
+
+
+
+
 ```
 
 
