@@ -34,6 +34,10 @@ helm repo add gitea-charts https://dl.gitea.com/charts/
 helm repo update
 helm install gitea gitea-charts/gitea
 
+NOTES:
+1. Get the application URL by running these commands:
+  echo "Visit http://127.0.0.1:3000 to use your application"
+  kubectl --namespace default port-forward svc/gitea-http 3000:3000
 
 
 
