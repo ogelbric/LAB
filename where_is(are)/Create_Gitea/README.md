@@ -858,6 +858,27 @@ EOF
 ```
 
 
+# Test 3
+
+```
+cat <<EOF > loadbalancer.yaml
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: loadbalanced-service
+spec:
+  selector:
+    run: echoserver
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+EOF
+kubectl apply -f loadbalancer.yaml
+
+```
 
 
   
