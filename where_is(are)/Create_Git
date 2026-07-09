@@ -39,6 +39,34 @@ NOTES:
   echo "Visit http://127.0.0.1:3000 to use your application"
   kubectl --namespace default port-forward svc/gitea-http 3000:3000
 
+so this works.... now we need an IP...and change the values file
+
+helm uninstall gitea
+helm list --all-namespaces
+
+```
+
+## test
+```
+cat > values-gitea.yaml <<"EOF"
+persistence:
+  create: false
+  claimName: nfs-test
+
+postgresql-ha:
+  enabled: false
+
+postgresql:
+  enabled: true
+
+http:
+    type: ClusterIP
+    port: 3000
+    clusterIP: None
+    loadBalancerIP: 10.1.4.45
+EOF
+
+helm install gitea gitea-charts/gitea --values values-gitea.yaml
 
 
 
