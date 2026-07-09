@@ -86,9 +86,9 @@ spec:
     targetPort: 8080
     protocol: TCP
 EOF
-kubectl apply -f loadbalancer.yaml
+kubectl apply -f loadbalancer.yaml -n es
 
-kubectl get service loadbalanced-service
+kubectl get service loadbalanced-service -n es
 
 
 
