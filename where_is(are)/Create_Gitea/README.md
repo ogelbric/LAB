@@ -1,4 +1,4 @@
-# Creae Git
+# Create Git
 
 ## Load Helm cli to jump box (need URL here!!!)
 ```
