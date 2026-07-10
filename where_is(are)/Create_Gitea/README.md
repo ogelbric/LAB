@@ -72,6 +72,7 @@ helm install gitea gitea-charts/gitea --values values-gitea.yaml -n git
 kubectl label --overwrite ns es pod-security.kubernetes.io/enforce=privileged
 kubectl run echoserver --image=gcr.io/google-containers/echoserver:1.10 --port=8080 -n es
 
+cat <<EOF > loadbalancer.yaml
 ---
 kind: Service
 apiVersion: v1
