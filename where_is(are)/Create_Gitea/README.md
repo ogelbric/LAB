@@ -61,6 +61,18 @@ http:
     loadBalancerIP: 10.1.4.45
 EOF
 
+persistence:
+  enabled: true
+  # Do not let Gitea's helm chart dynamically create a new claim
+  existingClaim: "nfs-test"
+  
+  # Ensure these match the specifications of your nfs-test PVC
+  accessModes:
+    - ReadWriteOnce  # or ReadWriteMany if your NFS provisioner supports it
+  size: 10Gi         # Set this to match your PVC's requested size
+
+
+
 kubectl create namespace git
 helm install gitea gitea-charts/gitea --values values-gitea.yaml -n git
 ```
