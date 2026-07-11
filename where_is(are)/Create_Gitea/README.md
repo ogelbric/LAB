@@ -28,7 +28,7 @@ root@orfvm [ ~ ]#
 ```
 helm repo add gitea-charts https://dl.gitea.com/charts/
 helm repo update
-kubect create namespace git
+kubectl create namespace git
 kubectl label --overwrite ns git pod-security.kubernetes.io/enforce=privileged
 helm install gitea gitea-charts/gitea -n git
 
