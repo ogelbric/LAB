@@ -1,0 +1,65 @@
+{
+  "specVersion": "1.0",
+  "supervisorSpec": {
+    "supervisorName": "sup1"
+  },
+  "envSpec": {
+    "vcenterDetails": {
+      "vcenterAddress": "vc-wld01-a.site-a.vcf.lab",
+      "vcenterDatacenter": "dc-a",
+      "vSphereZones": [
+        "z-wld-a"
+      ]
+    }
+  },
+  "componentSpec": {
+    "aviComponents": {
+      "aviName": "avi",
+      "aviUsername": "admin",
+      "aviController01Ip": "10.1.1.50:443",
+      "aviCertAuthorityChain": "-----BEGIN CERTIFICATE-----\nMIIC3DCCAcSgAwIBAgIUfv4N1QdpjpaslCRaH2wzcsFlauIwDQYJKoZIhvcNAQEL\nBQAwDjEMMAoGA1UEAwwDYXZpMB4XDTI2MDYyNzIwMDQzOVoXDTI3MDYyNzIwMDQz\nOVowDjEMMAoGA1UEAwwDYXZpMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKC\nAQEAuEXwaKpdj5O0B0PkzNGETtSObGmmQoQBXStzUV7FuaG7x6yPw2bhsENcfQcF\nFAYXK1410RlVjqlwCydw8Owj52hoe2zW6OkqlVpPgiy7HeOJaulX5tU9u/hIIQf/\nVp4y/Pd99zwz8jt9ebtJUeP9myKchmWi8B7Xvh9y34RmXCggxEI/tSl+tARngMbF\ncde0Ni/0G9srfjlbncmXWILjtrgq/JIgiU6ATqqdnYuGuIS5dJbwfvzrtyvyMq+/\nekE9QcIrfs1Y7Y2Slqw1sHuXgvS03ioidm0zkL6KRLSWX/iAz9971/g3CQXVvsKV\nT9ZgJCino0p1yuVD8f4FcailRwIDAQABozIwMDAPBgNVHREECDAGhwQKAQEyMB0G\nA1UdDgQWBBSTVYsOpDdUoQPL7bo70Lztt8ugKDANBgkqhkiG9w0BAQsFAAOCAQEA\npoArcRQM8HnaJ74fErFZDNV5rHK/JeDh+ufeaVx/ON3PHQM9mbNO+QJVejxAyDuC\nAQY3TRevWGxqHXAmhTfcgp7q3AKbJaSy/e/uwZ6eals2zeY8Ocb7BOT7ou+kc8D2\nVafayJZP7pcw3rtZrHMTDP8yjvIg5Byc9XMP5zJcqf48HZ4dZAR5wyaA/WvWgA2w\nC2IzveY+qc7pjdPGWCDjuplvs6FuO1WFTlLjm16nE+sJBzl18FYleXpFrB5GeZCy\nn9t25fMSYDIgLfb+P9thUQsQ58k9eg48P4XC4kuwc9g33k2P1j3MooqKsxN+BHya\n5l2wN7mjCOaG8HlXYBnACA==\n-----END CERTIFICATE-----",
+      "aviCloudName": "mycloud"
+    },
+    "mgmtNetworkSpec": {
+      "mgmtIpAssignmentMode": "STATICRANGE",
+      "mgmtNetworkName": "mgmt-vds01-wld01-01a",
+      "mgmtZoneNetworks": [
+        "mgmt-vds01-wld01-01a"
+      ],
+      "mgmtNetworkGatewayCidr": "10.1.1.1/24",
+      "mgmtNetworkStartingIp": "10.1.1.51 - 10.1.1.59",
+      "mgmtNetworkDnsServers": [
+        "10.1.1.1"
+      ],
+      "mgmtNetworkSearchDomains": [
+        "vcf.lab"
+      ],
+      "mgmtNetworkNtpServers": [
+        "10.1.1.1"
+      ]
+    },
+    "storagePolicySpec": {
+      "masterStoragePolicy": "vSAN Default Storage Policy",
+      "ephemeralStoragePolicy": "vSAN Default Storage Policy",
+      "imageStoragePolicy": "vSAN Default Storage Policy"
+    },
+    "primaryWorkloadNetwork": {
+      "primaryWorkloadIpAssignmentMode": "STATICRANGE",
+      "primaryWorkloadPortgroupName": "vsan-vds02-wld01-01a",
+      "primaryWorkloadNetworkName": "work1",
+      "primaryWorkloadNetworkGatewayCidr": "10.1.4.1/25",
+      "primaryWorkloadNetworkStartRange": "10.1.4.10",
+      "primaryWorkloadNetworkEndRange": "10.1.4.29",
+      "workloadDnsServers": [
+        "10.1.1.1"
+      ],
+      "workloadNtpServers": [
+        "10.1.1.1"
+      ],
+      "workloadServiceCidr": "10.96.0.0/23"
+    },
+    "controlPlaneSize": "SMALL",
+    "defaultServiceContentLibrary": "Kubernetes Service Content Library",
+    "cpvmCount": 1
+  }
+}
