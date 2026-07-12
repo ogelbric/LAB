@@ -43,7 +43,7 @@ helm uninstall gitea
 helm list --all-namespaces
 ```
 
-## test
+## test 1
 ```
 cat > values-gitea.yaml <<"EOF"
 persistence:
@@ -73,6 +73,20 @@ persistence:
     - ReadWriteOnce  # or ReadWriteMany if your NFS provisioner supports it
   size: 10Gi         # Set this to match your PVC's requested size
 
+
+
+kubectl create namespace git
+helm install gitea gitea-charts/gitea --values values-gitea.yaml -n git
+```
+## test 2
+```
+cat > values-gitea.yaml <<"EOF"
+http:
+    type: ClusterIP
+    port: 3000
+    clusterIP: None
+    loadBalancerIP: 10.1.4.45
+EOF
 
 
 kubectl create namespace git
