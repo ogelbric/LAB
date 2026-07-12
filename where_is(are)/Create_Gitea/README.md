@@ -81,11 +81,18 @@ helm install gitea gitea-charts/gitea --values values-gitea.yaml -n git
 ## test 2
 ```
 cat > values-gitea.yaml <<"EOF"
-http:
-    type: ClusterIP
-    port: 3000
-    clusterIP: None
+podSecurityContext:
+  fsGroup: 0
+service:
+  http:
+    type: LoadBalancer
     loadBalancerIP: 10.1.4.45
+    port: 443
+  ssh:
+    type: LoadBalancer
+    loadBalancerIP: 10.1.4.46
+    port: 22
+    ClusterIP:
 EOF
 
 
