@@ -1,0 +1,87 @@
+{
+  "specVersion": "1.0",
+  "supervisorSpec": {
+    "supervisorName": "sup1"
+  },
+  "envSpec": {
+    "vcenterDetails": {
+      "vcenterAddress": "vc-wld01-a.site-a.vcf.lab",
+      "vcenterDatacenter": "dc-a",
+      "vSphereZones": [
+        "z-wld-a"
+      ]
+    }
+  },
+  "componentSpec": {
+    "foundationLoadBalancerComponents": {
+      "flbName": "flb-sup1",
+      "flbSize": "SMALL",
+      "flbAvailability": "ACTIVE_PASSIVE",
+      "flbVipRanges": [
+        "10.1.4.40 - 10.1.4.49"
+      ],
+      "flbDnsServers": [
+        "10.1.1.1"
+      ],
+      "flbNtpServers": [
+        "10.1.1.1"
+      ],
+      "flbManagementNetwork": {
+        "flbNetworkIpAssignmentMode": "STATICRANGE",
+        "flbNetworkName": "mgmt-flb-orf-vds01-wld01-01a",
+        "flbNetworkPortgroupId": "dvportgroup-16",
+        "flbNetworkIpAddressRanges": "10.1.1.110 - 10.1.1.112",
+        "flbNetworkGateway": "10.1.1.1",
+        "flbNetworkSubnet": "255.255.255.0"
+      },
+      "flbVirtualServerNetwork": {
+        "flbNetworkIpAssignmentMode": "STATICRANGE",
+        "flbNetworkName": "vsan-flb-orf2-vds02-wld01-01a",
+        "flbNetworkPortgroupId": "dvportgroup-15",
+        "flbNetworkIpAddressRanges": "10.1.4.30 - 10.1.4.39",
+        "flbNetworkGateway": "10.1.4.1",
+        "flbNetworkSubnet": "255.255.255.128"
+      }
+    },
+    "mgmtNetworkSpec": {
+      "mgmtIpAssignmentMode": "STATICRANGE",
+      "mgmtZoneNetworks": [
+        "mgmt-vds01-wld01-01a"
+      ],
+      "mgmtNetworkGatewayCidr": "10.1.1.1/24",
+      "mgmtNetworkStartingIp": "10.1.1.50 - 10.1.1.59",
+      "mgmtNetworkDnsServers": [
+        "10.1.1.1"
+      ],
+      "mgmtNetworkSearchDomains": [
+        "vcf.lab"
+      ],
+      "mgmtNetworkNtpServers": [
+        "10.1.1.1"
+      ]
+    },
+    "storagePolicySpec": {
+      "masterStoragePolicy": "vSAN Default Storage Policy",
+      "ephemeralStoragePolicy": "vSAN Default Storage Policy",
+      "imageStoragePolicy": "vSAN Default Storage Policy"
+    },
+    "primaryWorkloadNetwork": {
+      "primaryWorkloadIpAssignmentMode": "STATICRANGE",
+      "primaryWorkloadPortgroupName": "vsan-vds02-wld01-01a",
+      "primaryWorkloadNetworkName": "vsan-vds02-wld01-01a",
+      "primaryWorkloadNetworkGatewayCidr": "10.1.4.1/25",
+      "primaryWorkloadNetworkStartRange": "10.1.4.10",
+      "primaryWorkloadNetworkEndRange": "10.1.4.29",
+      "workloadDnsServers": [
+        "10.1.1.1"
+      ],
+      "workloadNtpServers": [
+        "10.1.1.1"
+      ],
+      "workloadServiceCidr": "10.96.0.0/23"
+    },
+    "controlPlaneSize": "SMALL",
+    "apiServerDnsNames": [],
+    "cpvmCount": 1
+  }
+}
