@@ -2,9 +2,11 @@
 
 ## Load Helm cli to jump box (need URL here!!!)
 ```
+sudo tdnf install git
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-4
 chmod 700 get_helm.sh
-./get_helm.sh
+sudo ./get_helm.sh
+sudo chmod 755 /usr/local/bin/helm
 helm version
 ```
 
