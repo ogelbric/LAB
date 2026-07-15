@@ -127,9 +127,25 @@ EOF
 kubectl apply -f loadbalancer.yaml -n es
 
 kubectl get service loadbalanced-service -n es
+```
+
+#test 4
+```
+#pulling the images
+help pull gitea-charts/gitea
+
+helm registry login -u myuser localhost:5000
+Password:
+Login succeeded
+
+helm registry logout localhost:5000
+
+helm push mychart-0.1.0.tgz oci://localhost:5000/helm-charts
+
+$ helm install myrelease oci://localhost:5000/helm-charts/mychart --version 0.1.0
 
 
-
+$ helm upgrade myrelease oci://localhost:5000/helm-charts/mychart --version 0.2.0
 
 
 
