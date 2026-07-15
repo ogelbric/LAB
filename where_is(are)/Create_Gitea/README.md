@@ -66,7 +66,7 @@ gitea:
 EOF
 ```
 ```
-helm upgrade gitea gitea-charts/gitea --values values-gitea.yaml -n git
+helm upgrade gitea gitea-charts/gitea --values values-gitea-admin-user.yaml -n git
 ```
 
 ## Did not have to go down this road (pull/push) since I was able to pull the images
