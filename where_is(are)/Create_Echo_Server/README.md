@@ -1,4 +1,4 @@
-## Echo Server with Loadbalancer ingress
+## Echo Server with Loadbalancer Ingress
 
 ```
 
