@@ -54,6 +54,13 @@ kubectl create namespace git
 helm install gitea gitea-charts/gitea --values values-gitea.yaml -n git
 ```
 
+
+
+
+Section below I had Issues with...
+but I did notice a register account button and that worked 
+
+
 ## Upgrade GIT with admin user and password 
 
 ```
