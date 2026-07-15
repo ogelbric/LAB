@@ -29,25 +29,6 @@ k8-orf-cluster1-lxsfw-p2l8n                                 Ready    control-pla
 root@orfvm [ ~ ]# 
 ```
 
-## Install Git
-```
-helm repo add gitea-charts https://dl.gitea.com/charts/
-helm repo update
-kubectl create namespace git
-kubectl label --overwrite ns git pod-security.kubernetes.io/enforce=privileged
-helm install gitea gitea-charts/gitea -n git
-
-NOTES:
-1. Get the application URL by running these commands:
-  echo "Visit http://127.0.0.1:3000 to use your application"
-  kubectl --namespace default port-forward svc/gitea-http 3000:3000
-
-so this works.... now we need an IP...and change the values file for type loadbalancer
-
-helm uninstall gitea
-helm list --all-namespaces
-```
-
 
 ## Vaules file
 ```
@@ -114,5 +95,25 @@ $ helm install myrelease oci://localhost:5000/helm-charts/mychart --version 0.1.
 $ helm upgrade myrelease oci://localhost:5000/helm-charts/mychart --version 0.2.0
 ```
 
+## Default Git Install (no values file) 
+```
+helm repo add gitea-charts https://dl.gitea.com/charts/
+helm repo update
+kubectl create namespace git
+kubectl label --overwrite ns git pod-security.kubernetes.io/enforce=privileged
+helm install gitea gitea-charts/gitea -n git
+
+NOTES:
+1. Get the application URL by running these commands:
+  echo "Visit http://127.0.0.1:3000 to use your application"
+  kubectl --namespace default port-forward svc/gitea-http 3000:3000
+
+so this works.... now we need an IP...and change the values file for type loadbalancer
+
+helm uninstall gitea
+helm list --all-namespaces
+```
+
 
   
+
