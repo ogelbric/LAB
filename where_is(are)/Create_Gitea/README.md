@@ -54,8 +54,20 @@ kubectl create namespace git
 helm install gitea gitea-charts/gitea --values values-gitea.yaml -n git
 ```
 
+## Upgrade GIT with admin user and password 
 
-
+```
+cat > values-gitea-admin-user.yaml <<"EOF"
+gitea:
+  admin:
+    username: "admin1"
+    password: "CoolPassword@here"
+    email: "orf.gelbrich@broadcom.com"
+EOF
+```
+```
+helm upgrade gitea gitea-charts/gitea --values values-gitea.yaml -n git
+```
 
 ## Did not have to go down this road (pull/push) since I was able to pull the images
 ## This option needs to be expored more in locked down environments
