@@ -12,6 +12,8 @@ helm version
 
 ## Loginto the guest cluster 
 ```
+vcf context create  --endpoint https://10.1.4.41 --username administrator@WLD.SSO --insecure-skip-tls-verify --auth-type basic --workload-cluster-name kubernetes-cluster-5smg --workload-cluster-namespace namespace1000
+
 vcf context use
 ? Select a context guest88:k8-orf-cluster1
 kubectl get nodes 
