@@ -1,6 +1,6 @@
 # Create Git
 
-## Load Helm cli to jump box (need URL here!!!)
+## Load Helm CLI to jump box (need URL here!!!)
 ```
 sudo tdnf install git
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-4
@@ -12,6 +12,7 @@ helm version
 
 ## Loginto the guest cluster 
 ```
+FYI - Guest cluster needs to be created with default storage policy!!!
 vcf context create  --endpoint https://10.1.4.41 --username administrator@WLD.SSO --insecure-skip-tls-verify --auth-type basic --workload-cluster-name kubernetes-cluster-5smg --workload-cluster-namespace namespace1000
 
 vcf context use
@@ -47,42 +48,8 @@ helm uninstall gitea
 helm list --all-namespaces
 ```
 
-## test 1
-```
-cat > values-gitea.yaml <<"EOF"
-persistence:
-  create: false
-  claimName: nfs-test
 
-postgresql-ha:
-  enabled: false
-
-postgresql:
-  enabled: true
-
-http:
-    type: ClusterIP
-    port: 3000
-    clusterIP: None
-    loadBalancerIP: 10.1.4.45
-EOF
-
-persistence:
-  enabled: true
-  # Do not let Gitea's helm chart dynamically create a new claim
-  existingClaim: "nfs-test"
-  
-  # Ensure these match the specifications of your nfs-test PVC
-  accessModes:
-    - ReadWriteOnce  # or ReadWriteMany if your NFS provisioner supports it
-  size: 10Gi         # Set this to match your PVC's requested size
-
-
-
-kubectl create namespace git
-helm install gitea gitea-charts/gitea --values values-gitea.yaml -n git
-```
-## test 2
+## Vaules file
 ```
 cat > values-gitea.yaml <<"EOF"
 podSecurityContext:
@@ -90,22 +57,24 @@ podSecurityContext:
 service:
   http:
     type: LoadBalancer
-    loadBalancerIP: 10.1.4.45
+    loadBalancerIP: 10.1.5.49
     port: 443
   ssh:
     type: LoadBalancer
-    loadBalancerIP: 10.1.4.46
+    loadBalancerIP: 10.1.5.48
     port: 22
     ClusterIP:
 EOF
+```
 
-
+## Install git ea with values file
+```
 kubectl create namespace git
 helm install gitea gitea-charts/gitea --values values-gitea.yaml -n git
 ```
 
 
-# test 3
+## Test ingress with Echo Server (optional) 
 
 ```
 kubectl label --overwrite ns es pod-security.kubernetes.io/enforce=privileged
@@ -127,30 +96,22 @@ spec:
     protocol: TCP
 EOF
 kubectl apply -f loadbalancer.yaml -n es
-
 kubectl get service loadbalanced-service -n es
 ```
 
-#test 4
+## Did not have to go down this road since I was able to pull the images
+## This option needs to be expored more in locked down environments
+
 ```
 #pulling the images
 help pull gitea-charts/gitea
-
 helm registry login -u myuser localhost:5000
 Password:
 Login succeeded
-
 helm registry logout localhost:5000
-
 helm push mychart-0.1.0.tgz oci://localhost:5000/helm-charts
-
 $ helm install myrelease oci://localhost:5000/helm-charts/mychart --version 0.1.0
-
-
 $ helm upgrade myrelease oci://localhost:5000/helm-charts/mychart --version 0.2.0
-
-
-
 ```
 
 
