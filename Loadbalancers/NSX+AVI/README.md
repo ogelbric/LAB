@@ -10,3 +10,17 @@ IP: 10.1.2.41/25
 GW: 10.1.2.1
 Network: vsan
 
+## AVI Appliance
+
+```
+Go to https://10.1.2.40 
+And finish the set basic setup of AVI 
+```
+
+### AVI License
+
+```
+Administration -> Licensing -> OnPrem Licenses HUB 
+(Provides 20 SU's) 
+```
+
