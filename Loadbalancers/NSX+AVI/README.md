@@ -16,9 +16,24 @@ Go to https://10.1.2.40
 And finish the set basic setup of AVI 
 ```
 
-### AVI License
+## AVI License
 ```
 Administration -> Licensing -> OnPrem Licenses HUB 
 (Provides 20 SU's) 
 ```
+
+## AVI Connect to NSX
+
+```
+Infrastructure -> Get Started -> NSX Get Started quick Start Wizard -> Get Started
+Cloud Name: mycloud
+Prefix: mycloudnsx
+Enter NSX host name: nsx-wld01-a.site-a.vcf.lab
+
+```
+
+
+
+
+
 
