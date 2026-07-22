@@ -15,6 +15,12 @@ Give it a name: vna1.vcf.lab / DHCP / mgt network / storage -> save (you can hav
 ```
 
 
+
+
+
+# section below needs work 
+
+
 ## NSX Manager
 ```
 System -> Apliances -> AVI Load Balancer
