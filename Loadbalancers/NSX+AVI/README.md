@@ -23,15 +23,29 @@ Burger Menu -> content lib -> name: myaviSElib -> use all defaults -> create
 Burger Menu -> content lib -> name: supcluster -> subscribe: wp-content.vmware.com/v2/latest/lib.json  -> create
 ```
 
-## NSX (namgement) 
+## NSX (Management) 
 System -> Fabric -> Trasport zones -> nsx-vlan-trasport zone (for AVI SE's) 
 System -> Fabric -> Hosts -> Transport node profile -> edit
 Seelct (1)  on host switch -> edit 
 Add to vlan transport zone nsx-vlan-trasport zone
 Add -> apply -> save 
-
-
 ```
+
+## vSphere
+```
+Inventory -> vCenter -> Configure -> Networking -> VNA clusters -> make sure VNLA it is up and green 
+Networking -> Virtual Private Clouds -> Configure -> IP Blocks -> Add IP block
+Name: myexternalipblock
+Visibility: External
+Range: 10.1.3.40-10.1.3.50
+Save
+
+Networking -> Virtual Private Clouds -> Configure -> Connectivity Profiles -> Edit default profile 
+Select Virtual Network Appliance Cluster: myvnacluster
+My external IP block
+N-S Services: on
+Outbound NAT: on
+My external IP block 
 
 
 
