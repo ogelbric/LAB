@@ -23,8 +23,24 @@ Burger Menu -> content lib -> name: myaviSElib -> use all defaults -> create
 Burger Menu -> content lib -> name: supcluster -> subscribe: wp-content.vmware.com/v2/latest/lib.json  -> create
 ```
 
+## NSX (namgement) 
+System -> Fabric -> Trasport zones -> nsx-vlan-trasport zone (for AVI SE's) 
+System -> Fabric -> Hosts -> Transport node profile -> edit
+Seelct (1)  on host switch -> edit 
+Add to vlan transport zone nsx-vlan-trasport zone
+Add -> apply -> save 
 
 
+```
+
+
+
+
+
+
+
+
+```
 
 
 
