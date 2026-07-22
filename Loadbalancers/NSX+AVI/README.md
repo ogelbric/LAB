@@ -1,5 +1,20 @@
 # Adding AVI to a full NSX stack build out. 
 
+## vCenter 
+### External Connection
+```
+vSphere management cluster (not vSphere workload cluster)
+vCenter server in inventory -> configure -> networking -> external connection
+add an external connection mynewconnection / vlan 11 / 10.1.2.1/24
+```
+### VNA Cluster
+```
+vSphere management cluster (not vSphere workload cluster)
+vCenter server in inventory -> configure -> networking -> VNA Cluster -> add cluster
+Give it a name: vna1.vcf.lab / DHCP / mgt network / storage -> save (you can have just one)
+```
+
+
 ## NSX Manager
 ```
 System -> Apliances -> AVI Load Balancer
