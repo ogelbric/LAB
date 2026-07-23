@@ -20,7 +20,7 @@ Burger Menu -> content lib -> name: myaviSElib -> use all defaults -> create
 ```
 ### Create VKR content lib for supervisor cluster
 ```
-Burger Menu -> content lib -> name: supcluster -> subscribe: wp-content.vmware.com/v2/latest/lib.json  -> create
+Burger Menu -> content lib -> name: supcluster -> subscribe: https://wp-content.vmware.com/v2/latest/lib.json  -> create
 ```
 
 ## NSX (Management) 
