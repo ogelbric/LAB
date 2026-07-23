@@ -27,7 +27,7 @@ Burger Menu -> content lib -> name: supcluster -> subscribe: https://wp-content.
 ```
 System -> Fabric -> Trasport zones -> nsx-vlan-trasport zone (for AVI SE's) 
 System -> Fabric -> Hosts -> Transport node profile -> edit
-Seelct (1)  on host switch -> edit 
+Select (1)  on host switch -> edit 
 Add to vlan transport zone nsx-vlan-trasport zone
 Add -> apply -> save 
 ```
