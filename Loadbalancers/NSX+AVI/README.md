@@ -5,7 +5,7 @@
 ```
 vSphere management cluster (not vSphere workload cluster)
 vCenter server in inventory -> configure -> networking -> external connection
-add an external connection mynewconnection / vlan 11 / 10.1.2.1/24
+add an external connection mynewconnection / vlan 11 / 10.1.2.1/24 / Distributed vLAN
 ```
 ### VNA Cluster
 ```
