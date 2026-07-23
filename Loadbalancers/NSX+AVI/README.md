@@ -35,7 +35,7 @@ Add -> apply -> save
 ## vSphere
 ```
 Inventory -> vCenter -> Configure -> Networking -> VNA clusters -> make sure VNLA it is up and green 
-Networking -> Virtual Private Clouds -> Configure -> IP Blocks -> Add IP block
+Networking -> Virtual Private Clouds -> Configure -> Settings -> IP Blocks -> Add IP block
 Name: myexternalipblock
 Visibility: External
 Range: 10.1.3.40-10.1.3.50
