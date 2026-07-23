@@ -55,6 +55,7 @@ Edit -> add NTP (10.1.1.1) and DNS (10.1.1.1)
 ```
 Build -> Lifecycle -> fleet instance -> Bianry management -> Install Images -> Filter on AVI -> 32.1.1 -> Download
 Make sure the download finishes
+Possibel upgrade vCenter to avoid error message for AVI not the right version!
 Build -> Lifecycle -> fleet instance -> Management Domain -> manage components -> AVI Loadbalancer Install -> Wizzard -> small -> Passwords -> Node IP (x3)
 Register in DNS the avi.vcf.lab
 
