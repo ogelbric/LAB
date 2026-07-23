@@ -1,4 +1,4 @@
-# Adding AVI to a full NSX stack build out. 
+# Adding AVI to a full NSX stack build out. (Using the "VCF Experience Program: Kubernetes (9.1)"image in HOL lab)
 
 ## vCenter 
 ### External Connection
