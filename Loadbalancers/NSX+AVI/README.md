@@ -11,7 +11,7 @@ add an external connection mynewconnection / vlan 11 / 10.1.2.1/24 / Distributed
 ```
 vSphere management cluster (not vSphere workload cluster)
 vCenter server in inventory -> configure -> networking -> VNA Cluster -> add cluster
-Give it a name: vna1.vcf.lab / DHCP / mgt network / storage -> save (you can have just one)
+Give it a name: vna1.vcf.lab / DHCP / mgmt network / storage -> save (you can have just one)
 In my case I got 10.1.1.220 
 ```
 ### Create Content lib for AVI
