@@ -53,7 +53,7 @@ Edit -> add NTP (10.1.1.1) and DNS (10.1.1.1)
 ```
 # VCF Ops
 ```
-Build -> Lifecycle -> fleet instance -> Bianry management -> Install Images -> Filter on AVI -> 32.1.1
+Build -> Lifecycle -> fleet instance -> Bianry management -> Install Images -> Filter on AVI -> 32.1.1 -> Download
 Management Domain -> manage components -> AVI Install -> Wizzard -> small -> Passwords -> Node IP (x3)
 Register in DNS the avi.vcf.lab
 
