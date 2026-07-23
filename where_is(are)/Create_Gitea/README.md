@@ -1,6 +1,6 @@
 # Create Git
 
-## Load Helm CLI to jump box (need URL here!!!)
+## Load Helm CLI to jump box (https://github.com/ogelbric/LAB/blob/main/VCF-CLI/README.md)
 ```
 sudo tdnf install git
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-4
