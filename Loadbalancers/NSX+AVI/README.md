@@ -58,9 +58,13 @@ Make sure the download finishes
 Possibel upgrade vCenter to avoid error message for AVI not the right version!
 Build -> Lifecycle -> fleet instance -> Management Domain -> manage components -> AVI Loadbalancer Install -> Wizzard -> small -> Passwords -> Node IP (x3)
 Register in DNS the avi.vcf.lab
-
 ```
-
+```
+In Browser go to DNS server 10.1.1.1:5380 admin/VMware123!Vmware123!
+add zone avi.vcf.lab
+add A record pointing to 10.1.1.51
+Test from new jump server: nslookup avi.vcf.lashould resolve to 10.1.1.51
+```
 
 
 # section below needs work 
