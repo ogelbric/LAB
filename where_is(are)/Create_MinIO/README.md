@@ -55,8 +55,8 @@ helm install minio minio/minio –namespace minio-dev -f minio-values.yaml
 
 
 ```
-helm upgrade minio minio/minio \
-  --namespace minio-system \
+helm install minio minio/minio \
+  --namespace minio-dev \
   --set mode=standalone \
   --set replicas=1 \
   --set persistence.enabled=false \
