@@ -69,4 +69,7 @@ helm update minio minio/minio \
 
 ```
 
+```
+helm uninstall minio
+```
 
