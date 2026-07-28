@@ -38,6 +38,12 @@ buckets:
     policy: "none"
     purge: false
 
+app:
+  kubernetes.io
+    managed-by=Helm
+meta:
+  helm.sh
+    release-name=minio
 
 
 
