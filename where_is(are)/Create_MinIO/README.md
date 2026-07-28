@@ -17,9 +17,39 @@ kubectl patch storageclass vsan-default-storage-policy -p '{"metadata": {"annota
 helm repo add minio https://charts.min.io/
 helm repo update
 ```
+```
+# minio-values.yaml
+
+# Root credentials for the MinIO Console and S3 API
+rootUser: "your-admin-username"
+rootPassword: "your-secure-password"
+
+# Set deployment mode: standalone (single node) or distributed (multi-node)
+mode: standalone
+
+# Configure data persistence
+persistence:
+  enabled: true
+  size: 10Gi
+
+# Define S3 buckets to create automatically after initialization
+buckets:
+  - name: "my-s3-bucket"
+    policy: "none"
+    purge: false
+
+
+
 
 ```
-helm install minio minio/minio \
+```
+helm install minio minio/minio –namespace minio-system -f minio-values.yaml
+```
+
+
+
+```
+helm update minio minio/minio \
   --namespace minio-dev \
   --set mode=standalone \
   --set replicas=1 \
