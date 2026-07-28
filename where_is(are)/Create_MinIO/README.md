@@ -55,8 +55,8 @@ helm install minio minio/minio –namespace minio-dev -f minio-values.yaml
 
 
 ```
-helm update minio minio/minio \
-  --namespace minio-dev \
+helm upgrade minio minio/minio \
+  --namespace minio-system \
   --set mode=standalone \
   --set replicas=1 \
   --set persistence.enabled=false \
@@ -68,10 +68,7 @@ helm update minio minio/minio \
   --set resources.limits.cpu=250m \
   --set metrics.prometheus.enabled=false \
   --set service.type=LoadBalancer \
-  --set consoleService.type=LoadBalancer \
-  --set app.kubernetes.io/managed-by=Helm \
-  --set meta.helm.sh/release-name=minio
-
+  --set consoleService.type=LoadBalancer
 
 ```
 
