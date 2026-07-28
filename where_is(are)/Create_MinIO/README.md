@@ -90,7 +90,7 @@ metadata:
   name: minio-pvc
   namespace: minio-dev
 spec:
-  storageClassName: development
+  storageClassName: vsan-default-storage-policy
   accessModes:
     - ReadWriteOnce
   resources:
