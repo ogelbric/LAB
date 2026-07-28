@@ -4,7 +4,7 @@
 
 
 ```
-kubectl label --overwrite ns default pod-security.kubernetes.io/enforce=privileged
+kubectl label --overwrite ns minio-dev pod-security.kubernetes.io/enforce=privileged
 ```
 
 ```
@@ -20,7 +20,7 @@ helm repo update
 
 ```
 helm install minio minio/minio \
-  --namespace minio-system \
+  --namespace minio-dev \
   --set mode=standalone \
   --set replicas=1 \
   --set persistence.enabled=false \
