@@ -86,7 +86,7 @@ metadata:
   name: minio-service
   namespace: minio-dev
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: minio
   ports:
