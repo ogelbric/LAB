@@ -32,7 +32,9 @@ helm install minio minio/minio \
   --set resources.limits.cpu=250m \
   --set metrics.prometheus.enabled=false \
   --set service.type=LoadBalancer \
-  --set consoleService.type=LoadBalancer
+  --set consoleService.type=LoadBalancer \
+  --set app.kubernetes.io/managed-by=Helm \
+  --set meta.helm.sh/release-name=minio
 
 
 ```
