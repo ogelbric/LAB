@@ -43,7 +43,7 @@ buckets:
 
 ```
 ```
-helm install minio minio/minio –namespace minio-system -f minio-values.yaml
+helm install minio minio/minio –namespace minio-dev -f minio-values.yaml
 ```
 
 
