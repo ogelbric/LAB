@@ -19,7 +19,7 @@ helm repo update
 ```
 
 ```
-helm upgrade minio minio/minio \
+helm install minio minio/minio \
   --namespace minio-system \
   --set mode=standalone \
   --set replicas=1 \
