@@ -103,7 +103,9 @@ spec:
 #For Ubuntu OS
 #
 sudo apt install nodejs
+sudo apt-get update
 sudo apt install npm
+
 node -v && npm --version
 
 ```
