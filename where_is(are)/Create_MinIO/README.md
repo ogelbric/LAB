@@ -99,6 +99,14 @@ spec:
       port: 9001
       targetPort: 9001
 ```
+## Install the minio mc cli command 
+
+```
+wget https://dl.min.io/client/mc/release/linux-amd64/mc
+chmod +x mc
+./mc --help
+```
+
 ```
 #For Ubuntu OS
 #
