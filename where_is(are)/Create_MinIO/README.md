@@ -105,6 +105,8 @@ spec:
 wget https://dl.min.io/client/mc/release/linux-amd64/mc
 chmod +x mc
 ./mc --help
+sudo apt install mc
+
 ```
 
 ## Create Bucket with mc
@@ -116,7 +118,7 @@ chmod +x mc
 
 # Configuration variables
 #MINIO_URL="http://localhost:9000"
-MINIO_URL="http://`kubectl get svc -n minio-dev | tail -1 | awk '{print $4}'`:9001
+MINIO_URL="http://`kubectl get svc -n minio-dev | tail -1 | awk '{print $4}'`:9001"
 ACCESS_KEY="minioadmin"
 SECRET_KEY="minioadmin123"
 BUCKET_NAME="my-new-bucket"
