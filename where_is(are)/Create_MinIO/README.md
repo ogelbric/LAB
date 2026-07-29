@@ -105,7 +105,7 @@ spec:
 wget https://dl.min.io/client/mc/release/linux-amd64/mc
 chmod +x mc
 ./mc --help
-sudo apt install mc
+
 
 ```
 
@@ -120,13 +120,14 @@ MINIO_URL="http://`kubectl get svc -n minio-dev | tail -1 | awk '{print $4}'`:90
 ACCESS_KEY="minioadmin"
 SECRET_KEY="minioadmin123"
 BUCKET_NAME="my-new-bucket77"
-ALIAS="minio-dev"
+ALIAS="s3"
+API="S3v4"
 
 # Configure the MinIO client alias
-mc alias set $ALIAS $MINIO_URL $ACCESS_KEY $SECRET_KEY
+./mc alias set $ALIAS $MINIO_URL $ACCESS_KEY $SECRET_KEY --api $API
 
 # Create the bucket (ignores if it already exists)
-mc mb --ignore-existing $ALIAS/$BUCKET_NAME
+./mc mb --ignore-existing $ALIAS/$BUCKET_NAME
 
 echo "Bucket '$BUCKET_NAME' successfully verified/created."
 
