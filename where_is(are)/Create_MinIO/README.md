@@ -137,40 +137,6 @@ echo "Bucket '$BUCKET_NAME' successfully verified/created."
 
 
 
-```
-#For Ubuntu OS
-#
-sudo apt install nodejs
-sudo apt-get update
-sudo apt install npm
-
-node -v && npm --version
-
-npm run start
-npm init -y
-
-```
-
-## Create bucket
-```
-#!/bin/bash
-# Usage: ./create-bucket.sh <bucket-name>
-
-BUCKET=$1
-ACCESS_KEY="minioadmin"
-SECRET_KEY="minioadmin123"
-#MINIO_URL="http://localhost:9010" # Use your ClusterIP/Forwarded URL
-MINIO_URL="http://`kubectl get svc -n minio-dev | tail -1 | awk '{print $4}'`:9001" # Use your ClusterIP/Forwarded URL
-
-DATE=$(date -R)
-SIGNATURE=$(echo -en "PUT\n\n\n${DATE}\n/${BUCKET}" | openssl dgst -sha1 -hmac "${SECRET_KEY}" -binary | base64)
-
-curl -X PUT \
-     -H "Host: `kubectl get svc -n minio-dev | tail -1 | awk '{print $4}'`:9001" \
-     -H "Date: ${DATE}" \
-     -H "Authorization: AWS ${ACCESS_KEY}:${SIGNATURE}" \
-     "${MINIO_URL}/${BUCKET}"
-```
 
 
 
