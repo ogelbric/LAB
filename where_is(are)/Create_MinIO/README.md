@@ -112,17 +112,15 @@ sudo apt install mc
 ## Create Bucket with mc
 
 ```
-
-
-#!/bin/bash
+#!/usr//bin/bash
 
 # Configuration variables
 #MINIO_URL="http://localhost:9000"
 MINIO_URL="http://`kubectl get svc -n minio-dev | tail -1 | awk '{print $4}'`:9001"
 ACCESS_KEY="minioadmin"
 SECRET_KEY="minioadmin123"
-BUCKET_NAME="my-new-bucket"
-ALIAS="myminio"
+BUCKET_NAME="my-new-bucket77"
+ALIAS="minio-dev"
 
 # Configure the MinIO client alias
 mc alias set $ALIAS $MINIO_URL $ACCESS_KEY $SECRET_KEY
