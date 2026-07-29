@@ -108,6 +108,9 @@ sudo apt install npm
 
 node -v && npm --version
 
+npm run start
+npm init -y
+
 ```
 
 ## Create bucket
