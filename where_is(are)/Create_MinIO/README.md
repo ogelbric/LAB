@@ -107,6 +107,34 @@ chmod +x mc
 ./mc --help
 ```
 
+## Create Bucket with mc
+
+```
+
+
+#!/bin/bash
+
+# Configuration variables
+#MINIO_URL="http://localhost:9000"
+MINIO_URL="http://`kubectl get svc -n minio-dev | tail -1 | awk '{print $4}'`:9001
+ACCESS_KEY="minioadmin"
+SECRET_KEY="minioadmin123"
+BUCKET_NAME="my-new-bucket"
+ALIAS="myminio"
+
+# Configure the MinIO client alias
+mc alias set $ALIAS $MINIO_URL $ACCESS_KEY $SECRET_KEY
+
+# Create the bucket (ignores if it already exists)
+mc mb --ignore-existing $ALIAS/$BUCKET_NAME
+
+echo "Bucket '$BUCKET_NAME' successfully verified/created."
+
+```
+
+
+
+
 ```
 #For Ubuntu OS
 #
