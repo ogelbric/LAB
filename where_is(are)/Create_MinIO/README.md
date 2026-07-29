@@ -99,6 +99,12 @@ spec:
       port: 9001
       targetPort: 9001
 ```
+```
+sudo apt install nodejs
+sudo apt install npm
+node -v && npm --version
+
+```
 
 ## Create bucket
 ```
