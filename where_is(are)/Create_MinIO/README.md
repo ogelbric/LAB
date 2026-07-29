@@ -112,7 +112,7 @@ sudo apt install mc
 ## Create Bucket with mc
 
 ```
-#!/usr//bin/bash
+#!/usr/bin/bash
 
 # Configuration variables
 #MINIO_URL="http://localhost:9000"
