@@ -116,7 +116,7 @@ chmod +x mc
 
 # Configuration variables
 #MINIO_URL="http://localhost:9000"
-MINIO_URL="http://`kubectl get svc -n minio-dev | tail -1 | awk '{print $4}'`:9001"
+MINIO_URL="http://`kubectl get svc -n minio-dev | tail -1 | awk '{print $4}'`:9000"
 ACCESS_KEY="minioadmin"
 SECRET_KEY="minioadmin123"
 BUCKET_NAME="my-new-bucket77"
