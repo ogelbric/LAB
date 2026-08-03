@@ -28,7 +28,7 @@ vmotion-vds01-wld01-01a  VLAN 17		10.1.5.1	255.255.255.128			all				          VI
 vsan-vds02-wld01-01a     VLAN 15		10.1.4.1	255.255.255.128			.10-.99				      Workload
 
 # Used for AVI
-mgmt-vds01-wld01-01a		10.1.1.110	-	10.1.1.115 	(SE's)
+mgmt-vds01-wld01-01a		10.1.1.110	-	10.1.1.115 	MGT for SE's
 vmotion-vds01-wld01-01a		10.1.5.40	-	10.1.5.49 	Use for VIP
 
 #Sup Cluster
