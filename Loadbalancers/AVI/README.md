@@ -21,10 +21,20 @@ Enable DRS on vCenter cluster - Fully Automated -> ok
 ## Selecting Networks
 ```
 Burger Menu -> Inventory -> Networks -> expand the 2 VDS networks -> select each one and verify the VLANS in the Distributed Port Group Details
+# Current open IP ranges
 
 mgmt-vds01-wld01-01a     VLAN 10		10.1.1.1 	255.255.255.0           .50-59 .110-.130		  MGT
-vmotion-vds01-wld01-01a  VLAN 17		10.1.5.1	255.255.255.128							          VIP
+vmotion-vds01-wld01-01a  VLAN 17		10.1.5.1	255.255.255.128			all				          VIP
 vsan-vds02-wld01-01a     VLAN 15		10.1.4.1	255.255.255.128			.10-.99				      Workload
+
+# Used for AVI
+mgmt-vds01-wld01-01a		10.1.1.110	-	10.1.1.115 	(SE's)
+vmotion-vds01-wld01-01a		10.1.5.40	-	10.1.5.49 	Use for VIP
+
+#Sup Cluster
+mgmt-vds01-wld01-01a		10.1.1.51	-	10.1.1.59	MGT
+vsan-vds02-wld01-01a		10.1.4.10	-	10.1.4.29	Workload
+
 ```
 
 ## Locating open IP ranges on the Router
