@@ -51,12 +51,25 @@ My external IP block
 Networking -> Virtual Private Clouds -> Configure -> Service profile
 Edit -> add NTP (10.1.1.1) and DNS (10.1.1.1) 
 ```
+# Disable in SDDC manager the compat. check
+```
+Turn off upgrade compatibility checks in VMware Cloud Foundation's SDDC Manager
+SSH into the appliance as the vcf user, switch to root, 
+edit /opt/vmware/vcf/lcm/lcm-app/conf/compatibility.flag
+  set vcf.compatibility.controllers.compatibilityCheckEnabled=fals
+restart the LCM service via systemctl restart lcm
+```
+
 # VCF Ops
 ```
 Build -> Lifecycle -> fleet instance -> Bianry management -> Install Images -> Filter on AVI -> 32.1.1 -> Download
 Make sure the download finishes
 Possibel upgrade vCenter to avoid error message for AVI not the right version! (Build -> Lifecycle -> VCF management -> Upgrade)
 Build -> Lifecycle -> fleet instance -> Management Domain -> manage components -> AVI Loadbalancer Install -> Wizzard -> small -> Passwords -> Node IP (x3)
+10.1.1.50
+10.1.1.51
+10.1.1.52
+avi.cvf.lab = 10.1.1.49
 Register in DNS the avi.vcf.lab
 ```
 ```
