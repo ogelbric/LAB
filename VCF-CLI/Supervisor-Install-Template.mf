@@ -1,0 +1,3 @@
+SHA256(Supervisor-Install-Template-1.vmdk)= 785f84990e7c8b09ec2aa1aaad045c5d847bd0d0a5a979f89fa0584ac21b88c6
+SHA256(Supervisor-Install-Template.ovf)= c3bfcc27cfee7a1f4c42c20e9702140b2490e3f5b8042ab93ee42f4af2b469fc
+SHA256(Supervisor-Install-Template-2.nvram)= 5bd9bad94b0cab1a3a578cd4cac6b5fc99bfaf9cd90e9ed9c88085704f936d07
