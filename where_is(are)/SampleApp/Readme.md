@@ -1,7 +1,6 @@
 # Sample App - nginx
 
 ```
-
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -90,7 +89,5 @@ spec:
   ports:
     - port: 80
       targetPort: 80
-
-
 ```
 
