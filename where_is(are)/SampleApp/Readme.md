@@ -93,3 +93,5 @@ spec:
       targetPort: 80
 ```
 
+kubectl get all -n orf-web-apps
+
