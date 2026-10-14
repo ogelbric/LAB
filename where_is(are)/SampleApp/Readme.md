@@ -1,5 +1,7 @@
 # Sample App - nginx
 
+kubectl apply -f {file name of below context}
+
 ```
 apiVersion: v1
 kind: Namespace
