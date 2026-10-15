@@ -95,3 +95,6 @@ spec:
 
 kubectl get all -n orf-web-apps
 
+curl -v `kubectl get svc -n orf-web-apps | tail -1 | awk '{ print $4 }'`:80
+#
+# should sho connected to 
