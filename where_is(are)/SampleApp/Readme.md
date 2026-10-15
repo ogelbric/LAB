@@ -92,9 +92,10 @@ spec:
     - port: 80
       targetPort: 80
 ```
-
+# See the app running and its ingress IP
+```
 kubectl get all -n orf-web-apps
-
-curl -v `kubectl get svc -n orf-web-apps | tail -1 | awk '{ print $4 }'`:80
 #
-# should sho connected to 
+curl -v `kubectl get svc -n orf-web-apps | tail -1 | awk '{ print $4 }'`:80
+# should show connected to...
+```
