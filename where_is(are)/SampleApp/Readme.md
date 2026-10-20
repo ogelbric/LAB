@@ -99,3 +99,19 @@ kubectl get all -n orf-web-apps
 curl -v `kubectl get svc -n orf-web-apps | tail -1 | awk '{ print $4 }'`:80
 # should show connected to...
 ```
+
+
+# Register in new ns
+```
+apiVersion: cns.vmware.com/v1alpha1
+kind: CnsRegisterVolume
+metadata:
+  name: register-application-data
+  namespace: destination-supervisor-namespace
+spec:
+  volumeID: "2c5999e4-e4a7-4cf8-9220-ac9f2d04f4b1"
+  accessMode: ReadWriteOnce
+  pvcName: data-volume-adopted
+```
+
+
