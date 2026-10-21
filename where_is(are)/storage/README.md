@@ -63,3 +63,28 @@ kubectl --kubeconfig="${SUPERVISOR_KUBECONFIG}" \
 kubectl -n namespace-b get cnsregistervolume/register-application-data -o jsonpath='{.status.error}{"\n"}'
 
 ```
+
+
+```
+kubectl delete pvc {name} -n namespace-a
+```
+
+```
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: my-existing-pv
+  annotations:
+    pv.kubernetes.io/provisioned-by: csi.vsphere.vmware.com
+spec:
+  storageClassName: "vsan-default-storage-policy"
+  capacity:
+    storage: 3Gi # Match the actual size of your existing disk
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  csi:
+    driver: csi.vsphere.vmware.com
+    volumeHandle: "2c5999e4-e4a7-4cf8-9220-ac9f2d04f4b1"
+    fsType: ext4
+```
