@@ -133,9 +133,9 @@ result is the Clain is still with namesoace-a
 ```
 
 
-# New test 
+# New test !!!!!!!!!!!!!!!!!!!!!!!!!
 
-## In cluster-a / namespace-a 
+## Context swap to cluster-a / namespace-a 
 ```
 vcf context create cluster-a --endpoint https://10.1.8.132 --username administrator@WLD.SSO --insecure-skip-tls-verify --auth-type basic --workload-cluster-name cluster-a --workload-cluster-namespace namespace-a
 
@@ -168,7 +168,37 @@ kubectl get pvc
 kubectl label pvc { name } orf=testvol4g
 
 ```
-## Check in vCenter (storage -> vsan vol -> Monitor -> Container vol
+## Check in vCenter (storage -> vsan vol -> Monitor -> Container vol) (should find 4G vol with label) 
+
+## Create POD to mount vol
+```
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: default
+  labels:
+    pod-security.kubernetes.io/audit: privileged
+    pod-security.kubernetes.io/enforce: privileged
+    pod-security.kubernetes.io/warn: privileged
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox-debug
+spec:
+  containers:
+  - name: busybox
+    image: busybox:latest
+    command: ["sh", "-c", "sleep 3600"]
+    volumeMounts:
+    - mountPath: "/mnt"
+      name: my-storage
+  volumes:
+  - name: my-storage
+    persistentVolumeClaim:
+      claimName: my-guest-pvc2
+```
+
 
 
 
