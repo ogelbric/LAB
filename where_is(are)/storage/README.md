@@ -28,8 +28,13 @@ k get pvc -n namespace-a
 
 kubectl get pv
 kubectl describe pv pvc-9e-{long name}
+
 kubectl edit pv pvc-9e-{long name}
 # change Delete to Retain
+# or
+kubectl patch pv <your-pv-name> -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
+
+
 kubectl describe pv pvc-9e-{long name}
 
 kubectl get pv <pv-name> -o jsonpath='{.spec.csi.volumeHandle}'  #FCD UUID
