@@ -133,9 +133,9 @@ result is the Clain is still with namesoace-a
 ```
 
 
-## New test 
+# New test 
 
-# In cluster-a / namespace-a 
+## In cluster-a / namespace-a 
 ```
 vcf context create cluster-a --endpoint https://10.1.8.132 --username administrator@WLD.SSO --insecure-skip-tls-verify --auth-type basic --workload-cluster-name cluster-a --workload-cluster-namespace namespace-a
 
@@ -145,7 +145,7 @@ vcf context use cluster-a:cluster-a
 
 ```
 
-# Create pvc in guest cluster-a vSphere namespace-a
+## Create pvc in guest cluster-a vSphere namespace-a
 
 ```
 apiVersion: v1
@@ -162,9 +162,13 @@ spec:
       storage: 4Gi
 ```
 ```
+kubectl get nodes # to make sure we are on cluster-a
 kubcectl apply -f ./{above file}
+kubectl get pvc
+kubectl label pvc { name } orf=testvol4g
+
 ```
-# Check in vCenter (storage -> vsan vol -> Monitor -> Container vol
+## Check in vCenter (storage -> vsan vol -> Monitor -> Container vol
 
 
 
