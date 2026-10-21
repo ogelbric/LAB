@@ -135,9 +135,14 @@ result is the Clain is still with namesoace-a
 
 ## New test 
 
-#In cluster-a / namespace-a 
+# In cluster-a / namespace-a 
 ```
 vcf context create cluster-a --endpoint https://10.1.8.132 --username administrator@WLD.SSO --insecure-skip-tls-verify --auth-type basic --workload-cluster-name cluster-a --workload-cluster-namespace namespace-a
+
+# or
+
+vcf context use cluster-a:cluster-a
+
 ```
 
 # Create pvc in guest cluster-a vSphere namespace-a
