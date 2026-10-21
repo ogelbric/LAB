@@ -164,6 +164,7 @@ spec:
 ```
 kubcectl apply -f ./{above file}
 ```
+# Check in vCenter (storage -> vsan vol -> Monitor -> Container vol
 
 
 
