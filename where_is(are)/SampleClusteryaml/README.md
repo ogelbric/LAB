@@ -312,4 +312,256 @@ spec:
             annotations:
 
 ```
+# Navneet's sample cluster with addons
+```
+# vcf addon available list
+# vcf addon available-releases list --addon-name istio
+# vcf addon available-releases get istio.kubernetes.vmware.com.1.30.2-vmware.1-vks.1 -o output.yaml
+
+
+apiVersion: addons.kubernetes.vmware.com/v1alpha1
+kind: AddonInstall
+metadata:
+  name: cluster-helm-controller
+  namespace: navneet # Your vSphere namespace
+spec:
+  addonRef:
+    name: helm-controller
+  clusters:
+  - selector:
+      matchLabels:
+        cluster.x-k8s.io/cluster-name: workload-vsphere-vks2
+---
+apiVersion: addons.kubernetes.vmware.com/v1alpha1
+kind: AddonConfig
+metadata:
+  annotations:
+    clusteraddon.addons.kubernetes.vmware.com/owned-for-deletion: "true"
+  name: workload-vsphere-vks2-helm-controller
+  namespace: navneet # Your vSphere namespace
+spec:
+  values:
+    helmController:
+      priorityClassName: ""
+    sourceController:
+      priorityClassName: ""
+---
+apiVersion: addons.kubernetes.vmware.com/v1alpha1
+kind: AddonInstall
+metadata:
+  name: cluster-cert-manager
+  namespace: navneet # Your vSphere namespace
+spec:
+  addonRef:
+    name: cert-manager
+  clusters:
+  - selector:
+      matchLabels:
+        cluster.x-k8s.io/cluster-name: workload-vsphere-vks2
+---
+apiVersion: addons.kubernetes.vmware.com/v1alpha1
+kind: AddonInstall
+metadata:
+  name: cluster-prom
+  namespace: navneet # Your vSphere namespace
+spec:
+  addonRef:
+    name: prometheus
+  clusters:
+  - selector:
+      matchLabels:
+        cluster.x-k8s.io/cluster-name: workload-vsphere-vks2
+---
+apiVersion: addons.kubernetes.vmware.com/v1alpha1
+kind: AddonConfig
+metadata:
+  annotations:
+    clusteraddon.addons.kubernetes.vmware.com/owned-for-deletion: "true"
+  name: workload-vsphere-vks2-prometheus
+  namespace: navneet # Your vSphere namespace
+spec:
+  values:
+    deploycomponents:
+      kube-state-metrics: true
+      node-exporter: true
+      pushgateway: false
+      prometheus: false
+      alertmanager: true
+      prometheus-operator: true
+---
+apiVersion: addons.kubernetes.vmware.com/v1alpha1
+kind: AddonInstall
+metadata:
+  name: cluster-istio
+  namespace: navneet # Your vSphere namespace
+spec:
+  addonRef:
+    name: istio
+  clusters:
+  - selector:
+      matchLabels:
+        cluster.x-k8s.io/cluster-name: workload-vsphere-vks2
+---
+apiVersion: addons.kubernetes.vmware.com/v1alpha1
+kind: AddonConfig
+metadata:
+  annotations:
+    clusteraddon.addons.kubernetes.vmware.com/owned-for-deletion: "true"
+  name: workload-vsphere-vks2-istio
+  namespace: navneet  # Your vSphere namespace
+spec:
+  values:
+    istio:
+      namespace: "istio-system"
+      ambientMode:
+        enabled: false
+      istioCNI:
+        enabled: false
+      gateways:
+        ingress:
+          enabled: true
+          namespace: istio-ingress
+          autoscaling:
+            enabled: true
+            minReplicas: 1
+            maxReplicas: 5
+      pilot:
+        replicas: 1
+        autoscaling:
+          enabled: true
+          minReplicas: 1
+          maxReplicas: 2
+      meshConfig:
+        accessLogFile: ""
+        enableTracing: false
+        meshID: "workload-vsphere-vks2"
+---
+apiVersion: addons.kubernetes.vmware.com/v1alpha1
+kind: AddonInstall
+metadata:
+  name: cluster-headlamp
+  namespace: navneet # Your vSphere namespace
+spec:
+  addonRef:
+    name: headlamp
+  clusters:
+  - selector:
+      matchLabels:
+        cluster.x-k8s.io/cluster-name: workload-vsphere-vks2
+---
+apiVersion: addons.kubernetes.vmware.com/v1alpha1
+kind: AddonConfig
+metadata:
+  annotations:
+    clusteraddon.addons.kubernetes.vmware.com/owned-for-deletion: "true"
+  name: workload-vsphere-vks2-headlamp
+  namespace: navneet # Your vSphere namespace
+spec:
+  values:
+    hostname: headlamp.192.168.12.65.sslip.io
+    gatewayApi:
+      enabled: true
+      gateway:
+        className: istio
+        create: true
+        name: headlamp-gateway
+---
+apiVersion: cluster.x-k8s.io/v1beta2
+kind: Cluster
+metadata:
+  name: workload-vsphere-vks2
+  namespace: navneet
+spec:
+  clusterNetwork:
+    pods:
+      cidrBlocks:
+      - 240.0.0.0/20
+    serviceDomain: cluster.local
+    services:
+      cidrBlocks:
+      - 240.1.0.0/18
+  topology:
+    classRef:
+      name: builtin-generic-v3.7.0
+      namespace: vmware-system-vks-public
+    controlPlane:
+      metadata:
+        annotations:
+          run.tanzu.vmware.com/resolve-os-image: os-name=ubuntu,os-version=24.04
+      replicas: 1
+      variables:
+        overrides:
+        - name: vmClass
+          value: best-effort-large
+    variables:
+    - name: storageClass
+      value: vsan-esa-default-policy-raid5
+    - name: vmClass
+      value: best-effort-medium
+    - name: volumes
+      value:
+      - capacity: 30Gi
+        mountPath: /var/lib/containerd
+        name: containerd
+        storageClass: vsan-esa-default-policy-raid5
+      - capacity: 30Gi
+        mountPath: /var/lib/kubelet
+        name: kubelet
+        storageClass: vsan-esa-default-policy-raid5
+    - name: kubernetes
+      value:
+        certificateRotation:
+          enabled: true
+          renewalDaysBeforeExpiry: 90
+        etcdConfiguration:
+          maximumDBSizeGiB: 4
+        security:
+          podSecurityStandard:
+            audit: privileged
+            auditVersion: latest
+            deactivated: false
+            enforce: privileged
+            enforceVersion: latest
+            warn: privileged
+            warnVersion: latest
+          resourceQuotaConfiguration:
+            enabled: true
+        apiServerConfiguration:
+          logs:
+            format: json
+        kubeletConfiguration:
+          logging:
+            format: json
+    - name: vsphereOptions
+      value:
+        persistentVolumes:
+          availableStorageClasses:
+          - vsan-esa-default-policy-raid5
+          defaultStorageClass: vsan-esa-default-policy-raid5
+    - name: osConfiguration
+      value:
+        ntp:
+          servers:
+          - ntp.broadcom.net
+        sshd:
+          banner: '---AUTHORIZED ACCESS ONLY--- Use of this system is restricted to
+            authorized users for authorized activities only. '
+    version: v1.36.2---vmware.2-vkr.3
+    workers:
+      machineDeployments:
+      - class: node-pool
+        metadata:
+          annotations:
+            cluster.x-k8s.io/cluster-api-autoscaler-node-group-max-size: "5"
+            cluster.x-k8s.io/cluster-api-autoscaler-node-group-min-size: "1"
+            run.tanzu.vmware.com/resolve-os-image: os-name=ubuntu,os-version=24.04
+        name: node-pool-1
+      - class: node-pool
+        metadata:
+          annotations:
+            cluster.x-k8s.io/cluster-api-autoscaler-node-group-max-size: "5"
+            cluster.x-k8s.io/cluster-api-autoscaler-node-group-min-size: "1"
+            run.tanzu.vmware.com/resolve-os-image: os-name=ubuntu,os-version=24.04
+        name: node-pool-2
+```
 
