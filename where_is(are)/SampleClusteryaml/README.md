@@ -1,4 +1,4 @@
-Sample Cluster yaml with addons
+# Sample Cluster yaml with addons
 
 ```
 apiVersion: addons.kubernetes.vmware.com/v1alpha1
@@ -205,7 +205,7 @@ spec:
         name: node-pool-1
 ```
 
-Sample cluster yaml with containerd mount point
+#Sample cluster yaml with containerd mount point
 
 ```
 apiVersion: cluster.x-k8s.io/v1beta1
@@ -261,5 +261,55 @@ spec:
         - class: node-pool
           name: cluster21-worker
           replicas: 1
+```
+
+# Super Simple sample cluster yaml
+
+```
+apiVersion: cluster.x-k8s.io/v1beta1
+kind: Cluster
+metadata:
+  name: cluster1
+  namespace: namespace1000
+spec:
+  clusterNetwork:
+    pods:
+      cidrBlocks:
+        - 192.168.156.0/20
+    services:
+      cidrBlocks:
+        - 10.96.0.0/12
+    serviceDomain: cluster.local
+  topology:
+    class: builtin-generic-v3.3.0
+    classNamespace: vmware-system-vks-public
+    version: v1.33.3---vmware.1-fips-vkr.1
+    variables:
+      - name: vsphereOptions
+        value:
+          persistentVolumes:
+            defaultStorageClass: k8storage
+      - name: kubernetes
+        value:
+          certificateRotation:
+            enabled: true
+            renewalDaysBeforeExpiry: 90
+      - name: vmClass
+        value: guaranteed-xsmall
+      - name: storageClass
+        value: k8storage
+    controlPlane:
+      replicas: 1
+      metadata:
+        annotations:
+          run.tanzu.vmware.com/resolve-os-image: os-name=photon, content-library=cl-65e2e1e2897014dbe
+    workers:
+      machineDeployments:
+        - class: node-pool
+          name: cluster1-np-d6zh
+          replicas: 1
+          metadata:
+            annotations:
+
 ```
 
