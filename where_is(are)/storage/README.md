@@ -1,3 +1,8 @@
+# Original Write up
+```
+https://github.com/vmware/vks-validated-solutions/tree/main/VKS-Migrations
+```
+
 # Create pvc in guest cluster-a vSphere namespace-a
 
 ```
