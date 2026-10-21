@@ -39,6 +39,7 @@ kubectl get csidrivers
 
 ```
 
+# register in namespace-b on sup cluster
 ```
 apiVersion: cns.vmware.com/v1alpha1
 kind: CnsRegisterVolume
