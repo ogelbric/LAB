@@ -171,6 +171,7 @@ kubectl label pvc { name } orf=testvol4g
 ## Check in vCenter (storage -> vsan vol -> Monitor -> Container vol) (should find 4G vol with label) 
 
 ## Create POD to mount vol
+
 ```
 apiVersion: v1
 kind: Namespace
@@ -201,9 +202,11 @@ spec:
 
 ## Jump onto the POD
 ```
-kubectl exec -it busybox-debug -- sh or kubectl attach busybox-debug -c busybox -i -t
+kubectl -n orf-ns1 exec -it busybox-debug -- sh 
 cd /mnt
 touch myfile-abc
+ls
+exit
 ```
 
 
