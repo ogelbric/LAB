@@ -107,7 +107,7 @@ spec:
   volumeName: my-existing-pv
 ```
 
-# problem
+# problem (on sup cluster)
 
 ```
 k get pv | grep 3G
