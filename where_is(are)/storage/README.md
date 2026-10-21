@@ -175,7 +175,7 @@ kubectl label pvc { name } orf=testvol4g
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: default
+  name: orf-ns1
   labels:
     pod-security.kubernetes.io/audit: privileged
     pod-security.kubernetes.io/enforce: privileged
@@ -199,6 +199,12 @@ spec:
       claimName: my-guest-pvc2
 ```
 
+## Jump onto the POD
+```
+kubectl exec -it busybox-debug -- sh or kubectl attach busybox-debug -c busybox -i -t
+cd /mnt
+touch myfile-abc
+```
 
 
 
