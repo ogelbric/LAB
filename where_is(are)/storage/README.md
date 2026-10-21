@@ -123,3 +123,62 @@ result is the Clain is still with namesoace-a
 
 ```
 
+
+## New test 
+
+```
+
+Method 2: The Manual Rebind (Without Copying Data)
+
+If you have a large volume and want to move it without copying data, you can release the underlying vSphere Cloud Native Storage (CNS) disk and rebind it to the new namespace.
+
+Step 1: Change the Reclaim Policy to Retain
+
+By default, deleting a PVC deletes the backing storage. You must change the policy so the vSphere CNS volume stays intact.
+bash
+kubectl patch pv <your-pv-name> -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
+Use code with caution.
+
+Step 2: Delete the Old PVC & Edit the PV Spec
+
+1. Scale down your application in the old namespace.
+2. Delete the old PVC:bash
+kubectl delete pvc <old-pvc-name> -n source-ns
+Use code with caution.
+3. The PV status will change to Released. Now, you must strip the old namespace bindings from the PV so a new claim can grab it. Edit the PV:bash
+kubectl edit pv <your-pv-name>
+Use code with caution.
+4. In the YAML editor, look under spec.claimRef. Remove the uid line entirely, and change the namespace field to match your target namespace. Save and close.
+
+Step 3: Create the New PVC in the Target Namespace
+
+Create a manifest for your new PVC in the new namespace. To ensure it binds directly to your existing VMware PV, explicitly specify the volumeName in the spec:
+yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: destination-pvc-name
+  namespace: target-ns
+spec:
+  storageClassName: <your-vsphere-storage-class>
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: <must-match-exact-pv-size>
+  volumeName: <your-pv-name> # Forces binding to the existing PV
+Use code with caution.
+Apply this YAML. The new PVC and the existing PV should now change status to Bound.
+
+Step 4: Finalize the Binding (Crucial for Tanzu/vSphere CNS)
+
+To ensure the VMware Cloud Native Storage control plane recognizes the new relationship, get the UID of the new PVC and patch it back onto the PV.
+1. Get the new PVC's UID:bash
+kubectl get pvc destination-pvc-name -n target-ns -o jsonpath='{.metadata.uid}'
+Use code with caution.
+2. Patch the PV with the new UID:bash
+kubectl patch pv <your-pv-name> -p '{"spec":{"claimRef":{"uid":"<NEW_PVC_UID>"}}}'
+Use code with caution.
+3. (Optional) Change the persistentVolumeReclaimPolicy back to Delete if you want future automated teardowns to clean up the vSphere datastore.
+```
+
