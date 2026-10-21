@@ -204,3 +204,62 @@ spec:
             run.tanzu.vmware.com/resolve-os-image: os-name=ubuntu,os-version=24.04
         name: node-pool-1
 ```
+
+Sample cluster yaml with containerd mount point
+
+```
+apiVersion: cluster.x-k8s.io/v1beta1
+kind: Cluster
+metadata:
+  name: cluster01-new
+  namespace: namespace1000
+spec:
+  clusterNetwork:
+    pods:
+      cidrBlocks:
+        - 192.168.156.0/20
+    services:
+      cidrBlocks:
+        - 10.96.0.0/12
+    serviceDomain: cluster.local
+  topology:
+    class: builtin-generic-v3.6.0
+    classNamespace: vmware-system-vks-public
+    version: v1.33.6---vmware.1-fips-vkr.2
+    variables:
+      - name: vsphereOptions
+        value:
+          persistentVolumes:
+            defaultStorageClass: k8storage
+      - name: kubernetes
+        value:
+          certificateRotation:
+            enabled: true
+            renewalDaysBeforeExpiry: 90
+      - name: vmClass
+        value: guaranteed-xsmall
+      - name: storageClass
+        value: k8storage
+      - name: volumes
+        value:
+        - name: containerd
+          mountPath: /var/lib/containerd
+          storageClass: k8storage
+          capacity: 15Gi
+        - name: kubelet-override
+          mountPath: /var/lib/kubelet
+          storageClass: k8storage
+          capacity: 10Gi          
+        - name: log
+          mountPath: /var/log
+          storageClass: k8storage
+          capacity: 10Gi          
+    controlPlane:
+      replicas: 1
+    workers:
+      machineDeployments:
+        - class: node-pool
+          name: cluster21-worker
+          replicas: 1
+```
+
