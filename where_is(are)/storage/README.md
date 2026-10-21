@@ -106,3 +106,14 @@ spec:
       storage: 3Gi
   volumeName: my-existing-pv
 ```
+
+# problem
+
+```
+k get pv | grep 3G
+k describe pv {above pvc-long number} | grep namespace
+
+result is the Clain is still with namesoace-a
+
+```
+
