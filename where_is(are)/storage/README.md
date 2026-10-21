@@ -64,11 +64,12 @@ kubectl -n namespace-b get cnsregistervolume/register-application-data -o jsonpa
 
 ```
 
-
+# on sup cluster
 ```
 kubectl delete pvc {name} -n namespace-a
 ```
 
+# In guest cluster-b creae pv
 ```
 apiVersion: v1
 kind: PersistentVolume
@@ -87,4 +88,21 @@ spec:
     driver: csi.vsphere.vmware.com
     volumeHandle: "2c5999e4-e4a7-4cf8-9220-ac9f2d04f4b1"
     fsType: ext4
+```
+
+# in guest cluster-b create pvc
+```
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-existing-pvc
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: "vsan-default-storage-policy"
+  resources:
+    requests:
+      storage: 3Gi
+  volumeName: my-existing-pv
 ```
