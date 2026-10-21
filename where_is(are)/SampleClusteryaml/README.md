@@ -1,4 +1,4 @@
-# Sample Cluster yaml with addons
+# Ronak's Sample Cluster yaml with addon's
 
 ```
 apiVersion: addons.kubernetes.vmware.com/v1alpha1
@@ -312,7 +312,7 @@ spec:
             annotations:
 
 ```
-# Navneet's sample cluster with addons
+# Navneet's sample cluster with addon's
 ```
 # vcf addon available list
 # vcf addon available-releases list --addon-name istio
