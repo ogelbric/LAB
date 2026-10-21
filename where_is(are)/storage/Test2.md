@@ -148,3 +148,9 @@ kubectl patch pv <your-pv-name> -p '{"spec":{"claimRef":{"uid":"<NEW_PVC_UID>"}}
 ```
 ### (Optional) Change the persistentVolumeReclaimPolicy back to Delete if you want future automated teardowns to clean up the vSphere datastore.
 
+
+# Not sure about this.. 
+```
+kubectl edit cnsvolumeinfoes -n vmware-system-csi ba...{long name coming from kubectl get cnsvolumeinfoes and my 3 hour old pv/pvc I created}
+
+```
