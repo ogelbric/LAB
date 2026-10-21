@@ -6,7 +6,7 @@ https://github.com/vmware/vks-validated-solutions/tree/main/VKS-Migrations
 
 # Create 2 new contexts
 ```
-vcf context create  cluster-a --endpoint https://10.1.8.132 --username administrator@WLD.SSO --insecure-skip-tls-verify --auth-type basic --workload-cluster-name cluster-a --workload-cluster-namespace namespace-a
+vcf context create cluster-a --endpoint https://10.1.8.132 --username administrator@WLD.SSO --insecure-skip-tls-verify --auth-type basic --workload-cluster-name cluster-a --workload-cluster-namespace namespace-a
 
 vcf context create cluster-b --endpoint https://10.1.8.132 --username administrator@WLD.SSO --insecure-skip-tls-verify --auth-type basic --workload-cluster-name cluster-b --workload-cluster-namespace namespace-b
 
