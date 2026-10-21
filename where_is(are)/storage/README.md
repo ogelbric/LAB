@@ -226,15 +226,23 @@ kubectl get pv
 kubectl get pvc
 kubectl delete pvc my-guest-pvc2
 kubectl get pvc
+#The PV status will change to Released. Now, you must strip the old namespace bindings from the PV so a new claim can grab it. 
 ```
-
-## The PV status will change to Released. Now, you must strip the old namespace bindings from the PV so a new claim can grab it. 
-
+## On Sup cluster (on sup VM!) (/usr/lib/vmware-wcp/decryptK8Pwd.py)
 ```
+kubectl get pv
+kubectl patch pv <your-pv-name> -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
+kubectl get pv
+
+kubectl get pvc -n namespace-1
+kubectl delete pvc { long name from above command} -n namespace-a
+
+kubectl get pv  # should show released
+
 kubectl edit pv <your-pv-name>
 
 #In the YAML editor, look under spec.claimRef.
-#Remove the uid line entirely, and change the namespace field to match your target namespace. Save and close.
+#Remove the uid line entirely (Spec)(there are 2 uid entries the spec one needs to go, and change the namespace field to match your target namespace. Save and close.
 ```
 
 
