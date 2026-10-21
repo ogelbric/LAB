@@ -245,37 +245,42 @@ kubectl edit pv <your-pv-name>
 #Remove the uid line entirely (Spec)(there are 2 uid entries the spec one needs to go, and change the namespace field to match your target namespace. Save and close.
 ```
 
-
-
-Step 3: Create the New PVC in the Target Namespace
+# Create the New PVC in the Target Namespace (on sup VM)
 
 Create a manifest for your new PVC in the new namespace. To ensure it binds directly to your existing VMware PV, explicitly specify the volumeName in the spec:
 yaml
+```
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: destination-pvc-name
-  namespace: target-ns
+  namespace: namespace-b
 spec:
-  storageClassName: <your-vsphere-storage-class>
+  storageClassName: vsan-default-storage-policy
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: <must-match-exact-pv-size>
+      storage: 4G
   volumeName: <your-pv-name> # Forces binding to the existing PV
-Use code with caution.
-Apply this YAML. The new PVC and the existing PV should now change status to Bound.
+```
 
-Step 4: Finalize the Binding (Crucial for Tanzu/vSphere CNS)
+```
+kubectl apply -f ./{file name} -n nasmespace-b
+kubect get pvc 
+```
+Apply this YAML. The new PVC and the existing PV should now change status to Bound. Well no it is pending
 
+## Finalize the Binding (Crucial for Tanzu/vSphere CNS)
+```
 To ensure the VMware Cloud Native Storage control plane recognizes the new relationship, get the UID of the new PVC and patch it back onto the PV.
 1. Get the new PVC's UID:bash
-kubectl get pvc destination-pvc-name -n target-ns -o jsonpath='{.metadata.uid}'
-Use code with caution.
-2. Patch the PV with the new UID:bash
-kubectl patch pv <your-pv-name> -p '{"spec":{"claimRef":{"uid":"<NEW_PVC_UID>"}}}'
-Use code with caution.
-3. (Optional) Change the persistentVolumeReclaimPolicy back to Delete if you want future automated teardowns to clean up the vSphere datastore.
+kubectl get pvc destination-pvc-name -n namespace-b -o jsonpath='{.metadata.uid}'
 ```
+## Patch the PV with the new UID:bash
+```
+kubectl patch pv <your-pv-name> -p '{"spec":{"claimRef":{"uid":"<NEW_PVC_UID>"}}}'
+```
+### (Optional) Change the persistentVolumeReclaimPolicy back to Delete if you want future automated teardowns to clean up the vSphere datastore.
+
 
