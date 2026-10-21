@@ -128,7 +128,7 @@ spec:
 k get pv | grep 3G
 k describe pv {above pvc-long number} | grep namespace
 
-result is the Clain is still with namesoace-a
+result is the Claim is still with namespace-a
 
 ```
 
@@ -200,7 +200,7 @@ spec:
       claimName: my-guest-pvc2
 ```
 
-## Jump onto the POD
+## Jump onto the POD to see mount moint and place test file
 ```
 kubectl -n orf-ns1 exec -it busybox-debug -- sh 
 cd /mnt
@@ -208,30 +208,36 @@ touch myfile-abc
 ls
 exit
 ```
+## Delete pod to make sure the file system is not in use 
+```
+kubectl delete -f ./{file name from above}
+```
+## Change the Reclaim Policy to Retain
 
-
-
-Method 2: The Manual Rebind (Without Copying Data)
-
-If you have a large volume and want to move it without copying data, you can release the underlying vSphere Cloud Native Storage (CNS) disk and rebind it to the new namespace.
-
-Step 1: Change the Reclaim Policy to Retain
-
-By default, deleting a PVC deletes the backing storage. You must change the policy so the vSphere CNS volume stays intact.
-bash
+```
+kubectl get pv
 kubectl patch pv <your-pv-name> -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
-Use code with caution.
+# check that it is set to Retain! Very important!
+kubectl get pv
+```
 
-Step 2: Delete the Old PVC & Edit the PV Spec
+## Still in/on cluster-a / namespace-a 
+```
+kubectl get pvc
+kubectl delete pvc my-guest-pvc2
+kubectl get pvc
+```
 
-1. Scale down your application in the old namespace.
-2. Delete the old PVC:bash
-kubectl delete pvc <old-pvc-name> -n source-ns
-Use code with caution.
-3. The PV status will change to Released. Now, you must strip the old namespace bindings from the PV so a new claim can grab it. Edit the PV:bash
+## The PV status will change to Released. Now, you must strip the old namespace bindings from the PV so a new claim can grab it. 
+
+```
 kubectl edit pv <your-pv-name>
-Use code with caution.
-4. In the YAML editor, look under spec.claimRef. Remove the uid line entirely, and change the namespace field to match your target namespace. Save and close.
+
+#In the YAML editor, look under spec.claimRef.
+#Remove the uid line entirely, and change the namespace field to match your target namespace. Save and close.
+```
+
+
 
 Step 3: Create the New PVC in the Target Namespace
 
