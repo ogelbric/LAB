@@ -56,8 +56,10 @@ spec:
 
 ```
 kubectl --kubeconfig="${SUPERVISOR_KUBECONFIG}" \
-  -n destination-supervisor-namespace wait \
-  --for=jsonpath='{.status.registered}'=true \
+  -n destination-supervisor-namespace get \
   cnsregistervolume/register-application-data \
-  --timeout=5m
+  -o jsonpath='{.status.error}{"\n"}'
+
+kubectl -n namespace-b get cnsregistervolume/register-application-data -o jsonpath='{.status.error}{"\n"}'
+
 ```
