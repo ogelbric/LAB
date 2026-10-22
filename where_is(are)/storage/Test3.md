@@ -209,6 +209,126 @@ sup-src get pv "$SUP_PV" \
 
 ```
 
+# kill the busybix POD
+
+```
+vks-src -n "$SRC_VKS_NS" delete pod migration-test-writer \
+  --wait=true
+```
+# Check for remaining VKS VolumeAttachment objects:
+```
+vks-src get volumeattachments \
+  -o custom-columns=NAME:.metadata.name,PV:.spec.source.persistentVolumeName,NODE:.spec.nodeName \
+  | grep -F "$SRC_VKS_PV" || true
+```
+
+# Do not continue while the source volume remains attached to a running workload.
+
+
+# govc volume.rm -keep requires govc 0.49.0 or later:
+# Install govc
+```
+sudo curl -L -o - "https://github.com/vmware/govmomi/releases/latest/download/govc_$(uname -s)_$(uname -m).tar.gz" > /tmp/a
+sudo tar -C /usr/local/bin -xvzf /tmp/a govc
+```
+
+```
+govc version
+govc volume.rm -h | grep -F -- '-keep'
+```
+
+# Configure the normal GOVC_URL, GOVC_USERNAME, GOVC_PASSWORD, GOVC_DATASTORE and inventory defaults for the vCenter hosting the source FCD.
+
+```
+export GOVC_URL="vc-wld01-a.site-a.vcf.lab"
+export GOVC_USERNAME="administrator@WLD.SSO"
+export GOVC_PASSWORD='VMware123!VMware123!'
+export GOVC_DATASTORE="vsan-wld01-01a"
+export GOVC_INSECURE="true"
+export GOVC_DATACENTER="dc-a"
+export GOVC_NETWORK="mgmt-vds01-wld01-01a"
+# Test the login
+govc volume.ls -L "$FCD_UUID"
+
+export FCD_BACKING_ID=$(govc volume.ls -L "$FCD_UUID")
+
+printf '%-20s %s\n' \
+  'CNS volume ID:' "$FCD_UUID" \
+  'FCD backing ID:' "$FCD_BACKING_ID"
+
+govc volume.ls -l "$FCD_UUID"
+govc disk.ls -l "$FCD_BACKING_ID"
+```
+
+
+# Create a powered-off helper VM and attach the FCD
+# The helper VM is a safety interlock only. It must remain powered off and no guest operating system must mount or modify the disk.
+
+# Discover the backing path:
+
+```
+export FCD_PATH=$(
+  govc disk.ls -json "$FCD_BACKING_ID" |
+    jq -er '.objects[0].config.backing.filePath'
+)
+
+export HELPER_VM="${FCD_UUID}-migration-guard"
+
+printf 'FCD backing path: %s\n' "$FCD_PATH"
+```
+
+# Create the helper VM in inventory accessible to the datastore containing the FCD and attach the existing disk without creating a linked delta:
+
+```
+govc vm.create \
+  -on=false \
+  "$HELPER_VM"
+
+govc vm.disk.attach \
+  -vm "$HELPER_VM" \
+  -disk "$FCD_PATH" \
+  -link=false
+
+govc device.info -vm "$HELPER_VM" disk-*
+```
+
+# Verify that the helper VM is powered off:
+```
+test "$(govc vm.info -json "$HELPER_VM" | jq -r '.VirtualMachines[0].Runtime.PowerState')" = "poweredOff"
+```
+
+# Delete the source VKS PVC and PV
+# The source workload must already be quiesced and the Velero backup completed.
+
+# Delete the source VKS PVC and PV:
+
+```
+vks-src -n "$SRC_VKS_NS" delete pvc "$SRC_VKS_PVC" \
+  --wait=true
+
+if vks-src get pv "$SRC_VKS_PV" >/dev/null 2>&1; then
+  vks-src delete pv "$SRC_VKS_PV" --wait=true
+fi
+```
+
+# The Supervisor PVC may disappear automatically. If it remains, remove it using the normal namespaced Supervisor context:
+```
+if sup-src -n "$SRC_SUP_NS" get pvc "$SUP_PVC" >/dev/null 2>&1; then
+  sup-src -n "$SRC_SUP_NS" delete pvc "$SUP_PVC" --wait=true
+fi
+```
+
+
+
+
+```
+```
+
+
+
+
+
+
 
 
 # For later to figgure out on how to do this with VCF commands
