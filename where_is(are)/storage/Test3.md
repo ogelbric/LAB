@@ -195,7 +195,19 @@ printf '%-22s %s\n' \
 
 ```
 
+# More discovery
 
+```
+vks-src get pv "$SRC_VKS_PV" \
+  -o custom-columns=NAME:.metadata.name,HANDLE:.spec.csi.volumeHandle,RECLAIM:.spec.persistentVolumeReclaimPolicy
+
+sup-src -n "$SRC_SUP_NS" get pvc "$SUP_PVC" \
+  -o custom-columns=NAME:.metadata.name,PV:.spec.volumeName,PHASE:.status.phase
+
+sup-src get pv "$SUP_PV" \
+  -o custom-columns=NAME:.metadata.name,HANDLE:.spec.csi.volumeHandle,RECLAIM:.spec.persistentVolumeReclaimPolicy
+
+```
 
 
 
