@@ -92,7 +92,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
+      storage: 5Gi
 EOF_PVC
 
 vks-src -n "$SRC_VKS_NS" wait \
