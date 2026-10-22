@@ -2,6 +2,7 @@
 ```
 https://www.vmware.com/docs/vmw-kubernetes-workload-migration-to-vks
 https://github.com/vmware/vks-validated-solutions/tree/main/VKS-Migrations
+https://github.com/vmware/vks-validated-solutions/blob/main/VKS-Migrations/VKS-to-VKS/examples/2-same-supervisor-different-namespace.md
 ```
 
 # Has issues -> still shows namespace-a
