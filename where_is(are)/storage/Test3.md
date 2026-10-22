@@ -72,6 +72,13 @@ sup-src get nodes
 vks-dst get nodes
 sup-dst get nodes
 ```
+
+# Make sure there is a default storage class
+```
+vks-src -n "$SRC_VKS_NS" patch storageclass vsan-default-storage-policy -p '{"metadata": {"annotations": {"storageclass.kubernetes.io/is-default-class": "true"}}}'
+```
+
+
 # Create a test volume and write identifiable data
 
 ```
@@ -87,6 +94,11 @@ spec:
     requests:
       storage: 1Gi
 EOF_PVC
+
+vks-src -n "$SRC_VKS_NS" wait \
+  --for=jsonpath='{.status.phase}'=Bound \
+  "pvc/${SRC_VKS_PVC}" \
+  --timeout=5m
 
 
 ```
