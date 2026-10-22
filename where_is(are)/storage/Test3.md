@@ -13,9 +13,9 @@ https://github.com/vmware/vks-validated-solutions/blob/main/VKS-Migrations/VKS-t
 mv /${HOME}/.kube/config /${HOME}/.kube/config.bak
 rm /${HOME}/.kube/config
 #
-export SUP_CONTEXT="sup2"
-export SRC_CONTEXT="cluster-a2"
-export DST_CONTEXT="cluster-b2"
+export SUP_CONTEXT="sup3"
+export SRC_CONTEXT="cluster-a3"
+export DST_CONTEXT="cluster-b3"
 #
 export SRC_CLUSTER="cluster-a"
 export DST_CLUSTER="cluster-b"
@@ -27,21 +27,21 @@ vcf context use ${SUP_CONTEXT}
 kubectl get nodes
 cp /${HOME}/.kube/config "$HOME/supervisor-kubeconfig"
 export SUPERVISOR_KUBECONFIG="$HOME/supervisor-kubeconfig"
-rm /${HOME}/.kube/config
+#rm /${HOME}/.kube/config
 #
 vcf context create ${SRC_CONTEXT} --endpoint https://10.1.8.132 --username administrator@WLD.SSO --insecure-skip-tls-verify --auth-type basic --workload-cluster-name ${SRC_CLUSTER} --workload-cluster-namespace ${SRC_VSPHERE_NS}
 cp /${HOME}/.kube/config "$HOME/source-vks-kubeconfig"
 export SRC_VKS_KUBECONFIG="$HOME/source-vks-kubeconfig"
 vcf context use ${SRC_CONTEXT}:${SRC_CLUSTER}
 kubectl get nodes
-rm /${HOME}/.kube/config
+#rm /${HOME}/.kube/config
 #
 vcf context create ${DST_CONTEXT} --endpoint https://10.1.8.132 --username administrator@WLD.SSO --insecure-skip-tls-verify --auth-type basic --workload-cluster-name ${DST_CLUSTER} --workload-cluster-namespace ${DST_VSPHERE_NS}
 cp /${HOME}/.kube/config "$HOME/destination-vks-kubeconfig"
 export DST_VKS_KUBECONFIG="$HOME/destination-vks-kubeconfig"
 vcf context use ${DST_CONTEXT}:${DST_CLUSTER}
 kubectl get nodes
-rm /${HOME}/.kube/config
+#rm /${HOME}/.kube/config
 #
 # Alias setup
 alias vks-src='kubectl --kubeconfig=${SRC_VKS_KUBECONFIG}'
@@ -64,6 +64,14 @@ export BACKUP_NAME="vks-migration-${SRC_VKS_NS}"
 export RESTORE_NAME="vks-migration-${DST_VKS_NS}"
 ```
 
+# Confirm that each context points to the expected cluster before continuing:
+
+```
+vks-src cluster-info
+sup-src cluster-info
+vks-dst cluster-info
+sup-dst cluster-info
+```
 
 
 
