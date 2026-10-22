@@ -209,7 +209,7 @@ sup-src get pv "$SUP_PV" \
 
 ```
 
-# kill the busybix POD
+# kill the busybox POD
 
 ```
 vks-src -n "$SRC_VKS_NS" delete pod migration-test-writer \
@@ -316,6 +316,220 @@ fi
 if sup-src -n "$SRC_SUP_NS" get pvc "$SUP_PVC" >/dev/null 2>&1; then
   sup-src -n "$SRC_SUP_NS" delete pvc "$SUP_PVC" --wait=true
 fi
+```
+
+# Because the Supervisor PV still has reclaim policy Delete, the vSphere CSI provisioner will try to delete the CNS volume. The helper-VM attachment must prevent the backing FCD from being destroyed.
+
+# Verify that the Supervisor PV remains in Released state and still references the expected volume ID:
+```
+sup-src get pv "$SUP_PV" \
+  -o custom-columns=NAME:.metadata.name,PHASE:.status.phase,RECLAIM:.spec.persistentVolumeReclaimPolicy,HANDLE:.spec.csi.volumeHandle
+
+test "$(sup-src get pv "$SUP_PV" -o jsonpath='{.status.phase}')" = "Released"
+test "$(sup-src get pv "$SUP_PV" -o jsonpath='{.spec.csi.volumeHandle}')" = "$FCD_UUID"
+```
+
+# Inspect the PV events:
+```
+sup-src describe pv "$SUP_PV"
+```
+# The validated workflow showed repeated VolumeFailedDelete events containing:
+
+```
+ResourceInUse
+The resource 'volume' is in use.
+Do not continue if the backing disk has disappeared or if the source PV is not in the expected guarded state.
+```
+
+# Remove the CNS registration but keep the FCD
+# This is the handover operation:
+```
+govc volume.rm -keep "$FCD_UUID"
+# -keep is essential. It instructs CNS to remove the container-volume registration without deleting the backing disk.
+```
+
+# Verify that the CNS volume registration is gone:
+```
+if govc volume.ls "$FCD_UUID" >/dev/null 2>&1; then
+  echo "ERROR: CNS volume is still registered" >&2
+  exit 1
+fi
+```
+# Then verify independently that the backing FCD still exists:
+```
+govc disk.ls -l "$FCD_BACKING_ID"
+govc device.info -vm "$HELPER_VM" disk-*
+```
+# At this point the desired state is:
+```
+old CNS registration: gone
+backing FCD:           present
+helper VM:             powered off, FCD still attached
+```
+
+# Wait for the old Supervisor PV to disappear
+# Once CNS no longer contains the old container-volume registration, the source CSI deletion can finish reconciling the stale Supervisor PV without destroying the retained FCD.
+
+# Wait for the old Supervisor PV to be removed:
+```
+sup-src wait \
+  --for=delete \
+  "pv/${SUP_PV}" \
+  --timeout=5m
+```
+# Confirm that the old PV no longer blocks registration of the same volume ID:
+```
+if sup-src get pv "$SUP_PV" >/dev/null 2>&1; then
+  echo "ERROR: old Supervisor PV still exists" >&2
+  exit 1
+fi
+```
+# This is the critical difference from the old Retain workflow: there is no retained Supervisor PV and therefore no cluster-scoped claimRef to edit.
+
+# Detach the retained FCD from the helper VM
+# Only detach the helper disk after the old CNS registration and old Supervisor PV are gone.
+
+# Identify the helper VM disk device and remove it while keeping the backing files:
+```
+govc device.info -vm "$HELPER_VM" disk-*
+
+export HELPER_DISK_DEVICE=$(
+  govc device.ls -vm "$HELPER_VM" | awk '/^disk-/ {print $1; exit}'
+)
+
+test -n "$HELPER_DISK_DEVICE" || {
+  echo "ERROR: helper VM disk device not found" >&2
+  exit 1
+}
+
+govc device.remove \
+  -vm "$HELPER_VM" \
+  -keep \
+  "$HELPER_DISK_DEVICE"
+```
+
+# Verify that the retained FCD still exists:
+```
+govc disk.ls -l "$FCD_BACKING_ID"
+```
+# The helper VM can be removed after the migration has been validated.
+
+# Register the retained FCD in the destination Supervisor namespace
+# Create a namespaced CnsRegisterVolume object:
+```
+sup-dst -n "$DST_SUP_NS" apply -f - <<EOF_REGISTER
+apiVersion: cns.vmware.com/v1alpha1
+kind: CnsRegisterVolume
+metadata:
+  name: ${REGISTER_NAME}
+spec:
+  volumeID: "${FCD_UUID}"
+  accessMode: ${SUP_ACCESS_MODE}
+  pvcName: ${DST_SUP_PVC}
+EOF_REGISTER
+```
+# Wait for registration:
+```
+sup-dst -n "$DST_SUP_NS" wait \
+  --for=jsonpath='{.status.registered}'=true \
+  "cnsregistervolume/${REGISTER_NAME}" \
+  --timeout=10m
+```
+# Inspect the result and fail if the controller reports an error:
+```
+sup-dst -n "$DST_SUP_NS" get \
+  "cnsregistervolume/${REGISTER_NAME}" \
+  -o yaml
+
+REGISTER_ERROR=$(
+  sup-dst -n "$DST_SUP_NS" get \
+    "cnsregistervolume/${REGISTER_NAME}" \
+    -o jsonpath='{.status.error}'
+)
+
+test -z "$REGISTER_ERROR" || {
+  echo "ERROR: CnsRegisterVolume failed: $REGISTER_ERROR" >&2
+  exit 1
+}
+```
+# Discover the newly created Supervisor PV:
+```
+export DST_SUP_PV=$(
+  sup-dst -n "$DST_SUP_NS" get pvc "$DST_SUP_PVC" \
+    -o jsonpath='{.spec.volumeName}'
+)
+
+sup-dst -n "$DST_SUP_NS" get pvc "$DST_SUP_PVC" \
+  -o custom-columns=NAME:.metadata.name,PV:.spec.volumeName,PHASE:.status.phase
+
+sup-dst get pv "$DST_SUP_PV" \
+  -o custom-columns=NAME:.metadata.name,PHASE:.status.phase,HANDLE:.spec.csi.volumeHandle
+Confirm that the destination Supervisor PVC is Bound and that the new Supervisor PV represents the retained FCD:
+
+test "$(
+  sup-dst -n "$DST_SUP_NS" get pvc "$DST_SUP_PVC" \
+    -o jsonpath='{.status.phase}'
+)" = "Bound"
+
+test "$(
+  sup-dst get pv "$DST_SUP_PV" \
+    -o jsonpath='{.spec.csi.volumeHandle}'
+)" = "$FCD_UUID"
+```
+
+# The VKS volume handle is now the new Supervisor PVC name:
+```
+export DEST_VOLUME_HANDLE="$DST_SUP_PVC"
+```
+
+# Create the destination VKS PV and PVC
+# For this workflow, the VKS PV volumeHandle is the newly registered destination Supervisor PVC name ${DST_SUP_PVC} in ${DST_SUP_NS}. 
+# Do not put the FCD UUID here: that UUID is used by # CnsRegisterVolume and the Supervisor PV. Continue only after Step 12 confirms successful registration and a Bound destination Supervisor PVC.
+
+```
+vks-dst apply -f - <<EOF_DEST_VOLUME
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ${DST_VKS_PV}
+spec:
+  capacity:
+    storage: ${VKS_PVC_SIZE}
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ""
+  claimRef:
+    namespace: ${DST_VKS_NS}
+    name: ${DST_VKS_PVC}
+  csi:
+    driver: csi.vsphere.vmware.com
+    fsType: ext4
+    volumeHandle: "${DEST_VOLUME_HANDLE}"
+    volumeAttributes:
+      type: "vSphere CNS Block Volume"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ${DST_VKS_PVC}
+  namespace: ${DST_VKS_NS}
+spec:
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: ""
+  volumeName: ${DST_VKS_PV}
+  resources:
+    requests:
+      storage: ${VKS_PVC_SIZE}
+EOF_DEST_VOLUME
+
+vks-dst -n "$DST_VKS_NS" wait \
+  --for=jsonpath='{.status.phase}'=Bound \
+  "pvc/${DST_VKS_PVC}" \
+  --timeout=5m 
 ```
 
 
