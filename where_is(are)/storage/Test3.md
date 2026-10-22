@@ -13,9 +13,9 @@ https://github.com/vmware/vks-validated-solutions/blob/main/VKS-Migrations/VKS-t
 mv /${HOME}/.kube/config /${HOME}/.kube/config.bak
 rm /${HOME}/.kube/config
 #
-export SUP_CONTEXT="sup4"
-export SRC_CONTEXT="cluster-a4"
-export DST_CONTEXT="cluster-b4"
+export SUP_CONTEXT="sup6"
+export SRC_CONTEXT="cluster-a6"
+export DST_CONTEXT="cluster-b6"
 #
 export SRC_CLUSTER="cluster-a"
 export DST_CLUSTER="cluster-b"
@@ -92,7 +92,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 5Gi
+      storage: 6Gi
 EOF_PVC
 
 vks-src -n "$SRC_VKS_NS" wait \
@@ -352,7 +352,7 @@ govc volume.rm -keep "$FCD_UUID"
 ```
 if govc volume.ls "$FCD_UUID" >/dev/null 2>&1; then
   echo "ERROR: CNS volume is still registered" >&2
-  exit 1
+  echo "exit 1"
 fi
 ```
 # Then verify independently that the backing FCD still exists:
@@ -381,7 +381,7 @@ sup-src wait \
 ```
 if sup-src get pv "$SUP_PV" >/dev/null 2>&1; then
   echo "ERROR: old Supervisor PV still exists" >&2
-  exit 1
+  echo "exit 1"
 fi
 ```
 # This is the critical difference from the old Retain workflow: there is no retained Supervisor PV and therefore no cluster-scoped claimRef to edit.
@@ -399,7 +399,7 @@ export HELPER_DISK_DEVICE=$(
 
 test -n "$HELPER_DISK_DEVICE" || {
   echo "ERROR: helper VM disk device not found" >&2
-  exit 1
+  echo "exit 1"
 }
 
 govc device.remove \
@@ -449,7 +449,7 @@ REGISTER_ERROR=$(
 
 test -z "$REGISTER_ERROR" || {
   echo "ERROR: CnsRegisterVolume failed: $REGISTER_ERROR" >&2
-  exit 1
+  echo "exit 1"
 }
 ```
 # Discover the newly created Supervisor PV:
