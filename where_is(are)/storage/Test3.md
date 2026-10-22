@@ -388,6 +388,11 @@ if sup-src get pv "$SUP_PV" >/dev/null 2>&1; then
   echo "ERROR: old Supervisor PV still exists" >&2
   echo "exit 1"
 fi
+
+echo "$SUP_PV"
+This step may have to be done from the sup vm
+/usr/lib/vmware-wcp/decryptK8Pwd.py
+k delete pv {above long pvc- number}
 ```
 # This is the critical difference from the old Retain workflow: there is no retained Supervisor PV and therefore no cluster-scoped claimRef to edit.
 
