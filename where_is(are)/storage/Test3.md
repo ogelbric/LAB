@@ -1,3 +1,7 @@
+# using this write up as a base
+```
+https://github.com/vmware/vks-validated-solutions/blob/main/VKS-Migrations/VKS-to-VKS/examples/2-same-supervisor-different-namespace.md
+```
 
 
 # Set up all the contexts
@@ -38,8 +42,28 @@ export DST_VKS_KUBECONFIG="$HOME/destination-vks-kubeconfig"
 vcf context use ${DST_CONTEXT}:${DST_CLUSTER}
 kubectl get nodes
 rm /${HOME}/.kube/config
-
-
-
+#
+# Alias setup
+alias vks-src='kubectl --kubeconfig=${SRC_VKS_KUBECONFIG}'
+alias vks-dst='kubectl --kubeconfig=${DST_VKS_KUBECONFIG}'
+alias sup-src='kubectl --kubeconfig=${SUPERVISOR_KUBECONFIG}'
+alias sup-dst='kubectl --kubeconfig=${SUPERVISOR_KUBECONFIG}'
+#
+# Source and destination VKS clusters use different namespaces on the same Supervisor.
+export SRC_SUP_NS=${SRC_VSPHERE_NS}
+export DST_SUP_NS=${DST_VSPHERE_NS}
+#
+export SRC_VKS_PVC=my-test-pvc
+export DST_VKS_PV=my-test-pv-migrated
+export DST_VKS_PVC=my-test-pvc-migrated
+#
+export DST_SUP_PVC=my-test-pvc-migrated-supervisor
+export REGISTER_NAME=same-vcenter-fcd-migration
+#
+export BACKUP_NAME="vks-migration-${SRC_VKS_NS}"
+export RESTORE_NAME="vks-migration-${DST_VKS_NS}"
 ```
+
+
+
 
