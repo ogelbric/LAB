@@ -72,11 +72,24 @@ sup-src get nodes
 vks-dst get nodes
 sup-dst get nodes
 ```
+# Create a test volume and write identifiable data
+
+```
+vks-src -n "$SRC_VKS_NS" apply -f - <<EOF_PVC
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ${SRC_VKS_PVC}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+EOF_PVC
 
 
-
-
-
+```
 
 
 
