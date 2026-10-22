@@ -1,4 +1,4 @@
-# using this write up as a base
+# Using this write up as a base
 ```
 https://github.com/vmware/vks-validated-solutions/blob/main/VKS-Migrations/VKS-to-VKS/examples/2-same-supervisor-different-namespace.md
 ```
