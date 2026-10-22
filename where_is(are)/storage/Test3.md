@@ -484,7 +484,8 @@ export DEST_VOLUME_HANDLE="$DST_SUP_PVC"
 
 # Create the destination VKS PV and PVC
 # For this workflow, the VKS PV volumeHandle is the newly registered destination Supervisor PVC name ${DST_SUP_PVC} in ${DST_SUP_NS}. 
-# Do not put the FCD UUID here: that UUID is used by # CnsRegisterVolume and the Supervisor PV. Continue only after Step 12 confirms successful registration and a Bound destination Supervisor PVC.
+# Do not put the FCD UUID here: that UUID is used by 
+# CnsRegisterVolume and the Supervisor PV. Continue only after Step 12 confirms successful registration and a Bound destination Supervisor PVC.
 
 ```
 vks-dst apply -f - <<EOF_DEST_VOLUME
@@ -532,6 +533,80 @@ vks-dst -n "$DST_VKS_NS" wait \
   --timeout=5m 
 ```
 
+# Restore application manifests
+# Restore application metadata only after the destination VKS PV/PVC has been created.
+```
+velero restore create "$RESTORE_NAME" \
+  --kubeconfig "$DST_VKS_KUBECONFIG" \
+  --from-backup "$BACKUP_NAME" \
+  --namespace-mappings "${SRC_VKS_NS}:${DST_VKS_NS}" \
+  --exclude-resources \
+persistentvolumes,persistentvolumeclaims,volumesnapshots.snapshot.storage.k8s.io,volumesnapshotcontents.snapshot.storage.k8s.io \
+  --wait
+
+velero restore describe "$RESTORE_NAME" \
+  --kubeconfig "$DST_VKS_KUBECONFIG" \
+  --details
+```
+
+# Mount the migrated volume and verify the data
+```
+vks-dst -n "$DST_VKS_NS" apply -f - <<EOF_READER
+apiVersion: v1
+kind: Pod
+metadata:
+  name: migration-test-reader
+spec:
+  restartPolicy: Never
+  containers:
+    - name: reader
+      image: busybox:1.36
+      command: ["sh", "-c"]
+      args: ["cat /data/migration-test.txt && sleep 3600"]
+      volumeMounts:
+        - name: data
+          mountPath: /data
+  volumes:
+    - name: data
+      persistentVolumeClaim:
+        claimName: ${DST_VKS_PVC}
+EOF_READER
+
+vks-dst -n "$DST_VKS_NS" wait \
+  --for=condition=Ready \
+  pod/migration-test-reader \
+  --timeout=5m
+
+vks-dst -n "$DST_VKS_NS" exec migration-test-reader -- \
+  cat /data/migration-test.txt
+
+```  
+
+# Cleanup after validation
+# Delete the test reader after validation:
+```
+vks-dst -n "$DST_VKS_NS" delete pod migration-test-reader
+```
+
+# There is no migration snapshot or retained source Supervisor PV to remove. After the migrated workload has been validated, remove the powered-off helper VM if it is no longer required:
+```
+govc vm.destroy "$HELPER_VM"
+```
+# Only destroy the helper VM after its migration-guard disk has been detached with device.remove -keep and the destination workload has been validated.
+
+# Validation checklist
+```
+ Source workload was quiesced and manifest-only Velero backup completed.
+ VKS PV, Supervisor PVC, Supervisor PV, CNS volume ID and FCD backing object were recorded.
+ Powered-off helper VM held the FCD before source storage teardown.
+ Source Supervisor PV entered Released and CSI deletion failed safely with ResourceInUse.
+ govc volume.rm -keep removed the old CNS registration while the FCD remained present.
+ Old Supervisor PV disappeared before the helper VM released the disk.
+ CnsRegisterVolume created a new Supervisor PVC/PV in the destination namespace.
+ New Supervisor PV references the original FCD UUID.
+ Destination VKS PV uses the new Supervisor PVC name as volumeHandle.
+ Destination workload mounted and validated the original data.
+```
 
 
 
@@ -545,7 +620,7 @@ vks-dst -n "$DST_VKS_NS" wait \
 
 
 
-# For later to figgure out on how to do this with VCF commands
+# For later to figgure out on how to do the login  with VCF commands
 ```
 #
 vcf context create ${SUP_CONTEXT} --endpoint https://10.1.8.132 --username administrator@WLD.SSO --insecure-skip-tls-verify --auth-type basic
