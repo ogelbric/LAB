@@ -13,9 +13,9 @@ https://github.com/vmware/vks-validated-solutions/blob/main/VKS-Migrations/VKS-t
 mv /${HOME}/.kube/config /${HOME}/.kube/config.bak
 rm /${HOME}/.kube/config
 #
-export SUP_CONTEXT="sup3"
-export SRC_CONTEXT="cluster-a3"
-export DST_CONTEXT="cluster-b3"
+export SUP_CONTEXT="sup4"
+export SRC_CONTEXT="cluster-a4"
+export DST_CONTEXT="cluster-b4"
 #
 export SRC_CLUSTER="cluster-a"
 export DST_CLUSTER="cluster-b"
