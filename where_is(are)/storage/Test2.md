@@ -154,3 +154,17 @@ kubectl patch pv <your-pv-name> -p '{"spec":{"claimRef":{"uid":"<NEW_PVC_UID>"}}
 kubectl edit cnsvolumeinfoes -n vmware-system-csi ba...{long name coming from kubectl get cnsvolumeinfoes and my 3 hour old pv/pvc I created}
 
 ```
+
+
+
+# Need govc installed
+```
+sudo curl -L -o - "https://github.com/vmware/govmomi/releases/latest/download/govc_$(uname -s)_$(uname -m).tar.gz" > /tmp/a
+sudo tar -C /usr/local/bin -xvzf /tmp/a govc
+```
+
+
+
+
+
+
