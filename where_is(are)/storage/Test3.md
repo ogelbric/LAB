@@ -354,6 +354,9 @@ govc volume.rm -keep "$FCD_UUID"
 
 # Verify that the CNS volume registration is gone:
 ```
+#
+# This test may not be 100% true
+#
 if govc volume.ls "$FCD_UUID" >/dev/null 2>&1; then
   echo "ERROR: CNS volume is still registered" >&2
   echo "exit 1"
@@ -362,6 +365,10 @@ fi
 # run this also by hand it takes some time...
 #
 govc volume.ls "$FCD_UUID"
+#
+# and run in the sup cluster get pv to see if there is anything
+sup-src get pv
+
 
 ```
 # Then verify independently that the backing FCD still exists:
