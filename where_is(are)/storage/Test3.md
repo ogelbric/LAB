@@ -22,6 +22,9 @@ export DST_CLUSTER="cluster-b"
 export SRC_VSPHERE_NS="namespace-a"
 export DST_VSPHERE_NS="namespace-b"
 
+export SRC_VKS_NS=default
+export DST_VKS_NS=default
+
 #
 # use with caution
 export KUBECTL_VSPHERE_PASSWORD='VMware123!VMware123!'
