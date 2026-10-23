@@ -22,6 +22,9 @@ export DST_CLUSTER="cluster-b"
 export SRC_VSPHERE_NS="namespace-a"
 export DST_VSPHERE_NS="namespace-b"
 
+#
+# use with caution
+export KUBECTL_VSPHERE_PASSWORD='VMware123!VMware123!'
 
 #
 kubectl vsphere login --server=10.1.8.132 --vsphere-username administrator@WLD.SSO --insecure-skip-tls-verify
