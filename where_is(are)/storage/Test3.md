@@ -374,7 +374,7 @@ sup-src get pv
 # Then verify independently that the backing FCD still exists:
 ```
 govc disk.ls -l "$FCD_BACKING_ID"
-govc device.info -vm "$" disk-*
+govc device.info -vm "$HELPER_VM" disk-*
 ```
 # At this point the desired state is:
 ```
