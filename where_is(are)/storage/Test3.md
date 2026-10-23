@@ -466,6 +466,9 @@ sup-dst -n "$DST_SUP_NS" wait \
   --for=jsonpath='{.status.registered}'=true \
   "cnsregistervolume/${REGISTER_NAME}" \
   --timeout=10m
+#
+#or
+sup-dst -n "$DST_SUP_NS" get "cnsregistervolume/${REGISTER_NAME}"
 ```
 # Inspect the result and fail if the controller reports an error:
 ```
