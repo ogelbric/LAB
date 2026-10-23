@@ -76,9 +76,10 @@ vks-dst get nodes
 sup-dst get nodes
 ```
 
-# Make sure there is a default storage class
+# Make sure there is a default storage class (in my case I have the vsan-default-storage-policy <-- change....!!!!)
 ```
 vks-src -n "$SRC_VKS_NS" patch storageclass vsan-default-storage-policy -p '{"metadata": {"annotations": {"storageclass.kubernetes.io/is-default-class": "true"}}}'
+vks-dst -n "$SRC_VKS_NS" patch storageclass vsan-default-storage-policy -p '{"metadata": {"annotations": {"storageclass.kubernetes.io/is-default-class": "true"}}}'
 ```
 
 
