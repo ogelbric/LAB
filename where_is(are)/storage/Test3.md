@@ -570,6 +570,15 @@ vks-dst -n "$DST_VKS_NS" wait \
 ```
 vks-dst -n "$DST_VKS_NS" apply -f - <<EOF_READER
 apiVersion: v1
+kind: Namespace
+metadata:
+  name: default
+  labels:
+    pod-security.kubernetes.io/audit: privileged
+    pod-security.kubernetes.io/enforce: privileged
+    pod-security.kubernetes.io/warn: privileged
+---
+apiVersion: v1
 kind: Pod
 metadata:
   name: migration-test-reader
