@@ -228,8 +228,8 @@ vks-src get volumeattachments \
 # Do not continue while the source volume remains attached to a running workload.
 
 
-# govc volume.rm -keep requires govc 0.49.0 or later:
-# Install govc
+## govc volume.rm -keep requires govc 0.49.0 or later:
+## Install govc
 ```
 sudo curl -L -o - "https://github.com/vmware/govmomi/releases/latest/download/govc_$(uname -s)_$(uname -m).tar.gz" > /tmp/a
 sudo tar -C /usr/local/bin -xvzf /tmp/a govc
@@ -265,9 +265,9 @@ govc disk.ls -l "$FCD_BACKING_ID"
 
 
 # Create a powered-off helper VM and attach the FCD
-# The helper VM is a safety interlock only. It must remain powered off and no guest operating system must mount or modify the disk.
+## The helper VM is a safety interlock only. It must remain powered off and no guest operating system must mount or modify the disk.
 
-# Discover the backing path:
+## Discover the backing path:
 
 ```
 export FCD_PATH=$(
@@ -275,7 +275,7 @@ export FCD_PATH=$(
     jq -er '.objects[0].config.backing.filePath'
 )
 
-export HELPER_VM="${FCD_UUID}-migration-guard"
+export HELPER_VM="helper-vm-${FCD_UUID}-migration-guard"
 
 printf 'FCD backing path: %s\n' "$FCD_PATH"
 ```
@@ -301,9 +301,9 @@ test "$(govc vm.info -json "$HELPER_VM" | jq -r '.VirtualMachines[0].Runtime.Pow
 ```
 
 # Delete the source VKS PVC and PV
-# The source workload must already be quiesced and the Velero backup completed.
+## The source workload must already be quiesced and the Velero backup completed.
 
-# Delete the source VKS PVC and PV:
+## Delete the source VKS PVC and PV:
 
 ```
 vks-src -n "$SRC_VKS_NS" delete pvc "$SRC_VKS_PVC" \
@@ -321,7 +321,8 @@ if sup-src -n "$SRC_SUP_NS" get pvc "$SUP_PVC" >/dev/null 2>&1; then
 fi
 ```
 
-# Because the Supervisor PV still has reclaim policy Delete, the vSphere CSI provisioner will try to delete the CNS volume. The helper-VM attachment must prevent the backing FCD from being destroyed.
+## Because the Supervisor PV still has reclaim policy Delete, the vSphere CSI provisioner will try to delete the CNS volume. 
+## The helper-VM attachment must prevent the backing FCD from being destroyed.
 
 # Verify that the Supervisor PV remains in Released state and still references the expected volume ID:
 ```
@@ -366,7 +367,7 @@ govc volume.ls "$FCD_UUID"
 # Then verify independently that the backing FCD still exists:
 ```
 govc disk.ls -l "$FCD_BACKING_ID"
-govc device.info -vm "$HELPER_VM" disk-*
+govc device.info -vm "$" disk-*
 ```
 # At this point the desired state is:
 ```
@@ -376,7 +377,7 @@ helper VM:             powered off, FCD still attached
 ```
 
 # Wait for the old Supervisor PV to disappear
-# Once CNS no longer contains the old container-volume registration, the source CSI deletion can finish reconciling the stale Supervisor PV without destroying the retained FCD.
+## Once CNS no longer contains the old container-volume registration, the source CSI deletion can finish reconciling the stale Supervisor PV without destroying the retained FCD.
 
 # Wait for the old Supervisor PV to be removed:
 ```
@@ -396,18 +397,22 @@ echo "$SUP_PV"
 This step may have to be done from the sup vm
 /usr/lib/vmware-wcp/decryptK8Pwd.py
 k delete pv {above long pvc- number}
+#
+# The fianlizer may have to be changed as well for the PV to go away in k8's
+#
+kubectl patch pvc {above long pvc- number} -p '{"metadata":{"finalizers":null}}'
 ```
 # This is the critical difference from the old Retain workflow: there is no retained Supervisor PV and therefore no cluster-scoped claimRef to edit.
 
-# Detach the retained FCD from the helper VM
-# Only detach the helper disk after the old CNS registration and old Supervisor PV are gone.
+## Detach the retained FCD from the helper VM
+## Only detach the helper disk after the old CNS registration and old Supervisor PV are gone.
 
 # Identify the helper VM disk device and remove it while keeping the backing files:
 ```
-govc device.info -vm "$HELPER_VM" disk-*
+govc device.info -vm "$" disk-*
 
 export HELPER_DISK_DEVICE=$(
-  govc device.ls -vm "$HELPER_VM" | awk '/^disk-/ {print $1; exit}'
+  govc device.ls -vm "$" | awk '/^disk-/ {print $1; exit}'
 )
 
 test -n "$HELPER_DISK_DEVICE" || {
@@ -416,7 +421,7 @@ test -n "$HELPER_DISK_DEVICE" || {
 }
 
 govc device.remove \
-  -vm "$HELPER_VM" \
+  -vm "$" \
   -keep \
   "$HELPER_DISK_DEVICE"
 ```
@@ -427,8 +432,8 @@ govc disk.ls -l "$FCD_BACKING_ID"
 ```
 # The helper VM can be removed after the migration has been validated.
 
-# Register the retained FCD in the destination Supervisor namespace
-# Create a namespaced CnsRegisterVolume object:
+## Register the retained FCD in the destination Supervisor namespace
+## Create a namespaced CnsRegisterVolume object:
 ```
 sup-dst -n "$DST_SUP_NS" apply -f - <<EOF_REGISTER
 apiVersion: cns.vmware.com/v1alpha1
@@ -496,9 +501,9 @@ export DEST_VOLUME_HANDLE="$DST_SUP_PVC"
 ```
 
 # Create the destination VKS PV and PVC
-# For this workflow, the VKS PV volumeHandle is the newly registered destination Supervisor PVC name ${DST_SUP_PVC} in ${DST_SUP_NS}. 
-# Do not put the FCD UUID here: that UUID is used by 
-# CnsRegisterVolume and the Supervisor PV. Continue only after Step 12 confirms successful registration and a Bound destination Supervisor PVC.
+## For this workflow, the VKS PV volumeHandle is the newly registered destination Supervisor PVC name ${DST_SUP_PVC} in ${DST_SUP_NS}. 
+## Do not put the FCD UUID here: that UUID is used by 
+## CnsRegisterVolume and the Supervisor PV. Continue only after Step 12 confirms successful registration and a Bound destination Supervisor PVC.
 
 ```
 vks-dst apply -f - <<EOF_DEST_VOLUME
@@ -546,21 +551,7 @@ vks-dst -n "$DST_VKS_NS" wait \
   --timeout=5m 
 ```
 
-# Restore application manifests
-# Restore application metadata only after the destination VKS PV/PVC has been created.
-```
-velero restore create "$RESTORE_NAME" \
-  --kubeconfig "$DST_VKS_KUBECONFIG" \
-  --from-backup "$BACKUP_NAME" \
-  --namespace-mappings "${SRC_VKS_NS}:${DST_VKS_NS}" \
-  --exclude-resources \
-persistentvolumes,persistentvolumeclaims,volumesnapshots.snapshot.storage.k8s.io,volumesnapshotcontents.snapshot.storage.k8s.io \
-  --wait
 
-velero restore describe "$RESTORE_NAME" \
-  --kubeconfig "$DST_VKS_KUBECONFIG" \
-  --details
-```
 
 # Mount the migrated volume and verify the data
 ```
@@ -603,7 +594,7 @@ vks-dst -n "$DST_VKS_NS" delete pod migration-test-reader
 
 # There is no migration snapshot or retained source Supervisor PV to remove. After the migrated workload has been validated, remove the powered-off helper VM if it is no longer required:
 ```
-govc vm.destroy "$HELPER_VM"
+govc vm.destroy "$"
 ```
 # Only destroy the helper VM after its migration-guard disk has been detached with device.remove -keep and the destination workload has been validated.
 
