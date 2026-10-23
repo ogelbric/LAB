@@ -254,6 +254,10 @@ export GOVC_DATASTORE="vsan-wld01-01a"
 export GOVC_INSECURE="true"
 export GOVC_DATACENTER="dc-a"
 export GOVC_NETWORK="mgmt-vds01-wld01-01a"
+#
+# if govc throws and error maybe resource pool is needed
+#export GOVC_RESOURCE_POOL="ms-wkld-r-clus01/Resources"
+#
 # Test the login
 govc volume.ls -L "$FCD_UUID"
 
@@ -680,6 +684,13 @@ kubectl get nodes
 # And option to explore
 ```
 vcf cluster kubeconfig get ${SRC_CLUSTER} --export-file a
+
+export VCF_CLI_VSPHERE_PASSWORD=xxxx
+export SUPERVISOR_KUBECONFIG=~/supervisor-kubeconfig
+KUBECONFIG=${SUPERVISOR_KUBECONFIG} vcf context create supervisor --endpoint 10.139.8.6 --username yyyy --type k8s --insecure-skip-tls-verify
+KUBECONFIG=${SUPERVISOR_KUBECONFIG} vcf context use supervisor:my-namespace
+alias sup='kubectl --kubeconfig=${SUPERVISOR_KUBECONFIG}'
+
 ```
 
 
