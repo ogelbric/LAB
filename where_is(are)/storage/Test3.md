@@ -392,6 +392,12 @@ sup-src wait \
   --for=delete \
   "pv/${SUP_PV}" \
   --timeout=5m
+#
+# or run
+#
+sup-src get pv ${SUP_PV}
+# should be gone
+
 ```
 # Confirm that the old PV no longer blocks registration of the same volume ID:
 ```
