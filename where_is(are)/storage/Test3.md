@@ -422,10 +422,10 @@ kubectl patch pvc {above long pvc- number} -p '{"metadata":{"finalizers":null}}'
 
 # Identify the helper VM disk device and remove it while keeping the backing files:
 ```
-govc device.info -vm "$" disk-*
+govc device.info -vm "$HELPER_VM" disk-*
 
 export HELPER_DISK_DEVICE=$(
-  govc device.ls -vm "$" | awk '/^disk-/ {print $1; exit}'
+  govc device.ls -vm "$HELPER_VM" | awk '/^disk-/ {print $1; exit}'
 )
 
 test -n "$HELPER_DISK_DEVICE" || {
@@ -434,7 +434,7 @@ test -n "$HELPER_DISK_DEVICE" || {
 }
 
 govc device.remove \
-  -vm "$" \
+  -vm "$HELPER_VM" \
   -keep \
   "$HELPER_DISK_DEVICE"
 ```
@@ -607,7 +607,7 @@ vks-dst -n "$DST_VKS_NS" delete pod migration-test-reader
 
 # There is no migration snapshot or retained source Supervisor PV to remove. After the migrated workload has been validated, remove the powered-off helper VM if it is no longer required:
 ```
-govc vm.destroy "$"
+govc vm.destroy "$HELPER_VM"
 ```
 # Only destroy the helper VM after its migration-guard disk has been detached with device.remove -keep and the destination workload has been validated.
 
