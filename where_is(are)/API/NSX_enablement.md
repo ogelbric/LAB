@@ -7,37 +7,6 @@ sudo curl -L -o - "https://github.com/vmware/govmomi/releases/latest/download/go
 sudo tar -C /usr/local/bin -xvzf /tmp/a govc
 
 ```
-# ENV variables needed for API call
-```
-"${SUPERVISOR_NAME}"
-"${ZONE_ID}"
-"${StoragePolicy}"
-"${MgmtNetwork}"
-"${MGMT_GATEWAY_IP}/${MGMT_PREFIX}",
-"${MGMT_STARTING_IP}",
-"${DNS_SEARCHDOMAIN}"
-"${DNS_SERVER}"
-"${NTP_SERVER}"
-"${NSX_DVS}"
-"${NAMESPACE_CIDR}"
-"${NAMESPACE_COUNT}
-"${SERVICE_CIDR}"
-"${SERVICE_COUNT}"
-"${DNS_SEARCHDOMAIN}"
-"${DNS_SERVER}"
-"${NTP_SERVER}"
-"${LB_ID}"
-"${INGRESS_CIDR}"
-"${INGRESS_COUNT}"
-"${NSX_EDGE_CLUSTER_ID}"
-"${NSX_T0_GATEWAY_ID}"
-"${EGRESS_CIDR}"
-"${EGRESS_COUNT}"
-"${K8S_CONTENT_LIBRARY_ID}"
-"${StoragePolicy}"
-"${StoragePolicy}"
-"wcp.${DNS_SEARCHDOMAIN}"
-```
 # Log onto VC to get some information
 
 ```
@@ -56,7 +25,7 @@ export GOVC_NETWORK="mgmt-vds01-wld01-01a"
 # ENV variables needed for API call
 ```
 "${SUPERVISOR_NAME}"
-"${ZONE_ID}",
+"${ZONE_ID}"
 "${StoragePolicy}"
 "${MgmtNetwork}"
 "${MGMT_GATEWAY_IP}/${MGMT_PREFIX}"
@@ -72,7 +41,7 @@ ${SERVICE_COUNT}
 "${DNS_SEARCHDOMAIN}"
 "${DNS_SERVER}"
 "${NTP_SERVER}"
-export LB_ID=`govc Library.info -json | jq -r '.[1].id'`
+export LB_ID=`govc library.info -json | jq -r '.[1].id'`
 "${INGRESS_CIDR}"
 "${INGRESS_COUNT}"
 "${NSX_EDGE_CLUSTER_ID}"
