@@ -29,6 +29,8 @@ export GOVC_NETWORK="mgmt-vds01-wld01-01a"
 "${StoragePolicy}"
 "${MgmtNetwork}"
 "${MGMT_GATEWAY_IP}"
+```
+```
 "${MGMT_PREFIX}"
 "${MGMT_STARTING_IP}"
 "${DNS_SEARCHDOMAIN}"
