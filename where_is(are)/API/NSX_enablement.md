@@ -26,6 +26,8 @@ export GOVC_NETWORK="mgmt-vds01-wld01-01a"
 ```
 "${SUPERVISOR_NAME}"
 "${ZONE_ID}"
+```
+```
 "${StoragePolicy}"
 "${MgmtNetwork}"
 "${MGMT_GATEWAY_IP}"
