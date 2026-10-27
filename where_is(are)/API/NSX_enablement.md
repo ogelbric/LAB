@@ -21,7 +21,8 @@ export GOVC_NETWORK="mgmt-vds01-wld01-01a"
 #govc 2>&1 | tee /tmp/a
 # to see all the govc commands
 ```
-```
+
+
 # ENV variables needed for API call
 ```
 ${SUPERVISOR_NAME}
