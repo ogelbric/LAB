@@ -24,8 +24,8 @@ export GOVC_NETWORK="mgmt-vds01-wld01-01a"
 ```
 # ENV variables needed for API call
 ```
-"${SUPERVISOR_NAME}"
-"${ZONE_ID}"
+${SUPERVISOR_NAME}
+${ZONE_ID}
 ```
 ```
 "${StoragePolicy}"
