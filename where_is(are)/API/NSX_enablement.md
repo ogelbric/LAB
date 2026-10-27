@@ -22,7 +22,7 @@ sudo tar -C /usr/local/bin -xvzf /tmp/a govc
 "${NAMESPACE_CIDR}"
 "${NAMESPACE_COUNT}
 "${SERVICE_CIDR}"
-${SERVICE_COUNT}
+"${SERVICE_COUNT}"
 "${DNS_SEARCHDOMAIN}"
 "${DNS_SERVER}"
 "${NTP_SERVER}"
