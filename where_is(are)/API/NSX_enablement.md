@@ -1,9 +1,98 @@
 # NSX API enablement 
 
+# Need govc 
+
+```
+sudo curl -L -o - "https://github.com/vmware/govmomi/releases/latest/download/govc_$(uname -s)_$(uname -m).tar.gz" > /tmp/a
+sudo tar -C /usr/local/bin -xvzf /tmp/a govc
+
+```
+# ENV variables needed for API call
+```
+"${SUPERVISOR_NAME}",
+"${ZONE_ID}",
+"${StoragePolicy}",
+"${MgmtNetwork}"
+"${MGMT_GATEWAY_IP}/${MGMT_PREFIX}",
+"${MGMT_STARTING_IP}",
+"${DNS_SEARCHDOMAIN}"
+"${DNS_SERVER}"
+"${NTP_SERVER}"
+"${NSX_DVS}"
+"${NAMESPACE_CIDR}"
+"${NAMESPACE_COUNT}
+"${SERVICE_CIDR}"
+${SERVICE_COUNT}
+"${DNS_SEARCHDOMAIN}"
+"${DNS_SERVER}"
+"${NTP_SERVER}"
+"${LB_ID}"
+"${INGRESS_CIDR}"
+"${INGRESS_COUNT}"
+"${NSX_EDGE_CLUSTER_ID}"
+"${NSX_T0_GATEWAY_ID}"
+"${EGRESS_CIDR}"
+"${EGRESS_COUNT}"
+"${K8S_CONTENT_LIBRARY_ID}"
+"${StoragePolicy}"
+"${StoragePolicy}"
+"wcp.${DNS_SEARCHDOMAIN}"
+```
+# Log onto VC to get some information
+
+```
+export GOVC_URL="vc-wld01-a.site-a.vcf.lab"
+export GOVC_USERNAME="administrator@WLD.SSO"
+export GOVC_PASSWORD='VMware123!VMware123!'
+export GOVC_DATASTORE="vsan-wld01-01a"
+export GOVC_INSECURE="true"in
+export GOVC_DATACENTER="dc-a"
+export GOVC_NETWORK="mgmt-vds01-wld01-01a"
+#
+#govc 2>&1 | tee /tmp/a
+# to see all the govc commands
+```
+```
+# ENV variables needed for API call
+```
+"${SUPERVISOR_NAME}"
+"${ZONE_ID}",
+"${StoragePolicy}"
+"${MgmtNetwork}"
+"${MGMT_GATEWAY_IP}/${MGMT_PREFIX}"
+"${MGMT_STARTING_IP}"
+"${DNS_SEARCHDOMAIN}"
+"${DNS_SERVER}"
+"${NTP_SERVER}"
+"${NSX_DVS}"
+"${NAMESPACE_CIDR}"
+"${NAMESPACE_COUNT}
+"${SERVICE_CIDR}"
+${SERVICE_COUNT}
+"${DNS_SEARCHDOMAIN}"
+"${DNS_SERVER}"
+"${NTP_SERVER}"
+export LB_ID=`govc Library.info -json | jq -r '.[1].id'`
+"${INGRESS_CIDR}"
+"${INGRESS_COUNT}"
+"${NSX_EDGE_CLUSTER_ID}"
+"${NSX_T0_GATEWAY_ID}"
+"${EGRESS_CIDR}"
+"${EGRESS_COUNT}"
+"${K8S_CONTENT_LIBRARY_ID}"
+"${StoragePolicy}"
+"wcp.${DNS_SEARCHDOMAIN}"
+```
+
+```
+#Get the content lib ID
+govc Library.info 'Kubernetes Service Content Library'
+
+```
 
 ## Sample:
 ```
-
+cat << EOF > /tmp/api.yaml
 {
     "name": "${SUPERVISOR_NAME}",
     "zone": "${ZONE_ID}",
@@ -110,7 +199,7 @@
         }
     }
 }
-
+EOF
 ```
 
 # Need govc 
