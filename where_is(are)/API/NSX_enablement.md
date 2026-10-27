@@ -9,9 +9,9 @@ sudo tar -C /usr/local/bin -xvzf /tmp/a govc
 ```
 # ENV variables needed for API call
 ```
-"${SUPERVISOR_NAME}",
-"${ZONE_ID}",
-"${StoragePolicy}",
+"${SUPERVISOR_NAME}"
+"${ZONE_ID}"
+"${StoragePolicy}"
 "${MgmtNetwork}"
 "${MGMT_GATEWAY_IP}/${MGMT_PREFIX}",
 "${MGMT_STARTING_IP}",
