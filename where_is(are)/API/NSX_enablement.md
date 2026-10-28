@@ -20,6 +20,12 @@ export GOVC_NETWORK="mgmt-vds01-wld01-01a"
 #
 #govc 2>&1 | tee /tmp/a
 # to see all the govc commands
+cat /tmp/a
+#
+# test
+#
+#Get the content lib ID (in my case entry number 1 (entry zero is something else))
+govc Library.info 'Kubernetes Service Content Library'
 ```
 
 
@@ -55,11 +61,6 @@ export StoragePolicy=""
 export wcp."${DNS_SEARCHDOMAIN}"=""
 ```
 
-```
-#Get the content lib ID
-govc Library.info 'Kubernetes Service Content Library'
-
-```
 
 ## Sample:
 ```
