@@ -58,19 +58,15 @@ export NAMESPACE_CIDR=""
 export NAMESPACE_COUNT=""
 export SERVICE_CIDR=""
 export SERVICE_COUNT=""
-export DNS_SEARCHDOMAIN=""
-export DNS_SERVER=""
-export NTP_SERVER=""
-export LB_ID=`govc library.info -json | jq -r '.[1].id'`
+export LB_ID=""
 export INGRESS_CIDR=""
 export INGRESS_COUNT=""
 export NSX_EDGE_CLUSTER_ID=""
 export NSX_T0_GATEWAY_ID=""
 export EGRESS_CIDR=""
 export EGRESS_COUNT=""
-export K8S_CONTENT_LIBRARY_ID=""
-export StoragePolicy=""
-export wcp."${DNS_SEARCHDOMAIN}"=""
+export K8S_CONTENT_LIBRARY_ID="`govc library.info -json | jq -r '.[1].id'`"
+
 ```
 
 
