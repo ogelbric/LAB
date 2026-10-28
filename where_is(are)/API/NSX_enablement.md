@@ -26,6 +26,17 @@ cat /tmp/a
 #
 #Get the content lib ID (in my case entry number 1 (entry zero is something else))
 govc Library.info 'Kubernetes Service Content Library'
+#FInd a host
+govc find / -type h | xargs | awk '{print $1}'
+#Find hosts
+govc find / -type h | xargs 
+#Find info on host
+govc host.info -host `govc find / -type h | xargs | awk '{print $1}'` -json
+#Find DNS server IP
+govc host.esxcli -host `govc find / -type h | xargs | awk '{print $1}'` network ip dns server list | awk '{print $2}'
+
+
+
 ```
 
 
@@ -39,7 +50,8 @@ export MGMT_GATEWAY_IP=""
 export MGMT_PREFIX=""
 export MGMT_STARTING_IP}=""
 export DNS_SEARCHDOMAIN=""
-export DNS_SERVER=""
+export DNS_SERVER="govc host.esxcli -host `govc find / -type h | xargs | awk '{print $1}'` network ip dns server list | awk '{print $2}'
+"
 export NTP_SERVER=""
 export NSX_DVS=""
 export NAMESPACE_CIDR=""
