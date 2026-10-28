@@ -50,9 +50,8 @@ export MGMT_GATEWAY_IP=""
 export MGMT_PREFIX=""
 export MGMT_STARTING_IP}=""
 export DNS_SEARCHDOMAIN=""
-export DNS_SERVER="govc host.esxcli -host `govc find / -type h | xargs | awk '{print $1}'` network ip dns server list | awk '{print $2}'
-"
-export NTP_SERVER=""
+export DNS_SERVER="$(govc host.esxcli -host $(govc find / -type h | xargs | awk '{print $1}') network ip dns server list | awk '{print $2}')"
+export NTP_SERVER="$(govc host.esxcli -host $(govc find / -type h | xargs | awk '{print $1}') system ntp config get | awk '{print $2}')"
 export NSX_DVS=""
 export NAMESPACE_CIDR=""
 export NAMESPACE_COUNT=""
@@ -65,7 +64,7 @@ export NSX_EDGE_CLUSTER_ID=""
 export NSX_T0_GATEWAY_ID=""
 export EGRESS_CIDR=""
 export EGRESS_COUNT=""
-export K8S_CONTENT_LIBRARY_ID="`govc library.info -json | jq -r '.[1].id'`"
+export K8S_CONTENT_LIBRARY_ID="$(govc library.info -json | jq -r '.[1].id')"
 
 ```
 
