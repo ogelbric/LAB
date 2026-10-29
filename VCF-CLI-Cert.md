@@ -15,7 +15,7 @@ openssl s_client -connect ${API_IP}:443 -showcerts </dev/null 2>/dev/null  | ope
 vcf context create  mysupervisor01 --endpoint https://${API_IP} --username administrator@WLD.SSO --ca-certificate supervisor.crt --auth-type basic
 #
 vcf context list
-vcf context use
+vcf context use      # use the context of the supervisor:vSphereNameSpace
 kubectl get nodes
 #
 vcf clusters list -A
