@@ -35,6 +35,9 @@ kubectl get nodes
 ### 3 Apply Application
 
 ```
+kubectl apply -f {application file yaml}
+
+https://github.com/ogelbric/LAB/tree/main/where_is(are)/SampleApp
 
 ```
 
