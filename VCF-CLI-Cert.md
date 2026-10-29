@@ -1,8 +1,8 @@
 # VCF CLI with cert
 
-## 3 Step process Application onto Kubernetes cluster
+## 3 - Step process Application onto Kubernetes cluster
 
-### 1 Supervisor Cluster
+### 1 - Supervisor Cluster
 ```
 #
 # API end point is supervisor IP cert 
@@ -24,7 +24,7 @@ kubectl apply -f {Sample Cluster yaml}
 
 ```
 
-### 2 Guest Cluster
+### 2 - Guest Cluster
 
 ```
 #
@@ -36,13 +36,19 @@ vcf context use myguestcluster01:orfk8
 kubectl get nodes 
 ```
 
-### 3 Apply Application
+### 3 - Apply Application
 
 ```
 kubectl apply -f {application file yaml}
 
 https://github.com/ogelbric/LAB/tree/main/where_is(are)/SampleApp
 
+```
+
+### Apendix - Harbor Supervisor Service 
+
+```
+https://github.com/ogelbric/LAB/tree/main/where_is(are)/Create_Harbor
 ```
 
 
