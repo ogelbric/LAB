@@ -18,6 +18,10 @@ vcf context use
 kubectl get nodes
 #
 vcf clusters list -A
+
+kubectl apply -f {Sample Cluster yaml}
+#https://github.com/ogelbric/LAB/tree/main/where_is(are)/SampleClusteryaml
+
 ```
 
 ### 2 Guest Cluster
