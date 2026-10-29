@@ -19,10 +19,13 @@ vcf context use
 kubectl get nodes
 #
 vcf clusters list -A
-
+#
+# build new cluster (make sure the Harbor cert is in the Supervisor!
+#
 kubectl apply -f {Sample Cluster yaml}
 #https://github.com/ogelbric/LAB/tree/main/where_is(are)/SampleClusteryaml
 
+vcf clusters list -A
 ```
 
 ### 2 - Guest Cluster
