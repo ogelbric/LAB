@@ -20,7 +20,7 @@ kubectl get nodes
 #
 vcf clusters list -A
 #
-# build new cluster (make sure the Harbor cert is in the Supervisor then Herbor cert will end up in the guest cluster!)
+# build new cluster (make sure the Harbor cert is in the Supervisor then Harbor cert will end up in the guest cluster!)
 #
 kubectl apply -f {Sample Cluster yaml}
 #https://github.com/ogelbric/LAB/tree/main/where_is(are)/SampleClusteryaml
