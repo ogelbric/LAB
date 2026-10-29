@@ -2,7 +2,7 @@
 
 ## 3 - Step process Application onto Kubernetes cluster
 
-### 1 - Supervisor Cluster
+### 1 - Supervisor Cluster / vSphere Namespace
 ```
 #
 # API end point is supervisor IP cert 
