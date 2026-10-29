@@ -55,4 +55,11 @@ https://github.com/ogelbric/LAB/tree/main/where_is(are)/SampleApp
 https://github.com/ogelbric/LAB/tree/main/where_is(are)/Create_Harbor
 ```
 
+### Apendix - Build test image
+
+```
+https://github.com/AndriyKalashnykov/vks-guides/blob/main/docs/IMAGE-DOCKER.md
+```
+
+
 
