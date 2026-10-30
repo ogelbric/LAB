@@ -1,7 +1,7 @@
 # Sample create application with PV / PVC
 
 
-## 1 - Supervisor Cluster / vSphere Namespace
+## 1 - Supervisor Cluster / vSphere Namespace Login
 ```
 export API_IP="10.1.8.132"
 #
@@ -25,6 +25,13 @@ kubectl apply -f {Sample Cluster yaml}
 #https://github.com/ogelbric/LAB/tree/main/where_is(are)/SampleClusteryaml
 
 vcf clusters list -A
+# or
+kubectl get clusters -A
+# get base line PV/PVC's
+kubectl get sc
+kubectl get pv -A
+kubectl get pvc -A
+
 ```
 
 ## 2 - Guest Cluster
