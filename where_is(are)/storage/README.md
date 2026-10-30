@@ -5,12 +5,12 @@ https://github.com/vmware/vks-validated-solutions/tree/main/VKS-Migrations
 https://github.com/vmware/vks-validated-solutions/blob/main/VKS-Migrations/VKS-to-VKS/examples/2-same-supervisor-different-namespace.md
 ```
 
-# Has issues -> still shows namespace-a
+# Test 1: Has issues -> still shows namespace-a
 
 https://github.com/ogelbric/LAB/blob/main/where_is(are)/storage/Test1.md
 
 
-# Has issues dose not get pvc out of pending on sup vm
+# Test 2: Has issues dose not get pvc out of pending on sup vm
 
 https://github.com/ogelbric/LAB/blob/main/where_is(are)/storage/Test2.md
 
