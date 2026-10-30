@@ -22,7 +22,7 @@ vcf clusters list -A
 # build new cluster (make sure the Harbor cert is in the Supervisor then Harbor cert will end up in the guest cluster!)
 #
 kubectl apply -f {Sample Cluster yaml}
-#https://github.com/ogelbric/LAB/tree/main/where_is(are)/SampleClusteryaml
+#sample cluster yaml see below
 
 vcf clusters list -A
 # or
@@ -130,6 +130,65 @@ kubectl -n "$SRC_VKS_NS" exec migration-test-writer -- \
   cat /data/migration-test.txt
 ```
 
+
+#### Sample Cluster yaml
+```
+kubectl  apply -f - <<EOF_CLUSTER
+apiVersion: cluster.x-k8s.io/v1beta1
+kind: Cluster
+metadata:
+  name: cluster1
+  namespace: prod-t2938
+spec:
+  clusterNetwork:
+    pods:
+      cidrBlocks:
+        - 192.168.156.0/20
+    services:
+      cidrBlocks:
+        - 10.96.0.0/12
+    serviceDomain: cluster.local
+  topology:
+    class: builtin-generic-v3.6.0
+    classNamespace: vmware-system-vks-public
+    version: v1.33.6---vmware.1-fips-vkr.2
+    variables:
+      - name: vsphereOptions
+        value:
+          persistentVolumes:
+            defaultStorageClass: vsan-default-storage-policy
+      - name: kubernetes
+        value:
+          certificateRotation:
+            enabled: true
+            renewalDaysBeforeExpiry: 90
+      - name: vmClass
+        value: guaranteed-xsmall
+      - name: storageClass
+        value: vsan-default-storage-policy
+      - name: volumes
+        value:
+        - name: containerd
+          mountPath: /var/lib/containerd
+          storageClass: vsan-default-storage-policy
+          capacity: 15Gi
+        - name: kubelet-override
+          mountPath: /var/lib/kubelet
+          storageClass: vsan-default-storage-policy
+          capacity: 10Gi          
+        - name: log
+          mountPath: /var/log
+          storageClass: vsan-default-storage-policy
+          capacity: 10Gi          
+    controlPlane:
+      replicas: 1
+    workers:
+      machineDeployments:
+        - class: node-pool
+          name: cluster1-worker
+          replicas: 1
+EOF_CLUSTER
+```
 
 
 
