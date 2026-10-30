@@ -40,9 +40,9 @@ kubectl get pvc -A
 #
 # Connecting to guest cluster
 #
-vcf context create  myguestcluster01 --endpoint https://${API_IP} --username administrator@WLD.SSO --ca-certificate supervisor.crt --auth-type basic --workload-cluster-name orfk8 --workload-cluster-namespace orfns
+vcf context create  myguestcluster01 --endpoint https://${API_IP} --username administrator@WLD.SSO --ca-certificate supervisor.crt --auth-type basic --workload-cluster-name cluster1 --workload-cluster-namespace namespace1000
 vcf context list
-vcf context use myguestcluster01:orfk8
+vcf context use myguestcluster01:cluster1
 kubectl get nodes 
 ```
 
@@ -138,7 +138,7 @@ apiVersion: cluster.x-k8s.io/v1beta1
 kind: Cluster
 metadata:
   name: cluster1
-  namespace: prod-t2938
+  namespace: namespace1000
 spec:
   clusterNetwork:
     pods:
