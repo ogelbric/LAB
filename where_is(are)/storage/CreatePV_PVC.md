@@ -34,7 +34,7 @@ kubectl get pvc -A
 
 ```
 
-## 2 - Guest Cluster
+## 2 - Guest Cluster Login
 
 ```
 #
