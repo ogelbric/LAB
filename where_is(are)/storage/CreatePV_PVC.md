@@ -75,14 +75,14 @@ EOF_PVC
 ```
 #### Test PVC
 ```
-vks-src -n "$SRC_VKS_NS" wait \
+kubectl -n "$SRC_VKS_NS" wait \
   --for=jsonpath='{.status.phase}'=Bound \
   "pvc/${SRC_VKS_PVC}" \
   --timeout=5m
 ```
 ### Sample Application
 ```
-vks-src -n "$SRC_VKS_NS" apply -f - <<EOF_POD
+kubectl -n "$SRC_VKS_NS" apply -f - <<EOF_POD
 apiVersion: v1
 kind: Namespace
 metadata:
