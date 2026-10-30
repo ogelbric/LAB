@@ -14,3 +14,6 @@ https://github.com/ogelbric/LAB/blob/main/where_is(are)/storage/Test1.md
 
 https://github.com/ogelbric/LAB/blob/main/where_is(are)/storage/Test2.md
 
+# Test 3: Works
+
+https://github.com/ogelbric/LAB/blob/main/where_is(are)/storage/Test3.md
