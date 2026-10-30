@@ -55,7 +55,7 @@ vi /etc/docker/certs.d/harbor.vcf.lab/ca.crt
 ```
 ## Test login 
 ```
-docker login harbor.vcf.labUsername: admin
+docker login harbor.vcf.lab -u admin
 Password: 
 
 WARNING! Your credentials are stored unencrypted in '/root/.docker/config.json'.
@@ -68,5 +68,7 @@ Login Succeeded
 admin/Harbor12345
 ```
 ## Result
+docker image ls
+
 ```
 
