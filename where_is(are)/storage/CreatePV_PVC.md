@@ -165,7 +165,7 @@ spec:
             enabled: true
             renewalDaysBeforeExpiry: 90
       - name: vmClass
-        value: guaranteed-xsmall
+        value: best-effort-medium
       - name: storageClass
         value: vsan-default-storage-policy
       - name: volumes
