@@ -4,6 +4,8 @@
 ## 1 - Supervisor Cluster / vSphere Namespace Login
 ```
 export API_IP="10.1.8.132"
+export CL="cluster1"
+export SUP_NS="namespace1000"
 #
 # API end point is supervisor IP cert 
 #
@@ -40,7 +42,7 @@ kubectl get pvc -A
 #
 # Connecting to guest cluster
 #
-vcf context create  myguestcluster01 --endpoint https://${API_IP} --username administrator@WLD.SSO --ca-certificate supervisor.crt --auth-type basic --workload-cluster-name cluster1 --workload-cluster-namespace namespace1000
+vcf context create  myguestcluster01 --endpoint https://${API_IP} --username administrator@WLD.SSO --ca-certificate supervisor.crt --auth-type basic --workload-cluster-name ${CL} --workload-cluster-namespace ${SUP_NS}
 vcf context list
 vcf context use myguestcluster01:cluster1
 kubectl get nodes 
@@ -137,8 +139,8 @@ kubectl  apply -f - <<EOF_CLUSTER
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: Cluster
 metadata:
-  name: cluster1
-  namespace: namespace1000
+  name: ${CL}
+  namespace: ${SUP_NS}
 spec:
   clusterNetwork:
     pods:
@@ -185,7 +187,7 @@ spec:
     workers:
       machineDeployments:
         - class: node-pool
-          name: cluster1-worker
+          name: ${CL}-worker
           replicas: 1
 EOF_CLUSTER
 ```
