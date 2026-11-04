@@ -249,11 +249,7 @@ spec:
         - name: kubelet-override
           mountPath: /var/lib/kubelet
           storageClass: k8storage
-          capacity: 10Gi          
-        - name: log
-          mountPath: /var/log
-          storageClass: k8storage
-          capacity: 10Gi          
+          capacity: 10Gi                 
     controlPlane:
       replicas: 1
     workers:
