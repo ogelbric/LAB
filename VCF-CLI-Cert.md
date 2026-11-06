@@ -95,6 +95,13 @@ kubectl --kubeconfig="/tmp/${NS}-${CL}-direct.kubeconfig" get pods -A
 #
 kubectl --kubeconfig="/tmp/${NS}-${CL}-direct.kubeconfig" get svc -A
 
+#
+# print the expiration time stamp
+#
+TOKEN=$(kubectl config view --raw -o jsonpath='{.users[0].user.token}')
+echo "$TOKEN" | cut -d'.' -f2 | base64 --decode 2>/dev/null | jq -r '.exp' | xargs -I {} date -d @{}
+
+
 
 
 ```
