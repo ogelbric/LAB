@@ -5,6 +5,9 @@
 ### 1 - Supervisor Cluster / vSphere Namespace
 ```
 export API_IP="10.1.8.132"
+export USER='administrator@WLD.SSO'
+export NS="orfns"
+export CL="orfk8"
 #
 # API end point is supervisor IP cert 
 #
@@ -12,7 +15,7 @@ openssl s_client -connect ${API_IP}:443 -showcerts </dev/null 2>/dev/null  | ope
 #
 # Connecting to supervisor cluster
 #
-vcf context create  mysupervisor01 --endpoint https://${API_IP} --username administrator@WLD.SSO --ca-certificate supervisor.crt --auth-type basic
+vcf context create  mysupervisor01 --endpoint https://${API_IP} --username ${USER} --ca-certificate supervisor.crt --auth-type basic
 #
 vcf context list
 vcf context use      # use the context of the supervisor:vSphereNameSpace
@@ -34,7 +37,7 @@ vcf clusters list -A
 #
 # Connecting to guest cluster
 #
-vcf context create  myguestcluster01 --endpoint https://${API_IP} --username administrator@WLD.SSO --ca-certificate supervisor.crt --auth-type basic --workload-cluster-name orfk8 --workload-cluster-namespace orfns
+vcf context create  myguestcluster01 --endpoint https://${API_IP} --username ${USER} --ca-certificate supervisor.crt --auth-type basic --workload-cluster-name ${CL} --workload-cluster-namespace ${NS}
 vcf context list
 vcf context use myguestcluster01:orfk8
 kubectl get nodes 
