@@ -87,13 +87,13 @@ openssl s_client -connect ${API_IP}:443 -showcerts </dev/null 2>/dev/null  | ope
 #
 vcf context create  ${SUP} --endpoint https://${API_IP} --username ${USER} --ca-certificate supervisor.crt --auth-type basic
 #
-vcf context list
-vcf context use      # use the context of the supervisor:vSphereNameSpace
 vcf context use ${SUP}:${NS}
 #
 kubectl get secret ${CL}-kubeconfig -n ${NS} -o jsonpath='{.data.value}' | base64 --decode > /tmp/${NS}-${CL}-direct.kubeconfig
 #
 kubectl --kubeconfig="/tmp/${NS}-${CL}-direct.kubeconfig" get pods -A
+#
+kubectl --kubeconfig="/tmp/${NS}-${CL}-direct.kubeconfig" get svc -A
 
 
 
