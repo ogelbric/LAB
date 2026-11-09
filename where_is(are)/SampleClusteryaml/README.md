@@ -1,5 +1,10 @@
 # Ronak's Sample Cluster yaml with addon's
 
+## Cluster Class
+```
+https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-consumption/latest/managing-vsphere-kuberenetes-service-clusters-and-workloads/provisioning-tkg-service-clusters/using-the-cluster-v1beta1-api/using-the-versioned-clusterclass/usingbuiltingenericv380clusterclasswith380andlater.html
+```
+
 ```
 apiVersion: addons.kubernetes.vmware.com/v1alpha1
 kind: AddonInstall
