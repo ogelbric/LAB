@@ -103,21 +103,24 @@ echo "$TOKEN" | cut -d'.' -f2 | base64 --decode 2>/dev/null | jq -r '.exp' | xar
 
 ```
 
-### Local Consumption interface
+## Local Consumption interface
 
+```
 Created User in WLD.sso in vCenter: orf
 Created Group in WLD.sso: orfgroup
 Added User: orf to orfgroup
 Added orfgroup with Namespace Edit to orfns (vCenter Namespace) 
+```
 
 #
-# Local consumption interface
+# Local consumption interface (in my case at .188)
 #
 ```
 https://10.1.1.188/appplatform0/#/namespaces
 ```
 
-Create a k8 cluster
+
+### Create a k8 cluster
 Go to Kubernetes service and select cluster and download the kubeconfig file 
 
 
@@ -144,7 +147,7 @@ vcf context use ${GC}:${CL}
 
 kubectl get svc -A
 #
-# or from download from Local Consumption interface
+# or use from the download folder the kubeconfig file
 #
 
 kubectl --kubeconfig="~${HOME}/Downloads/${CL}-kubeconfig.yaml" get svc -A
