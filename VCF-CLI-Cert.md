@@ -68,7 +68,7 @@ https://github.com/ogelbric/LAB/tree/main/where_is(are)/Create_Harbor
 https://github.com/AndriyKalashnykov/vks-guides/blob/main/docs/IMAGE-DOCKER.md
 ```
 
-### Apendix - Get Guest Cluster kube config file
+### Apendix - Get Guest Cluster kube config file(admin level file may not be desirable!) 
 
 ```
 export API_IP="10.1.8.132"
