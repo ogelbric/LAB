@@ -123,13 +123,25 @@ Go to Kubernetes service and select cluster and download the kubeconfig file
 
 ```
 export API_IP="10.1.8.132"
-export USER='orf@WLD.SSO'
+export USER='orf@WLD.sso'
 export NS="orfns"
 export CL="orfk8"
 export SUP="mysupervisor01"
 export GC="orfcluster01"
 ```
 
+```
+#
+# API end point is supervisor IP cert 
+#
+openssl s_client -connect ${API_IP}:443 -showcerts </dev/null 2>/dev/null  | openssl x509 -outform PEM > supervisor.crt
+#
+# Connecting to supervisor cluster
+#
+vcf context create  ${SUP} --endpoint https://${API_IP} --username ${USER} --ca-certificate supervisor.crt --auth-type basic
+#
+vcf context use ${SUP}:${NS}
+```
 
 
 
