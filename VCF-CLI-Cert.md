@@ -121,6 +121,15 @@ Create a k8 cluster
 Go to Kubernetes service and select cluster and download the kubeconfig file 
 
 
+```
+export API_IP="10.1.8.132"
+export USER='orf@WLD.SSO'
+export NS="orfns"
+export CL="orfk8"
+export SUP="mysupervisor01"
+export GC="orfcluster01"
+```
+
 
 
 
