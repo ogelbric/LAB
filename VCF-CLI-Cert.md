@@ -101,9 +101,27 @@ kubectl --kubeconfig="/tmp/${NS}-${CL}-direct.kubeconfig" get svc -A
 TOKEN=$(kubectl config view --raw -o jsonpath='{.users[0].user.token}')
 echo "$TOKEN" | cut -d'.' -f2 | base64 --decode 2>/dev/null | jq -r '.exp' | xargs -I {} date -d @{}
 
-
-
-
 ```
+
+### Local Consumption interface
+
+Created User in WLD.sso in vCenter: orf
+Created Group in WLD.sso: orfgroup
+Added User: orf to orfgroup
+Added orfgroup with Namespace Edit to orfns (vCenter Namespace) 
+
+#
+# Local consumption interface
+#
+```
+https://10.1.1.188/appplatform0/#/namespaces
+```
+
+Create a k8 cluster
+Go to Kubernetes service and select cluster and download the kubeconfig file 
+
+
+
+
 
 
