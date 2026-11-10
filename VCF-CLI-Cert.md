@@ -149,7 +149,7 @@ kubectl get svc -A
 # or use from the download folder the kubeconfig file
 #
 
-kubectl --kubeconfig="~${HOME}/Downloads/${CL}-kubeconfig.yaml" get svc -A
+kubectl --kubeconfig="${HOME}/Downloads/${CL}-kubeconfig.yaml" get svc -A
 
 ```
 
