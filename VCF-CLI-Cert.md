@@ -125,7 +125,7 @@ Go to Kubernetes service and select cluster and download the kubeconfig file
 export API_IP="10.1.8.132"
 export USER='orf@WLD.sso'
 export NS="orfns"
-export CL="orfk8"
+export CL="orfcluster01"
 export SUP="mysupervisor01"
 export GC="orfcluster01"
 ```
@@ -136,11 +136,19 @@ export GC="orfcluster01"
 #
 openssl s_client -connect ${API_IP}:443 -showcerts </dev/null 2>/dev/null  | openssl x509 -outform PEM > supervisor.crt
 #
-# Connecting to supervisor cluster
+# Connecting to guest cluster
 #
-vcf context create  ${SUP} --endpoint https://${API_IP} --username ${USER} --ca-certificate supervisor.crt --auth-type basic
+vcf context create  ${GC} --endpoint https://${API_IP} --username ${USER} --ca-certificate supervisor.crt --auth-type basic --workload-cluster-name ${CL} --workload-cluster-namespace ${NS}
+vcf context list
+vcf context use ${GC}:${CL}
+
+kubectl get svc -A
 #
-vcf context use ${SUP}:${NS}
+# or from download from Local Consumption interface
+#
+
+kubectl --kubeconfig="~${HOME}/Downloads/${CL}-kubeconfig.yaml" get svc -A
+
 ```
 
 
