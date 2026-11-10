@@ -103,7 +103,7 @@ echo "$TOKEN" | cut -d'.' -f2 | base64 --decode 2>/dev/null | jq -r '.exp' | xar
 
 ```
 
-## Local Consumption interface
+### Apendix - Local Consumption interface
 
 ```
 Created User in WLD.sso in vCenter: orf
@@ -112,10 +112,11 @@ Added User: orf to orfgroup
 Added orfgroup with Namespace Edit to orfns (vCenter Namespace) 
 ```
 
-#
-# Local consumption interface (in my case at .188)
-#
+
+##Local consumption interface (in my case at .188)
+
 ```
+Go to vCenter and a namespace and upper right hand corner is the link to the interface
 https://10.1.1.188/appplatform0/#/namespaces
 ```
 
@@ -124,6 +125,7 @@ https://10.1.1.188/appplatform0/#/namespaces
 Go to Kubernetes service and select cluster and download the kubeconfig file 
 
 
+### Connect to guest cluster and use kubeconfig file 
 ```
 export API_IP="10.1.8.132"
 export USER='orf@WLD.sso'
@@ -131,9 +133,6 @@ export NS="orfns"
 export CL="orfcluster01"
 export SUP="mysupervisor01"
 export GC="orfcluster01"
-```
-
-```
 #
 # API end point is supervisor IP cert 
 #
@@ -144,7 +143,7 @@ openssl s_client -connect ${API_IP}:443 -showcerts </dev/null 2>/dev/null  | ope
 vcf context create  ${GC} --endpoint https://${API_IP} --username ${USER} --ca-certificate supervisor.crt --auth-type basic --workload-cluster-name ${CL} --workload-cluster-namespace ${NS}
 vcf context list
 vcf context use ${GC}:${CL}
-
+#
 kubectl get svc -A
 #
 # or use from the download folder the kubeconfig file
