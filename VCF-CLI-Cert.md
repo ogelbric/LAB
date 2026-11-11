@@ -153,6 +153,33 @@ kubectl --kubeconfig="${HOME}/Downloads/${CL}-kubeconfig.yaml" get svc -A
 
 ```
 
+### Leads to VCF-A login token web page
+
+```
+export API_IP="10.1.8.132"
+export USER='administrator@WLD.SSO'
+export NS="orfns"
+export CL="orfcluster01"
+export SUP="mysupervisor05"
+export GC="orfcluster01-new2"
+#
+# API end point is supervisor IP cert 
+#
+openssl s_client -connect ${API_IP}:443 -showcerts </dev/null 2>/dev/null  | openssl x509 -outform PEM > supervisor.crt
+#
+# Connecting to supervisor cluster
+#
+vcf context create  ${SUP} --endpoint https://${API_IP} --username ${USER} --ca-certificate supervisor.crt --auth-type basic
+#
+vcf context use ${SUP}:${NS}
+#
+vcf cluster kubeconfig get ${CL} --export-file /tmp/config.orfk8 --namespace ${NS}
+#
+kubectl --kubeconfig="/tmp/config.orfk8" get nodes -A
+```
+
+
+
 
 
 
